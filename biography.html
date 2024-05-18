@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>プロフィール</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+		<div id="nav">
+			<div id="nav-header">
+				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+				<label id="nav-menu-toggle-button" for="nav-menu-status"><span id="icon-menu-top"></span><span id="icon-menu-middle"></span><span id="icon-menu-bottom"></span></label>
+				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+			</div>
+			<div id="nav-content">
+				<ul class="header-menu-links">
+					<li class="current-page"><a href="biography.html">プロフィール</a></li>
+					<li><a href="gallery.html">制作実績</a></li>
+					<li><a href="blog.html">ブログ</a></li>
+					<li><a href="contact.html">連絡先</a></li>
+				</ul>
+			</div>
+		</div>
+		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+			</ul>
+			<div class="page-title">プロフィール</div>
+		</div>
+
+		<article class="content">
+			<div class="profile inner">
+				<div class="profile-header">
+					<div class="profile-image">
+						<figure style="background-image: url(images/myface.jpg);"></figure>
+					</div>
+					<div class="profile-content">
+						<h1 class="myname">
+							<span class="ruby">ひぐち&nbsp;まさひろ</span>
+							樋口&nbsp;雅裕</ruby>
+						</h1>
+						<ul class="dob horizontal-list">
+							<li>2005年生まれ</li>
+							<li>京都府出身</li>
+							<li>京都橘大学 在学</li>
+						</ul>
+					</div>
+				</div>
+				<div class="profile-content">
+					<h1 class="profile-concept">
+						<p>"作りたい"を形にする！</p>
+					</div>
+					<div class="profile-concept-mean">
+						<p>創造力と技術力を結集し、新たな可能性を探求します。</p>
+					<div class="profile-text">
+						<p>小さい頃から「ものずくり」や「プログラミング」が大好き。</p>
+						<p>実際に機械を作るだけでなく、アルゴリズムにも着目することで、新しい発見やアイデアの種が生まれる</p>
+					</div>
+					<div class="timeline">
+						<div class="timeline-item">
+							<div class="timeline-icon"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div>
+							<div class="timeline-date">2005</div>
+							<div class="timeline-text">京都府に生まれる</div>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
+							<div class="timeline-date">2012-</div>
+							<div class="timeline-text">ものづくりに目覚める</div>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
+							<div class="timeline-date">2023-</div>
+							<div class="timeline-text">京都橘大学に在学</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<div class="content footer">
+			<div class="copyright inner">
+				<ul>
+					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
