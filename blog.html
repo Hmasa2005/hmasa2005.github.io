@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>HTML テンプレート No.005 デモ</title>
+	<title>ブログ</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<script src="js/vue.min.js"></script>
 	<script src="js/lazysizes/lazysizes.min.js"></script>
@@ -16,7 +16,9 @@
 		<div id="nav">
 			<div id="nav-header">
 				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
-				<label id="nav-menu-toggle-button" for="nav-menu-status"><span id="icon-menu-top"></span><span id="icon-menu-middle"></span><span id="icon-menu-bottom"></span></label>
+				<label id="nav-menu-toggle-button" for="nav-menu-status">
+					<img src="images/C.png" alt="Menu Icon" />
+				</label>
 				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 			</div>
@@ -39,8 +41,8 @@
 			<div class="page-title">ブログ</div>
 		</div>
 
-		<article class="content">
-			<!-- <div class="entry-header">
+		<!-- <article class="content">
+			<div class="entry-header">
 				<h1 class="entry-title">ブログ記事</h1>
 				<ul class="entry-meta">
 					<li>2020.3.2 11:12</li>
@@ -53,10 +55,21 @@
 					ここに本文。
 				</p>
 			</div>
-		</article>
+		</article> -->
 
-		<article class="content"><div class="entry-header"><h1 class="entry-title">ブログ記事</h1><ul class="entry-meta"><li>2020.3.2 11:12</li><li><a href="#">HTML</a></li><li><a href="#">CSS</a></li></ul></div><div class="entry-body"><p>ここに本文。</p></div></article>
-		<article class="content"><div class="entry-header"><h1 class="entry-title">ブログ記事</h1><ul class="entry-meta"><li>2020.3.2 11:12</li><li><a href="#">HTML</a></li><li><a href="#">CSS</a></li></ul></div><div class="entry-body"><p>ここに本文。</p></div></article>
+		<article class="content">
+			<div class="entry-header">
+			  <h1 class="entry-title">Maker Faire Tokyo 2024への出典が正式に決定しました</h1>
+			  <ul class="entry-meta">
+				<li>2024.7.6</li>
+				<li><a href="Maker Faire tokyo 決定.html">もっと詳しく</a></li>
+			  </ul>
+			</div>
+			<div class="entry-content">
+			</div>
+		  </article>
+		  
+		<!-- <article class="content"><div class="entry-header"><h1 class="entry-title">ブログ記事</h1><ul class="entry-meta"><li>2020.3.2 11:12</li><li><a href="#">HTML</a></li><li><a href="#">CSS</a></li></ul></div><div class="entry-body"><p>ここに本文。</p></div></article>
 		<article class="content"><div class="entry-header"><h1 class="entry-title">ブログ記事</h1><ul class="entry-meta"><li>2020.3.2 11:12</li><li><a href="#">HTML</a></li><li><a href="#">CSS</a></li></ul></div><div class="entry-body"><p>ここに本文。</p></div></article> -->
 
 		<div class="content footer">

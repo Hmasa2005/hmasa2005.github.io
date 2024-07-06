@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>製作実績</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li class="current-page"><a href="gallery.html">製作実績</a></li>
+          <li><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">Maker Faire Tokyo 2024への出典が正式に決定しました</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          <article class="content">
+            <div class="entry-header">
+              <h1 class="entry-title">Maker Faire Tokyo 2024への出典が正式に決定しました</h1>
+              <ul class="entry-meta">
+                <li>2024.7.6</li>
+              </ul>
+            </div>
+            <div class="entry-content">
+
+              <p>この度、「ハンドベル自動演奏システム」がMaker Faire Tokyo 2024への出典が正式に決定しましたことをお知らせいたします。前回のMaker Faire Kyoto 2024では、多くの皆様にご来場いただき、誠にありがとうございました。</p>
+
+              <h2>Maker Faire Kyoto 2024への感謝</h2>
+
+              <p>Maker Faire Kyoto 2024では、私たちのブースにたくさんの方々が足を運んでくださいました。新しいアイデアや技術に興味を持っていただき、多くの貴重なフィードバックをいただけたことに心より感謝申し上げます。皆様の応援とご意見が、私たちのモチベーションとなり、次へのステップを踏み出す原動力となりました。</p>
+
+              <h2>東京への新たな挑戦</h2>
+
+              <p>次回のMaker Faire Tokyo 2024では、さらにレベルアップした展示をお届けできるよう、準備を進めています。新機能や改良点を盛り込んだプロジェクトをお披露目する予定ですので、どうぞご期待ください。</p>
+
+              <p>新しい展示内容や詳細については、随時ブログやSNSでお知らせしてまいります。皆様と再びお会いできることを楽しみにしております！</p>
+
+              <p>引き続き、私たちの活動を応援していただければ幸いです。東京でお会いしましょう！</p>
+
+              <h2>お知らせや更新情報について</h2>
+
+              <p>最新の情報は、私たちのブログやSNSをチェックしてください。質問やコメントがございましたら、本サイト「連絡先」よりどうぞお気軽にお知らせください。皆様のご意見をお待ちしております。</p>
+
+              <p>これからもどうぞよろしくお願い申し上げます。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
