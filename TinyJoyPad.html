@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>製作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="js/vue.min.js"></script>
+	<!-- 遅延読込 -->
+	<script src="js/lazysizes/lazysizes.min.js"></script>
+	<script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+		<div id="nav">
+			<div id="nav-header">
+				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+				<label id="nav-menu-toggle-button" for="nav-menu-status">
+					<img src="images/C.png" alt="Menu Icon" />
+				</label>
+				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+			</div>
+			<div id="nav-content">
+				<ul class="header-menu-links">
+					<li><a href="biography.html">プロフィール</a></li>
+					<li class="current-page"><a href="gallery.html">製作実績</a></li>
+					<li><a href="blog.html">ブログ</a></li>
+					<li><a href="contact.html">連絡先</a></li>
+				</ul>
+			</div>
+		</div>
+		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">製作実績</a></li>
+			</ul>
+			<div class="page-title">電子工作！自作ゲーム機講座</div>
+		</div>
+
+		<div class="content">
+			<div class="inner">
+                <div class="profile-concept-mean">
+					
+                    <img src="images/IMG_8037.jpg" alt="TinyJoyPad">
+                    <div class="profile-text">
+                    <h1>「電子工作！自作ゲーム機講座を開催」します</h1>
+                    <p>本講座では、京都橘大学の「プログラミングパーク」イベントにて、電子工作の楽しさを体験いただけます。はんだごてを使用して電子部品を基板に実装する実践的な作業を通じて、自作ゲーム機「TinyJoyPad」を完成させます。</p>
+                    <p>使用する基板は、クリエーションラボで独自に設計された特別なもの。シンプルながらもゲーム機としての機能をしっかりと備えた構造で、はんだ付け初心者から経験者まで幅広い方にお楽しみいただけます。</p>
+                    <p>さらに、講座中には電子部品や回路の基礎についても詳しく解説し、電子工作に興味がある方が安心して取り組める内容を目指しています。完成したTinyJoyPadでは、簡単なゲームで遊ぶことができ、持ち帰って自分でプログラムを書き換える楽しみも待っています。</p>
+                    <h2>対象者:</h2>
+                    <p>京都橘大学 工学部情報工学科に在籍している学生</p>
+                    <h2>参加特典:</h2>
+                    <p>完成したTinyJoyPadをお持ち帰りいただけます。また、今後の電子工作やプログラミングに役立つアドバイスや資料もご提供します。</p>
+                    <p>皆さまのご参加を心よりお待ちしております！</p>
+                    <h2>Github-Hmasa2005</h2>
+                    <a href="https://github.com/Hmasa2005/DIY-GAMEHARD">DIY-GAMEHARD</a>
+					<h2>詳細資料 (PDF)</h2>
+                    <p>以下のPDFでさらに詳しい講座内容をご覧いただけます:<a href="game_bocument.pdf" target="_blank">PDFをダウンロード</a></p>
+                    <p>※PDFが表示されない場合は、上記のリンクをクリックしてダウンロードしてください。</p>
+                    <embed src="game_bocument.pdf" type="application/pdf" width="100%" height="600px">
+					<!-- <img src="images/image19.png" alt="ハンドベル自動演奏システム5号機" width=32% height=32%>
+					<img src="images/image18.png" alt="ハンドベル自動演奏システム5号機" width=32% height=32%>
+					<img src="images/image17.jpg" alt="ハンドベル自動演奏システム5号機" width=32% height=32%> -->
+                </div>
+			</h6></div>
+		</div>
+		<div class="content footer">
+			<div class="copyright inner">
+				<ul>
+					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
