@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>製作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="js/vue.min.js"></script>
+	<!-- 遅延読込 -->
+	<script src="js/lazysizes/lazysizes.min.js"></script>
+	<script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+		<div id="nav">
+			<div id="nav-header">
+				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+				<label id="nav-menu-toggle-button" for="nav-menu-status">
+					<img src="images/C.png" alt="Menu Icon" />
+				</label>
+				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+			</div>
+			<div id="nav-content">
+				<ul class="header-menu-links">
+					<li><a href="biography.html">プロフィール</a></li>
+					<li class="current-page"><a href="gallery.html">製作実績</a></li>
+					<li><a href="blog.html">ブログ</a></li>
+					<li><a href="contact.html">連絡先</a></li>
+				</ul>
+			</div>
+		</div>
+		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">製作実績</a></li>
+			</ul>
+			<div class="page-title">利便性と環境に配慮されたカレンダー</div>
+		</div>
+		<div class="content">
+			<div class="inner">
+                <div class="profile-concept-mean">
+					
+                    <img src="images/ApCalendar1.jpg" alt="利便性と環境に配慮されたカレンダー">
+                    <div class="profile-text">
+                    <h1>利便性と環境に配慮されたカレンダー</h1>
+                    <p>本システムでは、スマートフォンアプリの利便性と紙のカレンダーの直感性を融合した新しいカレンダーを実現しました。</p>
+                    <p>従来のカレンダーアプリでは、予定を確認するためにアプリを開く手間が必要であり、紙のカレンダーでは廃棄時に環境負荷が発生するという課題がありました。本システムでは、AppleのCalDAV機能を活用してRaspberry PiがiCloudカレンダーとリアルタイムで同期し、スケジュールデータを効率的に収集します。収集されたデータは日時順に整理され、E-INKディスプレイに表示されます。</p>
+                    <img src="images/ApCalendar3.png" alt="まとめ画像">
+                    <p>この仕組みにより、電力消費を抑えながら常にスケジュールを確認することが可能になりました。また、3Dプリンタで製作した外枠とアクリル板で保護されたE-INKディスプレイによって、衝撃に強く耐久性のある構造を実現しました。さらに、Pythonを用いた高度なデータ処理アルゴリズムにより、複雑なスケジュールでも迅速かつ正確に表示することができます。</p>
+                    <p>これにより、従来のカレンダーに比べて手間を大幅に軽減しながら、紙ゴミを削減し環境保護にも貢献しています。スマホアプリと紙のカレンダーの利点を併せ持つこのカレンダーは、日々の生活をより便利でサステナブルなものにします。</p>
+                    <img src="images/ApCalendar2.png" alt="まとめ画像">
+					<!-- <img src="images/image19.png" alt="ハンドベル自動演奏システム5号機" width=32% height=32%>
+					<img src="images/image18.png" alt="ハンドベル自動演奏システム5号機" width=32% height=32%>
+					<img src="images/image17.jpg" alt="ハンドベル自動演奏システム5号機" width=32% height=32%> -->
+                </div>
+			</h6></div>
+		</div>
+		<div class="content footer">
+			<div class="copyright inner">
+				<ul>
+					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
