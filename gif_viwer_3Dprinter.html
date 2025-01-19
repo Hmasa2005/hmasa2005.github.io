@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .intro-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #555, #222);
+            z-index: 20;
+            text-align: center;
+            flex-direction: column;
+            color: #fff;
+            animation: fadeOut 1s ease-in-out forwards;
+            animation-delay: 1s;
+        }
+
+        .intro-screen div {
+            margin: 5px 0;
+        }
+
+        .intro-screen div:first-child {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .intro-screen div:nth-child(2) {
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        .intro-screen div:last-child {
+            font-size: 1rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .viewer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .nav-button.left {
+            left: 20px;
+        }
+
+        .nav-button.right {
+            right: 20px;
+        }
+
+        .home-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .fullscreen-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-screen" id="introScreen">
+        <div>講座資料Viewer V2.1</div>
+        <div>講座名: 3Dプリンタ活用講座</div>
+        <div>Made By Masahiro Higuchi</div>
+    </div>
+    <div class="viewer" id="viewer">
+        <button class="nav-button left" onclick="prevImage()">&lt;</button>
+        <img id="gifDisplay" src="3Dprinter_gif/1.gif" alt="Lecture Slide">
+        <button class="nav-button right" onclick="nextImage()">&gt;</button>
+        <a href="https://hmasa2005.github.io/home/index.html" class="home-button">ホームに戻る</a>
+        <button class="fullscreen-button" onclick="toggleFullscreen()">全画面</button>
+    </div>
+
+    <script>
+        let currentIndex = 1;
+        const basePath = '3Dprinter_gif';
+        const gifDisplay = document.getElementById("gifDisplay");
+
+        // 現在の画像を更新
+        function updateImage() {
+            gifDisplay.src = `${basePath}/${currentIndex}.gif`;
+        }
+
+        // 次の画像へ移動
+        function nextImage() {
+            const tempIndex = currentIndex + 1;
+            checkImageExists(tempIndex, exists => {
+                if (exists) {
+                    currentIndex = tempIndex;
+                    updateImage();
+                } else {
+                    alert('次の画像が見つかりません！');
+                }
+            });
+        }
+
+        // 前の画像へ移動
+        function prevImage() {
+            const tempIndex = currentIndex - 1;
+            if (tempIndex > 0) {
+                checkImageExists(tempIndex, exists => {
+                    if (exists) {
+                        currentIndex = tempIndex;
+                        updateImage();
+                    } else {
+                        alert('前の画像が見つかりません！');
+                    }
+                });
+            } else {
+                alert('これ以上戻れません！');
+            }
+        }
+
+        // ファイルの存在を確認
+        function checkImageExists(index, callback) {
+            const img = new Image();
+            img.src = `${basePath}/${index}.gif`;
+            img.onload = () => callback(true);
+            img.onerror = () => callback(false);
+        }
+
+        // 全画面表示のトグル
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // キーボードで画像の移動
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                nextImage();
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                prevImage();
+            }
+        });
+
+        // マウスホイールで画像の移動
+        document.addEventListener('wheel', function(event) {
+            if (event.deltaY > 0) {
+                nextImage(); // 下方向（スクロールダウン）で次の画像に進む
+            } else {
+                prevImage(); // 上方向（スクロールアップ）で前の画像に戻る
+            }
+        });
+    </script>
+</body>
+</html>
