@@ -194,10 +194,11 @@
         <button class="nav-button left" onclick="prevImage()">&lt;</button>
         <img id="gifDisplay" src="3Dprinter_gif/1.gif" alt="Lecture Slide">
         <button class="nav-button right" onclick="nextImage()">&gt;</button>
-        <a href="https://hmasa2005.github.io/home/index.html" class="home-button">ホームに戻る</a>
-        <button class="fullscreen-button" onclick="toggleFullscreen()">全画面</button>
         <div class="course-name">3Dプリンタ活用講座</div>
         <div class="name-display">Masahiro Higuchi</div>
+        <a href="#" class="home-button" onclick="goHome()">ホームに戻る</a>
+        <button class="fullscreen-button" onclick="toggleFullscreen()">全画面</button>
+        
     </div>
 
     <script>
@@ -257,6 +258,11 @@
                     document.exitFullscreen();
                 }
             }
+        }
+
+        // ホームに戻る
+        function goHome() {
+            window.location.href = 'https://hmasa2005.github.io/home/index.html';
         }
 
         // キーボードで画像の移動
