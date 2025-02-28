@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>京都学びフェスタ2024に出展!</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li><a href="gallery.html">製作実績</a></li>
+          <li class="current-page"><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">京都学びフェスタ2024に出典しました</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          
+          <article class="content">
+            <div class="entry-header">
+              <h2 class="entry-title">京都学びフェスタ2024に出展!</h2>
+              
+              <ul class="entry-meta">
+                <li>2024.8.25</li>
+              </ul>
+              <div style="text-align: center;">
+                <img src="images/kyoto_mk2024_main.jpg" alt="Kyotomf2024-main">
+              </div>
+            </div>
+            <div class="entry-content">
+              <p>京都学びフェスタ2024は、8月25日に「京都産業会館ホール」で実施された展示会です。本展示会に京都橘大学工学部情報工学科として展示を行いました。
+                この展示会では私のプロジェクトの一つである<a href="handbell5.html">「ハンドベル自動演奏装置」</a>の展示を行いました。<br>
+                <a href="https://www.kyoto-manabifesta.com/event.html#taikan05">京都学びフェスタ2024 出展者ページ</a>
+              </p>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+              <img src="images/kyouto_mk2024_TAXI.jpg" alt="kyouto_mk2024_folower">
+              <img src="images/kyoto_mk2024_preper.jpg" alt="kyouto_mk2024_folower">
+            </div>
+            
+            <div class="entry-content">
+              <p>今回の展示会にあたっては、京都橘大学の全面的な協力もあり、タクシーを利用してハンドベル自動演奏装置を輸送しました。輸送を支援してくださった、事務局の方には感謝しかありません。本当にありがとうございました。</p>
+              <div style="display: flex; justify-content: center; gap: 10px;">
+                <img src="images/Kyoto_manabi2024.jpg" alt="kyouto_mk2024_folower">
+                <img src="images/kyouto_mk2024_folower.png" alt="kyouto_mk2024_folower">
+              </div>
+              
+              
+              <p>今回はハンドベル自動演奏システムの展示だけでなく、開発に関するポスターも合わせて展示を行いました。このポスターを用いて、ハンドベル自動演奏装置の仕組みに関して製作中の画像や図を用いて説明しました。
+              </p>
+              <div style="display: flex; justify-content: center; gap: 10px;">
+                <img src="images/handobel_ver5_pos1 (1).png" alt="handobel_ver5_pos1" width=50% height=50%>
+                <img src="images/handobel_ver5_pos1 (2).png" alt="handobel_ver5_pos2" width=50% height=50%>
+              </div>
+              
+              
+              <p>展示にあたっては、京都市の主催関係者さんが私のブースを担当してくださり、お客さんへの説明をしてくださるシーンもありました。京都市の主催関係者さんには感謝申し上げます。</p>
+              <p>今後も子どもたちに見て、触れてもらえるような展示会への出展を積極的に行っていこうと考えています。当日私のブースに寄ってくださった方、質問やアドバイスをしてくださった方、本当にありがとうございました！</p>
+              
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>α-STATION 「UICK Radio」に出演します！</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li><a href="gallery.html">製作実績</a></li>
+          <li class="current-page"><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">α-STATION 「UICK Radio」に出演します！</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          
+          <article class="content">
+            <div class="entry-header">
+              <h2 class="entry-title">α-STATION 「UICK Radio」に<br>出演します！</h2>
+              
+              <ul class="entry-meta">
+                <li>2025.2.17</li>
+              </ul>
+              <div style="text-align: center;">
+                <img src="images/UICK2024_2main.png" alt="UICK2024_2main">
+              </div>
+            </div>
+            <div class="entry-content">
+              <p>このたび、α-STATION（FM京都）の「UICK Radio」 に出演することが決まりました！
+                番組では、私の大学での研究活動や日常についてお話しする予定です。<br><br>
+                <strong>放送日時：3月5日(水)15:00〜16:00<br>
+                番組名：UICK Radio（FM京都 α-STATION）<br><br></strong>
+                関西エリアのFMラジオはもちろん、Radiko（ラジコ） を使えば全国どこでも視聴可能です。
+                ぜひチェックしてください！</p>
+            </div>
+            
+              
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
