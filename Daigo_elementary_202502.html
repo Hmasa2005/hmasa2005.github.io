@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小学生に3Dプリンタ体験講座を実施！</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li><a href="gallery.html">製作実績</a></li>
+          <li class="current-page"><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">小学生に3Dプリンタ体験講座を実施！</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          
+          <article class="content">
+            <div class="entry-header">
+              <h2 class="entry-title">小学生に3Dプリンタ体験講座を実施！<br>京都橘大学×伏見区役所醍醐支所</h2>
+              <ul class="entry-meta">
+                <li>2025.2.1</li>
+              </ul>
+              <div style="text-align: center;">
+                <img src="images/Daigo202502_main.png" alt="Daigo202502_mian">
+              </div>
+              <br>
+            </div>
+            <div class="entry-content">
+              <p>2月1日(土)、京都橘大学と醍醐支所の協力のもと、小学生向けの3Dプリンタ体験教室を開催しました！<br>
+                このイベントでは、3Dプリンタの仕組みや使い方を学びながら、実際にネームプレートを3DCADでデザインし、3Dプリンタで出力する体験をしてもらいました。</p><br>
+            
+                <h3>3Dプリンタって何？ まずは基礎から！<img src="images/Daigo202502_01.png" alt="Daigo202502_mian"></h3><br>
+                
+                <p>最初は「3Dプリンタって何？」「どうやって使うの？」といった疑問を持つ子どもたちも多かったので、まずはよく見かけるペーパープリンタの使い方の流れに沿って、3Dプリンタの基本について簡単に解説しました。<br>
+                「どうやって立体を作るのか？」「どんなものが作れるのか？」といった話をすると、子どもたちは興味津々。</p><br>
+            
+                <h3>3DCADに挑戦！ オリジナルのネームプレートを作ろう<img src="images/Daigo202502_02.png" alt="Daigo202502_mian"></h3><br>
+                <p>次に、パソコンを使って <strong>3DCAD（Tinkercad）</strong> に挑戦！<br>
+                今回は簡単な操作でオリジナルのネームプレートを作りました。最初は「難しそう…」と戸惑う子どもたちもいましたが、実際に操作してみると、「できた！」「もっとカッコよくしたい！」と夢中になって作業を進めていました。</p>
+            
+                <p>文字を入力したり、可愛い図形を入れたりして、それぞれ個性のあるデザインが完成！<br>
+                自分の名前が立体になったデザインを見て、「これが本当に形になるの？」とワクワクしている様子でした。</p><br>
+            
+                <h3>3Dプリント！ 実際に出力してみよう<img src="images/Daigo202502_03.png" alt="Daigo202502_mian"></h3><br>
+                <p>デザインが完成したら、いよいよ3Dプリンタで出力！<br>
+                プリンタが少しずつフィラメントを積み重ねながら、形ができていく様子を見て、子どもたちは興味津々。「どのくらい時間がかかるの？」「何色で作れるの？」と質問が飛び交いました。</p>
+            
+                <p>自分のデザインしたネームプレートが実際に形になった瞬間、子どもたちの表情は大興奮！<br>
+                「やった！」「本当にできた！」「家に持って帰れるの？」と嬉しそうにしていました。完成した作品を手に取ると、自分で作ったものが実際に形になる楽しさを実感している様子でした。</p>
+                <br>
+                <h3>体験を通じて感じたこと</h3>
+                <p>今回の体験を通じて、子どもたちは <strong>「ものづくりの楽しさ」</strong> を実感できたのではないかと思います。<br>
+                単に3Dプリンタを見るだけではなく、自分でデザインし、それが形になり、実際に手に取れるというプロセスを体験することで、 <strong>「自分でもできる！」という自信や、デジタル技術への興味を持つきっかけ</strong> になったと思います。</p>
+            
+                <p>また、イベントを通じて、<strong>「3Dプリンタって、身の回りのものを自分で作りたい！」</strong> と言う子供たちもいました。<br>
+                「キーホルダーを作りたい！」「ゲームのキャラクターを立体にできる？」と、どんどんアイデアが出てくる子もいて、 <strong>未来のクリエイター誕生の予感！</strong>って感じがしました（笑）</p><br>
+            
+                <h3>最後に<img src="images/Daigo202502_04.png" alt="Daigo202502_mian"></h3>
+                <p>参加してくれた子どもたち、そしてイベントを支えてくださった醍醐支所の皆さん、学術振興課の皆さん、杉浦先生、本当にありがとうございました！<br>
+                今回の体験を通じて、子どもたちが <strong>ものづくりやデジタル技術に興味を持ち、将来の可能性を広げるきっかけ</strong> になれば嬉しいです。<br><br>
+                私にとっても、また一つ小学生に授業をする貴重な経験をさせてもらえたと感じています。
+                子どもたちの純粋な好奇心や創造力に触れ、教える側でありながら多くのことを学ぶ機会となりました。
+                今後も、ものづくりの楽しさやデジタル技術の魅力を伝えられるような活動を続けていきたいと思います！</p>
+                <br>
+                <div class="footer">
+                    <p>※本企画は「KYOTO CITY OPEN LABO」の事業によって実施されました。</p>
+                    <p><a href="https://open-labo.city.kyoto.lg.jp/issue/issue-2128/" target="_blank">KYOTO CITY OPEN LABOの詳細はこちら</a></p>
+                </div>
+            </div>
+            
+              
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
