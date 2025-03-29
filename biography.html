@@ -8,29 +8,215 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="js/vue.min.js"></script>
 </head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+    }
+
+    /* 四角形のアイコン画像 */
+    .profile-image {
+        width: 300px; /* アイコンの幅 */
+        height: 300px; /* アイコンの高さ */
+        margin-right: 40px; /* 画像と名前の間隔 */
+        margin-top: 20px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+    /* 画面幅が768px以下の場合に対応 */
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column; /* 縦並びに変更 */
+            align-items: center; /* 中央揃え */
+        }
+
+        .profile-image {
+            margin-right: 0; /* 画像と名前の間隔をなくす */
+            margin-bottom: 20px; /* 画像の下に余白を追加 */
+        }
+
+        .profile-name {
+            text-align: center; /* 名前と内容を中央揃え */
+            margin-left: 0; /* マージンをリセット */
+        }
+
+        .name-japanese {
+            font-size: 40px; /* 名前のフォントサイズを少し小さくする */
+        }
+
+        .name-English {
+            font-size: 18px; /* 英語名のフォントサイズも少し小さくする */
+        }
+    }
+</style>
+
 <body>
-<div id="container">
-	<div id="header">
-		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
-		<div id="nav">
-			<div id="nav-header">
-				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
-				<label id="nav-menu-toggle-button" for="nav-menu-status">
-					<img src="images/C.png" alt="Menu Icon" />
-				</label>
-				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
-				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li class="current-page"><a href="biography.html">プロフィール</a></li>
+						<li><a href="gallery.html">制作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
 			</div>
-			<div id="nav-content">
-				<ul class="header-menu-links">
-					<li class="current-page"><a href="biography.html">プロフィール</a></li>
-					<li><a href="gallery.html">制作実績</a></li>
-					<li><a href="blog.html">ブログ</a></li>
-					<li><a href="contact.html">連絡先</a></li>
-				</ul>
-			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
 		</div>
-		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
 	</div>
 	<div id="main">
 		<div class="page-header">
@@ -40,80 +226,213 @@
 			<div class="page-title">プロフィール</div>
 		</div>
 
-		<article class="content">
-			<div class="profile inner">
-				<div class="profile-header">
-					<div class="profile-image">
-						<figure style="background-image: url(images/myface.jpg);"></figure>
-					</div>
-					<div class="profile-content">
-						<h1 class="myname">
-							<span class="ruby">ひぐち&nbsp;まさひろ</span>
-							樋口&nbsp;雅裕</ruby>
-						</h1>
-						<ul class="dob horizontal-list">
-							<li>2005年生まれ</li>
-							<li>京都府出身</li>
-							<li>京都橘大学 在学</li>
-						</ul>
-					</div>
+		<div class="content">
+			
+			
+			<div class="profile-container">
+				
+				<div>
+				<!-- アイコン画像 -->
+				<img src="images/myface3.jpg" alt="Masahiro Higuchi" class="profile-image">
+				<!-- 名前（漢字と英語） -->
+				<h1 class="name-japanese">樋口 雅裕<br><span class="name-English">Masahiro Higuchi</span></h1>
+			
 				</div>
-				<div class="profile-content">
-					<h1 class="profile-concept">
-						<p>"作りたい"を形にする！</p>
-					</div>
-					<div class="profile-concept-mean">
-						<p>創造力と技術力を結集し、新たな可能性を探求します。</p>
-					<div class="profile-text">
-						<p>小さい頃から「ものずくり」や「プログラミング」が大好き。</p>
-						<p>実際に機械を作るだけでなく、アルゴリズムにも着目することで、新しい発見やアイデアの種が生まれる。</p>
-					</div>
-					<div class="timeline">
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-birthday-cake" aria-hidden="true"></i></div>
-							<div class="timeline-date">2005</div>
-							<div class="timeline-text">京都府で生まれる</div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
-							<div class="timeline-date">2012-</div>
-							<div class="timeline-text">ものづくりに目覚める</div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
-							<div class="timeline-date">2021~</div>
-							<div class="timeline-text">電子情報通信学会_会員</div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
-							<div class="timeline-date">2023-</div>
-							<div class="timeline-text">京都橘大学に在学</div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
-							<div class="timeline-date">2023~</div>
-							<div class="timeline-text">情報処理学会（IPSJ）_会員</div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-icon"><i class="fa fa-child" aria-hidden="true"></i></div>
-							<div class="timeline-date">2024.9</div>
-							<div class="timeline-text">ヒューマンインタフェース学会 優秀プレゼンテーション賞 受賞</div>
-						</div>
-					</div>
+				
+				<div class="profile-name">
+
+					<h2>興味分野</h2>
+					<p lass="content2">サウンド・ビジュアル空間演出、マイコンを活用したシステム設計、<br>IoT・組み込みシステム開発、デジタルデザイン表現、Digital Fabrication、<br>3Dプリンタ活用支援、電子工作支援、プログラミング支援</p>
+					
+					<h2>研究内容</h2>
+					<p class="content2">ハンドベル自動演奏装置の印象評価、利便性と環境を配慮したカレンダー、<br>効率的な公共交通機関の利用促進計画</p>
+
+					<h2>言語・マイコン</h2>
+					<p class="content2">言語：Python、C/C++、Arduino、HTML、CSS、JavaScript、Processing<br>
+					マイコン：Arduino、ESP32、M5Stick、Raspberry Pi、SPRESENSE</p>
+					<h2>趣味</h2>
+					<p class="content2">電子工作、プログラミング、ポスターデザイン、インテリアデザイン、料理、<br>バドミントン、ウィンタースポーツ</p>
 				</div>
 			</div>
-		</article>
+			<div>
+				<section id="about">
+					<h2>自己紹介</h2>
+					<p>現在、大学3回生として講義を受講しながら研究開発にも取り組んでおり、正式にゼミに配属されたことで、より一層研究に没頭する日々を送っています。
+						幼少期からものづくりが好きで、祖父との工作や小学生時代のプログラミング教室をきっかけに、ディジタル技術を活用したものづくりに興味を持ち、独学で学び始めました。大学入学後は、低回生のうちから研究室や CreationLab で活動し、マイコンや電子工作を活用したシステム開発に取り組んできました。ロボット制御やIoTシステム開発、デジタルサイネージ制作など、幅広い分野で経験を積んでいます。
+						「ものづくりに完成はない」 をモットーに、技術やアイデアの進化を追求し、より良い形を求めて試行錯誤を続けています。現在は、培った技術や知識を活かし、研究活動を通じてさらに高度なシステム開発に挑戦しています。　【更新：2025年4月】</p>
+				</section>
+			
+				<section id="career">
+					<h2>経歴</h2>
+					<table>
+						<tr>
+							<td class="date">2023/03</td>
+							<td class="content1">京都成章高等学校 卒業</td>
+						</tr>
+						<tr>
+							<td class="date">2023/04～</td>
+							<td class="content1">京都橘大学 工学部 情報工学科 入学</td>
+						</tr>
+						<tr>
+							<td class="date">2025/03～</td>
+							<td class="content1">杉浦研究室所属</td>
+						</tr>
+					</table>
+				</section>
+			
+				<section id="certifications">
+					<h2>資格</h2>
+					<p>・普通自動車第一種免許</p>
+				</section>
 
-		<div class="content footer">
-			<div class="copyright inner">
-				<ul>
-					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
-				</ul>
+				<section id="publications">
+					<h2>学会発表</h2>
+					<table>
+						<tr>
+							<td class="date">2024/09</td>
+							<td class="content1">樋口 雅裕, 杉浦 昌, 伊藤 京子: 『ハンドベル自動演奏装置の印象評価実験』, ヒューマンインタフェース学会シンポジウム2024, 1T-D1 (2024).<a href="https://jp.his.gr.jp/events/symposium2024/hi2024-schedule/#day1" class="tooltip" data-tooltip="サイト">🔗</a><a href="https://youtu.be/EDLfnrn392s?si=O02s6aFq5MwCSlgk" class="tooltip" data-tooltip="動画">▶️</a><span class="Award">【優秀プレゼンテーション賞】</span></td>
+						</tr>
+						<tr>
+							<td class="date">2024/03</td>
+							<td class="content1">樋口雅裕, 杉浦昌: 『「中学、高校、大学のIT教育の課題」-イベント展示用マイコン制御システムを構築した体験をもとに-』, 情報処理学会第86回全国大会, 7ZL-06 (2024), 第86回全国大会講演論文集 巻2024, 号1, p.913-914.<a href="https://ipsj.ixsq.nii.ac.jp/records/237064" class="tooltip" data-tooltip="詳細">📄</a></td>
+						</tr>
+					</table>
+				</section>
+				
+				<section id="media">
+					<h2>メディア報道</h2>
+					<table>
+						<!-- <tr>
+							<td class="date">2025/03/10</td>
+							<td class="kinds">新聞掲載</td>
+							<td class="content1">株式会社 京都新聞社, ハンケイ500mVol.84, TOWAの実力派 大学レポート, p.10-12.</td>
+						</tr> -->
+						<tr>
+							<td class="date">2025/03/10</td>
+							<td class="kinds">誌面掲載</td>
+							<td class="content1">株式会社 union.a, ハンケイ500m Vol.84, TOWAの実力派 大学レポート, p.38-39.<a href="https://hankei500.com/back-number/" class="tooltip" data-tooltip="詳細">📄</a></td>
+						</tr>
+						<tr>
+							<td class="date">2025/03/05</td>
+							<td class="kinds">ラジオ出演</td>
+							<td class="content1">株式会社 エフエム京都, α-STATION, UICK Radio, 2025年3月5日放送.</td>
+						</tr>
+						<tr>
+							<td class="date">2024/12/11</td>
+							<td class="kinds">WEB掲載</td>
+							<td class="content1">学校法人 京都橘大学, Tachibana Discovery, 「いつかこんなことができたら」と二人三脚で挑みつづける！ハンドベル自動演奏装置でヒューマンインターフェースシンポジウム2024で優秀プレゼンテーション賞を受賞！.<a href="https://www.tachibana-u.ac.jp/discovery/interview/4760" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+					</table>
+				</section>
+			
+				<section id="exhibitions">
+					<h2>展示・講演</h2>
+					<h5 class="Classification">●展示会</h5>
+					<table>
+						<tr>
+							<td class="date">2025/01/25</td>
+							<td class="kinds">オープンソス<br>カンファレンス<br>Osaka 2025</td>
+							<td class="content1">・Location Sinage System（LSS）<br>・利便性と環境に配慮されたカレンダー<br>2点展示</td>
+						</tr>
+						<tr>
+							<td class="date">2024/10/11</td>
+							<td class="kinds">日本新薬（株）主催<br>Digital縁日</td>
+							<td class="content1">・ハンドベル自動演奏装置Ver5<br>・利便性と環境に配慮されたカレンダー<br>2点展示<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html" class="tooltip" data-tooltip="サイト">🔗</a><a href="https://www.youtube.com/watch?v=oLVSfy_miwk" class="tooltip" data-tooltip="動画">▶️</a></td>
+						</tr>
+						<tr>
+							<td class="date">2024/09/21・22</td>
+							<td class="kinds">Maker Faire<br>Tokyo 2024</td>
+							<td class="content1">・ハンドベル自動演奏装置Ver5<br>・フルカラーLEDパネル<br>・無線ピアノ鍵盤<br>3点展示<a href="https://makezine.jp/event/makers-mft2024/m0081/" class="tooltip" data-tooltip="サイト">🔗</a><a href="https://youtu.be/PW34wFboSco" class="tooltip" data-tooltip="動画">▶️</a></td>
+						</tr>
+						<tr>
+							<td class="date">2024/08/25</td>
+							<td class="kinds">京都学びフェスタ<br>2024</td>
+							<td class="content1">ハンドベル自動演奏装置Ver5 展示<a href="https://www.kyoto-manabifesta.com/event.html#taikan05" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+						<tr>
+							<td class="date">2024/04/27・28</td>
+							<td class="kinds">Maker Faire<br>Kyoto 2024</td>
+							<td class="content1">ハンドベル自動演奏装置Ver5 展示<a href="https://makezine.jp/event/makers-mfk2024/m0052/" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+						<tr>
+							<td class="date">2023/12/17</td>
+							<td class="kinds">醍醐みらい食堂</td>
+							<td class="content1">ハンドベル自動演奏装置Ver3 展示<a href="https://mirai-kyoto.com/2023/12/27/2-17%e3%80%8c%e3%81%bf%e3%82%93%e3%81%aa%e3%81%a7%e6%a5%bd%e3%81%97%e3%81%8f%ef%bc%81%e3%82%af%e3%83%83%e3%82%ad%e3%83%b3%e3%82%b0%e2%99%aa%ef%bc%88%e3%82%af%e3%83%aa%e3%82%b9%e3%83%9e%e3%82%b9/" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+					</table>
+					<h5 class="Classification">●学外連携事業・講師</h5>
+					<table>
+						<tr>
+							<td class="date">2025/02/01</td>
+							<td class="kinds">京都市伏見区</td>
+							<td class="content1">京都橘大学×醍醐支所　3Dプリンタ体験教室 ～子ども達の新たな学習・体験プログラムの創出　in 醍醐地域　第1弾～<a href="https://www.city.kyoto.lg.jp/fushimi/page/0000334474.html" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+					</table>
+				</section>
+				<section id="career">
+					<h2>受賞</h2>
+					<table>
+						<tr>
+							<td class="date">2025/03</td>
+							<td class="content1">京都橘大学 学長による学生表彰<a href="https://www.tachibana-u.ac.jp/f385321a121ddd36bf5c0d00f726e3aa93c3058b.pdf" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+						<tr>
+							<td class="date">2024/09</td>
+							<td class="content1">ヒューマンインタフェース学会ヒューマンインタフェースシンポジウム2024優秀プレゼンテーション賞（ハンドベル自動演奏装置の印象評価実験）<a href="https://jp.his.gr.jp/events/symposium2024/award2024/" class="tooltip" data-tooltip="サイト">🔗</a></td>
+						</tr>
+						
+					</table>
+				</section>
+				<section id="others">
+					<h2>その他</h2>
+					<h5 class="Classification">●授業・学習支援への貢献</h5>
+					<table>
+						<tr>
+							<td class="date">2025/04～</td>
+							<td class="content1">情報工学実践 3Dプリンタを用いた造形 LA（Learning Assistant）</td>
+						</tr>
+						<tr>
+							<td class="date">2025/04～</td>
+							<td class="content1">アカデミックスキル LA（Learning Assistant）</td>
+						</tr>
+						<tr>
+							<td class="date">2025/04～</td>
+							<td class="content1">プログラミング演習 LA（Learning Assistant）</td>
+						</tr>
+						<tr>
+							<td class="date">2024/09～</td>
+							<td class="content1">プログラミングパーク運営 LA（Learning Assistant）</td>
+						</tr>
+						<tr>
+							<td class="date">2024/07</td>
+							<td class="content1">情報工学実践 3Dプリンタを用いた造形 LA（Learning Assistant）</td>
+						</tr>
+						
+						
+					</table>
+					<h5 class="Classification">●教育環境の質向上への貢献</h5>
+					<table>
+						<tr>
+							<td class="date">2024/04～</td>
+							<td class="content1">教務課SA（Student Assistant） 役職：リーダー</td>
+						</tr>
+					</table>
+				</section>
 			</div>
 		</div>
-	</div>
-</div>
+		
 
-<script src="js/script.js"></script>
+		
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
 </body>
 </html>
