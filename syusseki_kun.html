@@ -237,6 +237,42 @@
 		text-align: right;
 	}
 
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
 
 </style>
 
