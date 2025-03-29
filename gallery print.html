@@ -10,13 +10,36 @@
 	<script src="js/lazysizes/lazysizes.min.js"></script>
 	<script src="js/lazysizes/ls.unveilhooks.min.js"></script>
 </head>
-
 <style>
+	.gallery-item-meta-hover {
+		position: absolute; /* 親要素（画像）を基準に配置 */
+		right: 0; /* 右端に寄せる */
+		bottom: 0; /* 必要なら下端にも寄せる */
+		opacity: 1 !important;  /* 透明度を完全に表示 */
+		visibility: visible !important; /* 非表示を解除 */
+		display: block !important; /* 非表示の場合は強制表示 */
+		text-align: right; /* テキストを右寄せ */
+		position: relative !important; /* hoverの影響を受けないよう調整 */
+		background: rgba(255, 255, 255, 0.7); /* 背景色（オプション） */
+		color: rgb(0, 0, 0); /* 文字色（オプション） */
+		width: auto; /* 必要なら幅を自動調整 */
+		padding: 5px; /* 余白調整 */
+		transition: none !important; /* 余計なアニメーションを無効化 */
+	}
+
+	/* もし `.gallery-item:hover .gallery-item-meta-hover` のような指定があれば無効化 */
+	.gallery-item:hover .gallery-item-meta-hover {
+		opacity: 1 !important;
+		visibility: visible !important;
+		display: block !important;
+	}
+
 	.Link_Description {
 		font-size: 20px;
 	}
-</style>
 
+
+</style>
 <body>
 <div id="container">
 	<div id="header">
@@ -32,10 +55,11 @@
 			</div>
 			<div id="nav-content">
 				<ul class="header-menu-links">
-					<li><a href="biography.html">プロフィール</a></li>
-					<li class="current-page"><a href="gallery.html">製作実績</a></li>
-					<li><a href="blog.html">ブログ</a></li>
-					<li><a href="contact.html">連絡先</a></li>
+						<li><a href="biography-port.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">制作実績</a></li>
+						<li><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
+						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
+						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
 				</ul>
 			</div>
 		</div>
@@ -43,9 +67,9 @@
 	</div>
 	<div id="main">
 		<div class="page-header">
-			<ul class="breadcrumb">
+			<!-- <ul class="breadcrumb">
 				<li><a href="index.html">ホーム</a></li>
-			</ul>
+			</ul> -->
 			<div class="page-title">製作実績</div>
 		</div>
 
@@ -127,9 +151,9 @@
 		</div>
 		<div class="content footer">
 			<div class="copyright inner">
-				<ul>
+				<!-- <ul>
 					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>

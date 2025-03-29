@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>製作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">製作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">製作実績</a></li>
+			</ul>
+			<div class="page-title">出席くん</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">学生証(Felica)読み取り技術を用いた出席登録システム</h1>
+			</div>
+			<div>
+				
+				
+				<section>
+					
+					<h2>出席くん</h2>
+					
+					<div class="image-container"><img src="images/syusseki_kun-main.jpg" alt="Masahiro Higuchi" class="poster-image2"></div>
+
+					<h5 class="Classification">●開発概要</h5>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/syusseki_kun-univ.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>教室に設置されている端末</figcaption>
+						</div>	
+						<p class="p-w">　近年、大学の講義では、学生証(Felica)読み取り端末を用いた出席登録システムが導入されている。
+							これにより、教員が出席カードを配る手間が省け、不正出席の防止にもつながる。
+							しかし、端末のない教室では、教員がカードを配り、学生が氏名を記入する必要があった。そこで、持ち運び可能な出席登録システムを開発した。</p>
+						
+					</div>
+
+					<h5 class="Classification">●システム概要</h5>
+					<div class="profile-container">
+						
+						<p class="p-w">　このシステムでは、Google Sheets APIを利用して学生の出席情報をスプレッドシートに記録する。
+							学生証の読み取りにはSONY RC-S320を使用し、サービスコード 0x1A8BのBlock0（学籍番号）および Block1（氏名）から情報を取得し、タイムスタンプとともにスプレッドシートへ書き込む仕組みとなっている。
+							また、出席情報は限られたユーザー（教員）のみが確認できるようにし、セキュリティを向上させている。</p>
+						<div class="div-center">
+							<img src="images/syusseki_kun-set.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>システム全体像</figcaption>
+						</div>	
+						
+					</div>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/syusseki_kun-reaction.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>全体像</figcaption>
+						</div>	
+						<p class="p-w">　このシステムはPythonで開発されており、端末にはlibusbをインストールすることで、SONY RC-S320をnfcpyモジュールで読み取れるようにしている。
+							また、ユーザインタフェースの作成にはTkinterを使用し、出席登録の状態を表示する。</p>
+						
+						
+					</div>
+					
+
+				</section>
+
+
+				
+
+				
+			</div>
+		</div>
+		
+
+		
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>

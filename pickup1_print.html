@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>研究ポートフォリオ①</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography-port.html">プロフィール</a></li>
+						<li><a href="gallery-port.html">制作実績</a></li>
+						<li class="current-page"><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
+						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
+						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<!-- <ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+			</ul> -->
+			<div class="page-title">研究ポートフォリオ①</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">マイコン制御によるハンドベル自動演奏</h1>
+			</div>
+			<div>
+				
+				
+				<section>
+					
+					<h2>ハンドベル自動演奏装置の開発</h2>
+					
+					<div class="image-container"><img src="images/handobel_ver5_pos1 (1).png" alt="Masahiro Higuchi" class="poster-image2"></div>
+					<div class="image-container"><img src="images/handobel_ver5_pos1 (2).png" alt="Masahiro Higuchi" class="poster-image2"></div>
+					<p class="atention-left"><strong>※展示イベントの装置説明ポスターより</strong></p>
+
+					<h5 class="Classification">●課題解決（苦労した点）</h5>
+					<p class="bottom"><strong>1．駆動の最適化を実現した構造</strong></p>
+					<div class="profile-container">
+						<!-- <img src="images/handbell_move.png" alt="Masahiro Higuchi" class="poster-image"> -->
+							<!-- <div class="profile-container2"> -->
+								<!-- <img src="images/handbell_move2.png" alt="Masahiro Higuchi" class="poster-image"> -->
+							
+							<!-- </div> -->
+							<div class="div-center">
+								<img src="images/handbell_move2.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>ハンドベル部分の構造</figcaption>
+							</div>
+						
+						  
+							<iframe width="300" height="190" src="https://www.youtube.com/embed/kUDEnSjqWgE?si=Cvks3HDzODanG-gy&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+					</div>
+					
+
+					<p>　ハンドベルの駆動部分は、Arduinoを用いてリレーを制御し、ソレノイド（電磁アクチュエータ）を駆動することで、ハンドベルのクラッパーを打撃し音を鳴らす仕組みである。 
+						　ソレノイドを使用する理由は、電気信号によって瞬時に動作し、精密なタイミングでの打撃が可能であるためである。<br> 
+						　しかし、クラッパーは一度打撃を加えると、そのまま振動を続けるため、不要な共鳴が発生し、意図しない余韻や音の濁りが生じるという問題があった。
+						また、次の打撃までにクラッパーの振動が収束しないと、連続した音の演奏に支障をきたす可能性があった。 
+						　そこで、ハンドベルの下部に小型ソレノイドを搭載し、クラッパーの振動を制御する仕組みを導入した。このソレノイドを適切なタイミングで作動させることで、不要な振動を速やかに抑え、音の強さを均一にし、音のムラを防ぐことを実現できた。
+						これにより、連続した音や複雑な曲の演奏時でも正確なリズムを維持できるようになっている。</p>
+
+					<p class="bottom"><strong>2．自動演奏および光の演出における制御速度の制約</strong></p>
+					<p>　演出は、約500個のフルカラーLED（WS2812B）の制御と、ハンドベル演奏のためのソレノイド駆動を同時に行う。当初は、Arduino MEGA 2560 だけで LED とソレノイドの両方を制御し、演出を実現する計画だった。<br>
+						　しかし、Arduino MEGA 2560 の 16 MHz のクロック周波数では、LED のデータ送信とソレノイド駆動の処理をリアルタイムで両立させるのが困難だった。特に WS2812 の制御は、1 ビットあたり約 1.25 µs の正確なタイミングでデータを送信する必要があり、処理負荷が高いため、演奏の精度に影響を与えたと推測する。
+						そこで、マイコンの役割を分担し、Arduino MEGA 2560 はソレノイドの制御を、ESP32 はフルカラー LED の制御を担当する構成に変更した。ESP32 は 240 MHz の高クロックで動作し、高速な LED 制御が可能なため、滑らかな光の演出を実現できる。
+						また、Arduino MEGA 2560 と ESP32 は UART によるシリアル通信を用いて接続し、鳴らす音の命令をリアルタイムで共有するように設計した。通信プロトコルには MIDI 形式を採用し、正確な演奏と光の同期を両立している。</p>
+					
+					<p class="bottom"><strong>3．安定したMIDI通信の実現に向けた検討</strong></p>
+					<p>　ハンドベル自動演奏装置では、MIDI 規格を用いて演奏データをリアルタイム送信し、Arduino MEGA 2560 が受信してソレノイドを駆動する。
+						MIDI 通信には ① MocoLUFA を用いた USB MIDI 方式 と ② USB 接続 MIDI インターフェースケーブルを用いる方式 の 2 つが検討された。
+						当初は MocoLUFA を採用したが、OS によって MIDI の送信速度やクロックにばらつきが発生する問題が確認された。
+						これは、USB 処理のタイミングや OS によるバッファ処理の違いによる影響と推測される。
+						そこで、USB 接続 MIDI インターフェースケーブルを使用する方式に変更したところ、OS の違いによる影響がなく、安定した MIDI 通信が可能であることが確認されたため、この方式を採用した。</p>
+				</section>
+
+
+				<section id="about">
+					<h2>本装置を用いたヒューマンインタフェース分野の研究</h2>
+					<p>　開発したハンドベル自動演奏装置を用いて研究を行った。研究の結果を2024年9月の<strong>ヒューマンインタフェースシンポジウム2024の「デモ・対話発表」</strong>で発表した。その結果、優秀プレゼンテーション優秀賞を受賞した。</p>
+					<div class="profile-container">
+						
+						<img src="images/HIS-handbell_pos.png" alt="Masahiro Higuchi" class="poster-image">
+						<img src="images/HIS-Thesis.png" alt="Masahiro Higuchi" class="poster-image">
+					</div>
+					<p class="atention-left"><strong>※学会発表の資料より</strong></p>
+					<h5 class="Classification">●実験概要</h5>
+					
+					<div class="profile-container">
+						<p class="p-w">　実験では、参加者に自動演奏と人間の演奏を聴取してもらい、その印象を評価するために「感情状態アンケート」「演奏の印象評価アンケート」「多面的感情状態アンケート」の3種類のアンケートを実施した。
+							自動演奏はコンソールソフトウェアを用いてMIDI音源を再生し、人間の演奏には無線ピアノ鍵盤を開発して使用した。収集した評価結果をもとに、自動演奏と人間の演奏のどちらがより高い印象評価を得るのかを分析した。
+							さらに、無線ピアノ鍵盤を導入することで、ピアノを弾く感覚でハンドベルを演奏することが可能となった。この新たな演奏方式が今後のハンドベル演奏に応用可能かについても考察を行った。
+							</p>
+						<div class="div-center">
+							<img src="images/wireless_piano-main.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>無線ピアノ鍵盤</figcaption>
+						</div>	
+					</div>
+					<h5 class="Classification">●鍵盤の開発</h5>
+					
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/wireless-testpcb.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>実験用ピアノ鍵盤の基盤</figcaption>
+						</div>
+						<div class="div-center">
+							<img src="images/wireless-piano-pcb.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>鍵盤基盤の改修</figcaption>
+						</div>
+						
+					</div>
+					<p>　無線ピアノ鍵盤は、市販のおもちゃの鍵盤を改造して作成した。
+						おもちゃの鍵盤基板はマトリクススイッチ方式を採用した設計となっていたため、プログラムのデバッグおよび開発専用のマトリクススイッチ基板をKiCadで設計し、CNCミリングマシンを用いて基板パターンを加工して製作した。
+						プログラム開発後、おもちゃの鍵盤基板に改造を施し、鍵盤ボタンスイッチの入力がArduino UNOに接続できるように配線を行った。
+						また、ハンドベル自動演奏装置と無線で通信を行うため、Arduino UNOからUARTシリアル通信を使用してESP32へ鍵盤のノート番号を送信するシステムを構築した。
+						さらに、複数の鍵盤が同時に押された場合の処理として、押されている鍵盤のノート番号を配列として送信する仕様とした。
+					</p>
+					
+				</section>
+				<section>
+					<h2>その他の活動</h2>
+					<ul>
+						<li class="font-black">エフエム京都 α-STATION「UICK Radio」に出演し、自動演奏の音と光の演出が視覚・聴覚に与える感動について語った。<a href="https://radiko.jp/#!/ts/ALPHA-STATION/20250305150000">https://radiko.jp/#!/ts/ALPHA-STATION/20250305150000</a></li>
+						<li class="font-black">日本新薬（株）主催 Digital縁日に出展した。<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html">https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html</a></li>
+						<li class="font-black">Maker Faire Tokyo 2024に出展した。<a href="https://makezine.jp/event/makers-mft2024/m0081/">https://makezine.jp/event/makers-mft2024/m0081/</a></li>
+						<li class="font-black">ヒューマンインタフェースシンポジウム2024で優秀プレゼンテーション賞を受賞した。<a href="https://jp.his.gr.jp/events/symposium2024/award2024/">https://jp.his.gr.jp/events/symposium2024/award2024/</a></li></li>
+						<li class="font-black">ヒューマンインタフェースシンポジウム2024で発表した。<a href="https://jp.his.gr.jp/events/symposium2024/hi2024-schedule/#day1">https://jp.his.gr.jp/events/symposium2024/hi2024-schedule/#day1</a></li></li>
+						<li class="font-black">京都学びフェスタ2024に出展した。<a href="https://www.kyoto-manabifesta.com/event.html#taikan05">https://www.kyoto-manabifesta.com/event.html#taikan05</a></li>
+						<li class="font-black">京都橘中学高等学校のロボットプログラミング部と文化祭で作品交流を行った。<a href="https://kt-robo.blogspot.com/2024/09/blog-post_7.html">https://kt-robo.blogspot.com/2024/09/blog-post_7.html</a></li>
+						<li class="font-black">Maker Faire European official 「X」で紹介された。<a href="https://x.com/MakerFaireRome/status/1784444937515287019">https://x.com/MakerFaireRome/status/1784444937515287019</a></li>
+						<li class="font-black">「Maker Faire Kyoto 2024」会場レポートで紹介された。<a href="https://makezine.jp/blog/2024/04/mfk2024_report01.html">https://makezine.jp/blog/2024/04/mfk2024_report01.html</a></li>
+						<li class="font-black">Maker Faire Kyoto 2024に出展した。<a href="https://makezine.jp/event/makers-mfk2024/m0052/">https://makezine.jp/event/makers-mfk2024/m0052/</a></li>
+						<li class="font-black">「Maker Faire Kyoto 2024」注目出展者として紹介された。<a href="https://makezine.jp/blog/2024/04/mfk2024_makers_young-maker.html">https://makezine.jp/blog/2024/04/mfk2024_makers_young-maker.html</a></li>
+						<li class="font-black">京都橘大学 Touch Tech!で紹介された。<a href="https://www.tachibana-u.ac.jp/admission/touchtech/project04.html">https://www.tachibana-u.ac.jp/admission/touchtech/project04.html</a></li>
+						<li class="font-black">醍醐みらい食堂で演奏した。<a href="https://mirai-kyoto.com/2023/12/27/2-17%e3%80%8c%e3%81%bf%e3%82%93%e3%81%aa%e3%81%a7%e6%a5%bd%e3%81%97%e3%81%8f%ef%bc%81%e3%82%af%e3%83%83%e3%82%ad%e3%83%b3%e3%82%b0%e2%99%aa%ef%bc%88%e3%82%af%e3%83%aa%e3%82%b9%e3%83%9e%e3%82%b9/">https://mirai-kyoto.com/2023/12/27/2-17%e3%80%8c%e3%81%bf%e3%82%93%e3%81%aa%e3%81%a7%e6%a5%bd%e3%81%97%e3%81%8f%ef%bc%81%e3%82%af%e3%83%83%e3%82%ad%e3%83%b3%e3%82%b0%e2%99%aa%ef%bc%88%e3%82%af%e3%83%aa%e3%82%b9%e3%83%9e%e3%82%b9/</a></li>
+					</ul>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/UICK2025-REC.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>α-STATION「UICK Radio」</figcaption>
+						</div>
+						<div class="div-center">
+							<img src="images/MFT2024_1.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>Maker Faire Tokyo 2024での発表</figcaption>
+						</div>
+						
+					</div>
+				</section>
+
+
+				
+			</div>
+		</div>
+		
+
+		
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>

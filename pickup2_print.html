@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>研究ポートフォリオ②</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1300px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    /* @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    } */
+	
+
+
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography-port.html">プロフィール</a></li>
+						<li><a href="gallery-port.html">制作実績</a></li>
+						<li><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
+						<li class="current-page"><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
+						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<!-- <ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+			</ul> -->
+			<div class="page-title">研究ポートフォリオ②</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">利便性と環境を配慮したカレンダー</h1>
+			</div>
+			<div>
+				<section>
+					
+					<h2>カレンダーデバイスの開発</h2>
+					<div class="image-container"><img src="images/ApCalendar_pos.png" alt="Masahiro Higuchi" class="poster-image2"></div>
+					<p class="atention-left"><strong>※展示イベントの装置説明ポスターより</strong></p>
+					
+					<h5 class="Classification">●開発概要</h5>
+					<p class="bottom"><strong></strong></p>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/Apcalender4.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>開発したカレンダーデバイス</figcaption>
+						</div>
+						<p class="p-w">　近年、ペーパーレス化が進む中で、多くの人がスマートフォンのカレンダーアプリを利用して日程を管理している。
+							スマートフォンのカレンダーアプリは、デバイス間で予定を共有できるだけでなく、通知機能によってリマインドを受け取れるという利点がある。
+							一方で、紙のカレンダーは、設置場所を見れば直感的に予定を確認できるというメリットがある。しかし、両者を併用すると情報の同期が難しくなり、予定の食い違いが生じる可能性がある。
+
+							そこで、本研究では、スマートフォンアプリの利便性と紙のカレンダーの直感的な視認性を調和させたデバイスを開発した。
+							本装置はApple iCloudと連携し、カレンダーの内容や変更をリアルタイムに表示できる。表示にはE-INK（電子ペーパー）を採用し、低消費電力を実現した。
+							また、目覚まし電波時計のデザインを参考にし、正面上部のボタンを押すことで画面にLEDを点灯させ、暗所でも視認しやすくした。
+							</p>
+					</div>
+
+					<h5 class="Classification">●表示内容の詳細</h5>
+					<p class="bottom"><strong></strong></p>
+					<div class="profile-container">
+						
+						<p class="p-w">　本装置で実装したE-INKは、白・黒・赤の3色での表示が可能であり、この特性を活かして視認性を向上させている。E-INKディスプレイに当月のカレンダーを表示し、現在の日付を赤色で強調する。
+							日付が変わると、自動的にE-INKの画面を書き換え、最新の日付を赤く塗り直す。また、月が変わると、カレンダーのレイアウトも当月の配置に更新される。
+							さらに、本装置はApple iCloudと連携し、カレンダーの予定をリアルタイムで反映する。
+							iCloud上のカレンダーに予定が追加・変更された場合、E-INKの画面も自動的に更新される。カレンダーの表示にはPythonのcalendarモジュールを用い、E-INK上で視認しやすいように予定ボックスを整理する。
+							また、Apple CalDAVサーバーからiCloudアカウントに紐づいたカレンダーの予定情報（予定名など）を取得し、該当する日付の予定ボックスに表示する。</p>
+						<div class="div-center">
+							<iframe width="470" height="315" src="https://www.youtube.com/embed/EZNeqkm4pZw?si=CikVJPcoxCcqnlMB&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							
+						</div>
+					</div>
+
+					<h5 class="Classification">●iCloudからカレンダーの内容を取得する仕組み</h5>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/ApCalendar3.png" alt="Masahiro Higuchi" class="poster-image-caption">
+						</div>
+						<p class="p-w">　Pythonのcaldavモジュールを使用してiCloudからカレンダーの内容を取得するには、https://caldav.icloud.com/にApple IDとアプリ用パスワードで認証し、PROPFINDリクエストを送ってCalDAVのホームセットアップURLを取得する。
+							次に、このURLに対してPROPFINDを実行し、利用可能なカレンダーの一覧を取得する。
+							特定のカレンダーに対してREPORTリクエストを送ることで、指定した期間の予定をXML形式で取得できる。
+							取得したデータはiCalendarフォーマットで提供されるため、icalendarモジュールを用いて解析し、カレンダーの予定を整理・表示している。</p>
+						
+					</div>
+
+					<h5 class="Classification">●使用方法</h5>
+							
+						<p>　初期設定として、iCloudに紐づけられたメールアドレスとアプリ用パスワードを準備する。
+							カレンダーデバイスが起動すると、PCからWEBUIにアクセスするため、ブラウザを使用してデバイスのIPアドレスを入力し、WEBサーバにアクセスする。
+							その際、用意したメールアドレスとアプリ用パスワードを入力する。
+							設定が適用されると、次回以降の起動時からは、指定したアカウント情報を基にカレンダーの情報が自動的に取得され、表示されるようになる。</p>
+					<h5 class="Classification">●文献</h5>
+					<ui>
+						<li><a href="https://qiita.com/masaki12-s/items/905365c9d5f68b7efcd8">PythonでNextCloud(CalDAV)のカレンダーの予定を取得する</a></li>
+						<li><a href="https://qiita.com/shi_ma/items/7133cea99fbf1dc5bdc7">iCalendarデータの仕様とPythonにおける利用方法</a></li>
+						<li><a href="https://qiita.com/TomOse/items/31b5fb4782f06d19af79">カレンダーに使われるiCalendar形式について part1</a></li>
+						<li><a href="https://github.com/python-caldav/caldav">python-caldav</a></li>
+					</ui>
+					
+					
+				</section>
+
+				<section>
+					<h2>その他の活動</h2>
+					<ul>
+						<li class="font-black">オープンソースカンファレンス2025 Osakaに出展した。</li>
+						<li class="font-black">日本新薬（株）主催 Digital縁日に出展した。<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html">https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html</a></li>
+					</ul>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/OSCosaka2025main.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>オープンソースカンファレンス2025 Osaka</figcaption>
+						</div>
+						<div class="div-center">
+							<img src="images/NihopnSinyaku_calender.JPG" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>日本新薬（株）主催 Digital縁日</figcaption>
+						</div>
+						
+					</div>
+				</section>
+
+
+				
+			</div>
+		</div>
+		
+
+		
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>

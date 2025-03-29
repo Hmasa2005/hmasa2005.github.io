@@ -165,32 +165,6 @@
     .Award {
         color: #ff9100;
     }
-
-    /* 画面幅が768px以下の場合に対応 */
-    @media (max-width: 1050px) {
-        .profile-container {
-            flex-direction: column; /* 縦並びに変更 */
-            align-items: center; /* 中央揃え */
-        }
-
-        .profile-image {
-            margin-right: 0; /* 画像と名前の間隔をなくす */
-            margin-bottom: 20px; /* 画像の下に余白を追加 */
-        }
-
-        .profile-name {
-            text-align: center; /* 名前と内容を中央揃え */
-            margin-left: 0; /* マージンをリセット */
-        }
-
-        .name-japanese {
-            font-size: 40px; /* 名前のフォントサイズを少し小さくする */
-        }
-
-        .name-English {
-            font-size: 18px; /* 英語名のフォントサイズも少し小さくする */
-        }
-    }
 </style>
 
 <body>
@@ -210,8 +184,9 @@
 					<ul class="header-menu-links">
 						<li class="current-page"><a href="biography.html">プロフィール</a></li>
 						<li><a href="gallery.html">制作実績</a></li>
-						<li><a href="blog.html">ブログ</a></li>
-						<li><a href="contact.html">連絡先</a></li>
+						<li><a href="blog.html">研究ポートフォリオ①</a></li>
+						<li><a href="contact.html">研究ポートフォリオ②</a></li>
+						<li><a href="contact.html">研究ポートフォリオ③</a></li>
 					</ul>
 				</div>
 			</div>
@@ -220,9 +195,9 @@
 	</div>
 	<div id="main">
 		<div class="page-header">
-			<ul class="breadcrumb">
+			<!-- <ul class="breadcrumb">
 				<li><a href="index.html">ホーム</a></li>
-			</ul>
+			</ul> -->
 			<div class="page-title">プロフィール</div>
 		</div>
 
@@ -242,14 +217,14 @@
 				<div class="profile-name">
 
 					<h2>興味分野</h2>
-					<p lass="content2">サウンド・ビジュアル空間演出、マイコンを活用したシステム設計、<br>IoT・組み込みシステム開発、デジタルデザイン表現、Digital Fabrication、<br>3Dプリンタ活用支援、電子工作支援、プログラミング支援</p>
+					<p lass="content2">サウンド・ビジュアル空間演出、マイコンを活用したシステム設計、<br>IoT・組み込みシステム開発、デジタルデザイン表現、Digital Fabrication、<br>3Dプリンタ活用支援、電子工作支援</p>
 					
 					<h2>研究内容</h2>
 					<p class="content2">ハンドベル自動演奏装置の印象評価、利便性と環境を配慮したカレンダー、<br>効率的な公共交通機関の利用促進計画</p>
 
 					<h2>言語・マイコン</h2>
 					<p class="content2">言語：Python、C/C++、Arduino、HTML、CSS、JavaScript、Processing<br>
-					マイコン：Arduino、ESP32、M5Stick、Raspberry Pi、SPRESENSE</p>
+						マイコン：Arduino、ESP32、M5Stick、Raspberry Pi、SPRESENSE</p>
 					<h2>趣味</h2>
 					<p class="content2">電子工作、プログラミング、インテリアデザイン、料理、<br>バドミントン、ウィンタースポーツ、ドライブ</p>
 				</div>
@@ -326,18 +301,18 @@
 				</section>
 			
 				<section id="exhibitions">
-					<h2>展示・講演</h2>
+					<h2>イベント展示・講演</h2>
 					<h5 class="Classification">●展示会</h5>
 					<table>
 						<tr>
 							<td class="date">2025/01/25</td>
 							<td class="kinds">オープンソス<br>カンファレンス<br>Osaka 2025</td>
-							<td class="content1">・Location Sinage System（LSS）<br>・利便性と環境を配慮したカレンダー<br>2点展示</td>
+							<td class="content1">・Location Sinage System（LSS）<br>・利便性と環境を配慮したたカレンダー<br>2点展示</td>
 						</tr>
 						<tr>
 							<td class="date">2024/10/11</td>
 							<td class="kinds">日本新薬（株）主催<br>Digital縁日</td>
-							<td class="content1">・ハンドベル自動演奏装置Ver5<br>・利便性と環境を配慮したカレンダー<br>2点展示<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html" class="tooltip" data-tooltip="サイト">🔗</a><a href="https://www.youtube.com/watch?v=oLVSfy_miwk" class="tooltip" data-tooltip="動画">▶️</a></td>
+							<td class="content1">・ハンドベル自動演奏装置Ver5<br>・利便性と環境を配慮したたカレンダー<br>2点展示<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html" class="tooltip" data-tooltip="サイト">🔗</a><a href="https://www.youtube.com/watch?v=oLVSfy_miwk" class="tooltip" data-tooltip="動画">▶️</a></td>
 						</tr>
 						<tr>
 							<td class="date">2024/09/21・22</td>
@@ -374,7 +349,7 @@
 					<table>
 						<tr>
 							<td class="date">2025/03</td>
-							<td class="content1">京都橘大学 学長による学生表彰<a href="https://www.tachibana-u.ac.jp/f385321a121ddd36bf5c0d00f726e3aa93c3058b.pdf" class="tooltip" data-tooltip="サイト">🔗</a></td>
+							<td class="content1">京都橘大学 学長による学生表彰</td>
 						</tr>
 						<tr>
 							<td class="date">2024/09</td>
