@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>富山県立大門高校で講演しました</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="js/vue.min.js"></script>
+	<!-- 遅延読込 -->
+	<script src="js/lazysizes/lazysizes.min.js"></script>
+	<script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+		<div id="nav">
+			<div id="nav-header">
+				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+				<label id="nav-menu-toggle-button" for="nav-menu-status">
+					<img src="images/C.png" alt="Menu Icon" />
+				</label>
+				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+			</div>
+			<div id="nav-content">
+				<ul class="header-menu-links">
+					<li><a href="biography.html">プロフィール</a></li>
+					<li><a href="gallery.html">製作実績</a></li>
+					<li class="current-page"><a href="blog.html">ブログ</a></li>
+					<li><a href="contact.html">連絡先</a></li>
+				</ul>
+			</div>
+		</div>
+		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="blog.html">ブログ</a></li>
+			</ul>
+			<div class="page-title">富山県立大門高校で講演しました</div>
+		</div>
+
+		<div class="content">
+			<div class="inner">
+                <div class="profile-concept-mean">
+					
+                    
+                    <div class="profile-text">
+
+					<h2 style="text-align: center;">富山県立大門高校で講演しました</h2>
+					<div style="text-align: center;">
+						<img src="images/20250725_DaimonSeniorHighSchool01.JPG" alt="20250725_DaimonSeniorHighSchool01" style="margin-bottom: 20px; width: 100%; height: auto;">
+					</div>
+                    <p>　2025年7月9日（水）、富山県立大門高校で開催された「キャリア教育講演会（理数情報系）」で、講演をさせていただく機会をいただきました。
+						今回の講演は、2025年5月に正式にご依頼をいただいたもので、理数情報系に関心を持つ大門高校の生徒の皆さんに向けて、私自身の経験や考えを共有させていただきました。
+						講演では、これまでの研究・創作活動を通じて得た気づきや学び、そして「大学でどのようなことに取り組んでほしいか」「今からどのような意識を持って日々を過ごしてほしいか」といったテーマを中心にお話ししました。
+						ものづくりの楽しさや苦労、試行錯誤の重要性、そして“真似ることから始める力”について、具体的なエピソードを交えながら紹介しました。</p>
+					</p>
+					<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+						<img src="images/20250725_DaimonSeniorHighSchool02.JPG" alt="20250725_DaimonSeniorHighSchool02" style="width: 50%; height: auto;">
+						<img src="images/20250725_DaimonSeniorHighSchool03.png" alt="20250725_DaimonSeniorHighSchool02" style="width: 50%; height: auto;">
+					</div>
+					<p>　また、当日は私の制作物である ハンドベル自動演奏装置 を大門高校に輸送し、実物をご覧いただく機会も設けることができました。
+						大門高校の生徒の皆さんや先生方に興味を持って見ていただけたことをとても嬉しく思います。<br>
+						このたびは講演の機会をいただき、また装置展示に関しても多大なご配慮をいただき、本当にありがとうございました。
+					</p>
+                    <!-- <ul style="margin-top: 30px;">
+						<li>2024年 京都橘大学 学生表彰の受賞者が決定<a href="https://www.tachibana-u.ac.jp/news/2025/03/2024-2142262375.html">https://www.tachibana-u.ac.jp/news/2025/03/2024-2142262375.html</a></li>
+						<li>2024年京都橘大学学生表彰式を執り行いました<a href="https://www.tachibana-u.ac.jp/news/2025/05/2024-101.html">https://www.tachibana-u.ac.jp/news/2025/05/2024-101.html</a></li>
+					</ul> -->
+                </div>
+			</div>
+		</div>
+		<div class="content footer">
+			<div class="copyright inner">
+				<ul>
+					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

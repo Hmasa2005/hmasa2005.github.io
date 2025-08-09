@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>製作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
+
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">製作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">製作実績</a></li>
+			</ul>
+			<div class="page-title">モグラ叩きゲーム</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">モグラ叩きゲーム</h1>
+			</div>
+			<div>
+				
+				<section>
+					<h2>モグラ叩きゲーム</h2>
+
+					<!-- <div class="image-container"><img src="images/202050809_Mogura Punch.png" alt="Masahiro Higuchi" class="poster-image2" style="margin-bottom: 20px; width: 60%; height: auto;"></div> -->
+
+					<h5 class="Classification">現実逃避コーナー</h5>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/202050809_MoguraPunch.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>開発したゲーム画面</figcaption>
+
+							</figcaption>
+						</div>	
+						<p class="p-w">　本ツールは、プログラミングパークで訪ねてきた学生にモグラ叩きゲームを作ってほしいという依頼があって、図形を使って作成したものである。
+							ゲームのルールは、モグラが出てきた穴をクリックして叩くというシンプルなものですが、モグラが出てくるタイミングや位置をランダムに設定することで、プレイヤーに楽しんでもらえるように工夫した。
+							また、ゲームの進行状況を表示するためのスコアボードも実装し、プレイヤーが自分のスコアを確認できるようにした。
+							プログラムのパラメータの値を変更することで、モグラの出現速度や、タイムアウト時間の設定を変更することができる。<br>
+							モジュールは、Tkinter, Randomを使用して作成した。<br><br>
+							もし試したい方は、以下のリポジトリよりダウンロードしてお試しあれ。<br>
+							※Tkinterのモジュールが必要です。ご注意ください。<br>
+							<a href="https://github.com/Hmasa2005/MolePunch/tree/main" class="tooltip" data-tooltip="MolePunchGame">https://github.com/Hmasa2005/MolePunch/tree/main</a>
+						</p>
+						
+					</div>
+				</section>
+				
+			</div>
+		</div>
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>
