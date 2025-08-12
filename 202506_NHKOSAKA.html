@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NHKで放送された番組に出演しました</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="js/vue.min.js"></script>
+	<!-- 遅延読込 -->
+	<script src="js/lazysizes/lazysizes.min.js"></script>
+	<script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+		<div id="nav">
+			<div id="nav-header">
+				<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+				<label id="nav-menu-toggle-button" for="nav-menu-status">
+					<img src="images/C.png" alt="Menu Icon" />
+				</label>
+				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+			</div>
+			<div id="nav-content">
+				<ul class="header-menu-links">
+					<li><a href="biography.html">プロフィール</a></li>
+					<li><a href="gallery.html">製作実績</a></li>
+					<li class="current-page"><a href="blog.html">ブログ</a></li>
+					<li><a href="contact.html">連絡先</a></li>
+				</ul>
+			</div>
+		</div>
+		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="blog.html">ブログ</a></li>
+			</ul>
+			<div class="page-title">NHKで放送された番組に出演しました</div>
+		</div>
+
+		<div class="content">
+			<div class="inner">
+                <div class="profile-concept-mean">
+					
+                    
+                    <div class="profile-text">
+
+					<h2 style="text-align: center;">NHKで放送された番組に出演しました</h2>
+					<div style="text-align: center;">
+						<img src="images/20250812_NHKOSAKA01.JPG" alt="20250812_NHKOSAKA01" style="margin-bottom: 20px; width: 100%; height: auto;">
+					</div>
+                    <p>　2025年6月30日（月）、NHK大阪で放送された『「ぐるっと関西おひるまえ」学校へどーも！』の番組に出演しました。
+						この番組では、京都橘大学の施設紹介や研究活動に関する紹介を行っており、私もその一環として出演させていただきました。
+						番組内では、本学の学生が主体的にものづくりを行うことができる施設の紹介の中で、ハンドベル自動演奏装置が取り上げられました。
+						実際に装置を演奏するシーンの撮影も行われ、私自身も装置の説明や制作の背景についてお話ししました。
+					</p>
+					</p>
+					<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+						<img src="images/20250812_NHKOSAKA04.JPG" alt="20250812_NHKOSAKA04" style="width: 50%; height: auto;">
+						<img src="images/20250812_NHKOSAKA02.JPG" alt="20250812_NHKOSAKA02" style="width: 50%; height: 50%;">
+					</div>
+					<p>　放送当日にNHK大阪のスタジオにも招待いただき、実際に生放送に少しだけ出演させていただけました。
+						リハーサル終了後、時間があり暇をしていると、親切な撮影スタッフの方がNHKで実際に放送で使用されているカメラを触らせて下さりました。
+						触ってみて、びっくり。ハイビジョンカメラには、オートフォーカスはなく全てマニュアルフォーカスでした。
+						（高校では、写真部で一眼レフカメラを使っていましたが、オートフォーカスしか使ったことがなかったので、マニュアルフォーカスは初めてでした）
+						今回の出演を通じて、貴重な経験をさせていただきました。関係者の皆様では、心より感謝申し上げます。
+					</p>
+                    <!-- <ul style="margin-top: 30px;">
+						<li>2024年 京都橘大学 学生表彰の受賞者が決定<a href="https://www.tachibana-u.ac.jp/news/2025/03/2024-2142262375.html">https://www.tachibana-u.ac.jp/news/2025/03/2024-2142262375.html</a></li>
+						<li>2024年京都橘大学学生表彰式を執り行いました<a href="https://www.tachibana-u.ac.jp/news/2025/05/2024-101.html">https://www.tachibana-u.ac.jp/news/2025/05/2024-101.html</a></li>
+					</ul> -->
+                </div>
+			</div>
+		</div>
+		<div class="content footer">
+			<div class="copyright inner">
+				<ul>
+					<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
