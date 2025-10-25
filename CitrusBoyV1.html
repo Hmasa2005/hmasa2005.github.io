@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>製作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
+
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">製作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">製作実績</a></li>
+			</ul>
+			<div class="page-title">CitrusBoyを作ってみた</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">CitrusBoyを作ってみた</h1>
+			</div>
+			<div>
+				
+				<section>
+					
+					<h2>CitrusBoy</h2>
+					
+					<div class="image-container"><img src="images/Citrusboy_main.jpg" alt="Masahiro Higuchi" class="poster-image2"></div>
+				</section>
+				<section>
+					<h2>企業提供</h2>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/PCBWay.png" alt="Masahiro Higuchi" class="poster-image-caption" style="margin-top: 30px;">
+							<figcaption style="text-align:center; margin-top:8px;">
+								<strong style="font-size:18px;">提供：PCBWay</strong>
+							</figcaption>
+						</div>
+						
+						
+						
+					</div>
+					<p>　<a href="https://www.pcbway.com/">PCBWay</a>は、プリント基板（PCB）の製造から部品実装（SMT・DIP）、筐体加工、3Dプリント、CNC加工、さらには組立までを一貫して行うものづくりサービスを提供する企業である。高品質かつ短納期で、試作から量産まで幅広く対応しており、学生や研究者、個人開発者にも利用しやすい環境を整えている。
+						</p>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/PCBWay2.png" alt="Masahiro Higuchi" class="poster-image-caption">
+						</div>
+						<div class="div-center">
+							<img src="images/CitrusBoy3.jpeg" alt="Masahiro Higuchi" class="poster-image-caption">
+						</div>
+					</div>
+					<p>　特に、<strong>2層FR-4基板を標準仕様で10枚あたり$5~ (※2025/10現在)</strong>で製作できるなど、低コストで高精度な試作を行える点が大きな特徴である。オンライン上で即時に見積もりを確認できるシステムも備えており、設計段階からコストや納期を明確に把握することができる。
+					<br>
+						　本開発では、PCBWayのご提供により、CitrusBoyのプリント基板を製作することができた。PCBWayの高品質なサービスと迅速な対応により、CitrusBoyの開発を円滑に進めることができたことに深く感謝申し上げる。<br><br>
+					<strong>- 以下リンクより内容の確認ができます -</strong><br><a href="https://www.pcbway.com/project/sponsor/Student_Mentorship_Through_Game_Console_Events_758c8320.html">https://www.pcbway.com/project/sponsor/Student_Mentorship_Through_Game_Console_Events_758c8320.html</a>
+					</p>
+					
+				</section>
+				<section>
+					<h2>概要</h2>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/CitrusBoy6.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+						</div>
+						<p class="p-w">　CitrusBoyは、オープンソースの携帯型ゲーム機<a href="https://www.arduboy.com">「ArduBoy」</a>をベースに、独自に設計・開発した互換機である。
+						マイコンには Pro Micro を採用し、ディスプレイには、SH1106 OLED を使用している。本開発は、大学内におけるメンター制度を活用した学習支援活動の一環として、<a href="TinyJoyPad.html">電子工作企画</a>のために行ったものである。</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>部品</h2>
+					<p>登場するパーツは以下の通りである。</p>
+					<ul>
+						<li>Pro Micro (ATmega32U4搭載) ￥400</li>
+						<li>1.3inch SH1106 OLEDディスプレイ (SPI通信) ￥500</li>
+						<li>タクトスイッチ ×6 ￥30</li>
+						<li>ボタン電池CR2032 ×2 ￥200</li>
+						<li>ボタン電池ソケット ×2 ￥100</li>
+						<li>スライドスイッチ ×2 ￥10</li>
+						<li>PCB基板 ×1 ￥200</li>
+					</ul>
+				</section>
+				<section>
+					<h2>開発目標</h2>
+
+					<p>　装置の開発では、主に<a href="https://www.arduboy.com">「ArduBoy」</a>を参考に設計した。しかし、ArduBoyのハードウェアに実装されている機能をそのまま利用するのではなく、独自の改良を加えることを目指した。
+					改良点は以下のように整理した。</p>
+					<ul>
+						<li>ディスプレイを1.3inchのSH1106 OLEDに変更</li>
+						<li>交換可能なバッテリーの搭載</li>
+						<li>ミュートスイッチの実装</li>
+						<li>組み立て工程で表面実装部品を使用せずスルーホール部品のみを使用する</li>
+						<li>CitrusBoyのロゴを起動画面に表示する</li>
+						<li>1台あたりのコストを1500円以内に抑える</li>
+					</ul>
+					<p>　学習支援活動の一環であること、調達できた予算の都合、持続可能な企画にすることや学生の教育効果を考慮したため、特に組み立ての容易さとコスト削減に重点を置いた。</p>
+				</section>
+				<section>
+					<h2>ハードウェアの実験</h2>
+
+					<p>　<a href="https://community.arduboy.com/t/production-arduboy-schematic/702">ArduBoy Form</a>の回路図をもとに、GamePadに割り当てられているピンアサインなどを確認して実験した。参照した資料ではSSD1306 0.96inchでI2Cを使用した設計である。
+					実験では、SH1106 1.3inch SPIを使用した通信で実装する。回路エディタはFrizingを使用した。</p>
+					
+					<div class="profile-container">		
+						<div class="div-center">
+							<img src="images/20250725_Student_CardReader_Excel.png" alt="Masahiro Higuchi" class="poster-image-caption" style="width: auto; height: auto;">
+							<figcaption>Frizingの回路エディタ</figcaption>
+						</div>
+					</div>
+					
+					<p>　参照した<a href="https://github.com/MLXXXp/Arduboy2/tree/master">ArduBoy2ライブラリ</a>では、SSD1306 OLEDの仕様である。SH1106で実現するために、ArduBoy Formなどの資料を参考に関数、命令アドレスや表示可能領域の定義を改修した。
+					さらに、CitrusBoyロゴをBitMap形式に変換を行い、ArduBoy2ライブラリ内に組み込んだ。<br><br><strong>改修済みのライブラリはGitHubの「CITRUSBOY-Ver1.0.0.zip」よりダウンロード</strong><br><a href="https://github.com/Hmasa2005/DIY-GAMEHARD/tree/main">https://github.com/Hmasa2005/DIY-GAMEHARD/tree/main</a>
+					<br><br><strong>または、Arduino IDEでは、環境設定より追加ボードリンクに次を追加</strong><br><code>https://raw.githubusercontent.com/Hmasa2005/DIY-GAMEHARD/refs/heads/main/CitrusBOYver1.0.json</code><br><strong>ボードマネージャで「CITRUSBOY-ATmega32U4」をインストール</strong></p>
+
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/CitrusBoy7.png" alt="Masahiro Higuchi" class="poster-image-caption">
+						</div>
+					</div>
+
+					<p>上記のライブラリをArduino IDEにインストールすることで、CitrusBoyの開発環境を整えることができる。</p>
+					<div class="profile-container">
+						<div class="div-center">
+								<img src="images/CitrusBoy5.jpeg" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>起動ロゴの表示</figcaption>
+							</div>	
+							<div class="div-center">
+								<img src="images/CitrusBoy8.jpeg" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>ゲームの動作確認</figcaption>
+						</div>
+					</div>
+					
+
+				</section>
+				<section>
+					<h2>基板設計と製造</h2>
+
+										
+					<div class="profile-container">		
+						<div class="div-center">
+							<img src="images/CitrusBoy2.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>設計した基盤の表面</figcaption>
+						</div>	
+						<div class="div-center">
+							<img src="images/CitrusBoy3.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>裏面</figcaption>
+						</div>
+					</div>
+					
+					<p>　回路設計が完了した後、基板設計を行った。基板設計には、Frizingを使用した。基板設計では、GamePadの操作性を考慮し、パーツの配置を行った。また、スルーホール部品のみを使用する設計とした。
+						バッテリは交換可能なCR2032ボタン電池を採用し、ソケットを基板に実装することで、簡単に電池交換ができるようにした。さらに、ミュートスイッチを追加した。
+					基板データの作成が完了した後、Gerberファイルを生成し、PCBWayに発注した。PCBWayのオンライン見積もりシステムを活用し、コストや納期を確認しながら発注手続きを進めた。</p>
+					
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/CitrusBoy3.jpeg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>製造されたCitrusBoyの基板</figcaption>
+						</div>
+					</div>
+					
+					<p>　PCBWayから届いた基板は、高品質であり、設計通りに製造されていた。
+				</section>
+				<section>
+					<h2>完成</h2>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/Citrusboy_main.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>表面</figcaption>
+						</div>
+						
+						<div class="div-center">
+							<img src="images/CitrusBoy4.jpeg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>裏面</figcaption>
+						</div>
+					</div>
+					<p>　表面には、SH1106 OLED全体の重量による端子への負荷を軽減するため、3DプリンタでOLEDを支えるパーツを作成し、実装した。
+						裏面には、半田付け部分への直接的な手の接触を防ぐため、レーザー加工機で切削したアクリル板を、PCBの四隅の穴にネジとナットで固定している。
+					</p>
+				</section>
+				<section>
+					<h2>文献</h2>
+					
+						<p class="p-w">学生証リーダーの開発にあたり、以下の文献を参考にした。
+						</p>
+						<ul>
+							<li><a href="https://qiita.com/nanbuwks/items/ac02bb307c9850b5e5c4">PN532 NFC RFID module について調べる</a></li>
+							<li><a href="https://qiita.com/nanbuwks/items/42f639e7eec928181298">PN532 NFC RFID module を Arduino UNO で読む</a></li>
+							<li><a href="https://qiita.com/gpioblink/items/91597a5275862f7ffb3c">PN532を使ってArduinoでFeliCa学生証を読む方法</a></li>
+						</ul>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>
