@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>制作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: column; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 100%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
+            /* 画像リストを横並び・高さ揃え */
+        .image-list-row {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: stretch; /* 高さを揃える */
+        }
+        .image-list-item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        justify-content: stretch;
+        background: none;
+        }
+        .image-list-item img.poster-image-caption {
+        max-width: 250px;
+        max-height: 250px;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        }
+        .image-list-item figcaption {
+        min-height: 2em;
+        text-align: center;
+        margin-top: 5px;
+        font-size: 14px;
+        color: #000;
+        }
+        @media (max-width: 700px) {
+        .image-list-row {
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-list-item img.poster-image-caption {
+            max-width: 90vw;
+            max-height: 200px;
+        }
+        }
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">制作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">制作実績</a></li>
+			</ul>
+			<div class="page-title">PID制御を習得したい！その①</div>
+		</div>
+
+		<div class="content">
+				<h1 class="main-title">PID制御を習得したい！その①</h1>
+			</div>
+			<div>
+				<section>
+					<h2>PID制御を倒立振子の開発を通じて学ぶ</h2>
+
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/PID_Practice1_1.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図1 開発中の倒立振子の図</figcaption>
+
+
+						</div>	
+						<p class="p-w">　この制作実績のレポートでは、倒立振子の開発を通じてPID制御の仕組みを学習している過程を記録する。現在、制御パラメータの調整や動作安定化に向けた実験を進めており、その内容を本レポートにまとめる。</p>
+						
+					</div>
+				</section>
+                
+                <section>
+					<h2>PID制御とは</h2>
+
+					
+						
+						<p class="p-w">PID制御とは、<strong>比例（Proportional）・積分（Integral）・微分（Derivative）</strong>の3つの要素を組み合わせて行う制御方式である。
+                            対象の状態（たとえば角度や速度など）を目標値に近づけるために、誤差をもとに制御量を計算する。
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>P（比例）制御：</strong>誤差の大きさに応じて出力を調整する。応答が速いが、誤差が残ることがある。
+                            </li>
+                            <li>
+                                <strong>I（積分）制御：</strong>過去の誤差を蓄積して補正し、定常誤差をなくす働きを持つ。
+                            </li>
+                            <li>
+                                <strong>D（微分）制御：</strong>誤差の変化率を利用して、急激な変化を抑え、安定性を高める。
+                            </li>
+                        </ul>
+                        <p class="p-w">
+                            これら3つを組み合わせることで、速い応答と安定した制御の両立が可能となる。
+                            倒立振子のように不安定なシステムを安定化させる代表的な手法として広く利用されている。
+                        </p>
+						
+					
+				</section>
+                <section>
+                    <h2>車体の設計</h2>
+                    
+						<div class="profile-container">
+						  <ul class="image-list-row">
+							<li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_2.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図2 CADの図</figcaption>
+							  </div>
+							</li>
+							<li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_3.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図3 開発中の倒立振子の図</figcaption>
+							  </div>
+							</li>
+                            <li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_4.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図4 開発中の倒立振子の図</figcaption>
+							  </div>
+							</li>
+						  </ul>
+						</div>
+
+                    <p class="p-w">　倒立振子の車体設計では、重心位置や支持点の配置が重要である。図2のCAD画像のように、前面を制御基板部、背面をバッテリ部として実装する想定で、重心を中心に寄せるように設計している。MCUはESPDev32E、モータドライバはA4988、9軸センサはBNO055を採用している。
+                        また、車体の駆動部は2つのステッピングモータで駆動させている。ステッピングモータに取り付けられたタイヤは直径80mmで、滑り止めとして同サイズのOリングを設計した溝にはめ込んでいる。
+                    </p>
+
+                </section>
+                <section>
+                    <h2>制御ロジック</h2>
+                    <p class="p-w">　倒立振子の制御ロジックは、センサからの情報をもとにPID制御を行う。ジャイロセンサと加速度センサを用いて倒立振子の姿勢を検出し、そのフィードバックを基に制御信号を生成する。
+                        また、ステッピングモータを使用するにはパルス信号の生成が必要である。そのため、センサのフィードバックを受けながら、モータの制御を実現できるタスクをそれぞれ独立して動作させることで、リアルタイム性を確保する必要がある。
+                        今回の実験では、PID制御の出力を基にパルス周期の制御を行った。
+
+                    </p>
+                    <div class="profile-container">
+                        <div class="div-center">
+							<img src="images/PID_Practice_fig01.PNG" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図5 状態推移図</figcaption>
+						</div>	
+                    </div>
+                </section>
+
+                <section>
+                    <h2>動作映像</h2>
+                    <div class="profile-container">
+                        <div class="div-center">
+                            <iframe width="413" height="730" src="https://www.youtube.com/embed/HsgiNXUe5tg" title="PID_Practice1_video2025.10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        
+                    </div>
+                    <p>　検証動画では、ゲイン値をそれぞれ、Kp=20,Ki=10,Kd=5に設定して実験を行った。動作の考察として、ふらつきがまだ見られるため、ゲイン値の調整が課題となっている。また、バッテリをこの時点では実装できていないために、重心が中心に定まらずに動作が不安定となっている。今後は、バッテリを実装して、ゲイン値の調整を行いたい。</p>
+
+                    <a href="https://github.com/Hmasa2005/Inverted-Pendulum-with-PID-V1" target="_blank" style="font-size: 20px;">github repository</a>
+                </section>
+                
+				
+			</div>
+		</div>
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>
