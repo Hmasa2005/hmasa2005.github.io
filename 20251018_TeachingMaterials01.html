@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>制作実績</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: column; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 100%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
+            /* 画像リストを横並び・高さ揃え */
+        .image-list-row {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: stretch; /* 高さを揃える */
+        }
+        .image-list-item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        justify-content: stretch;
+        background: none;
+        }
+        .image-list-item img.poster-image-caption {
+        max-width: 250px;
+        max-height: 250px;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        }
+        .image-list-item figcaption {
+        min-height: 2em;
+        text-align: center;
+        margin-top: 5px;
+        font-size: 14px;
+        color: #000;
+        }
+        @media (max-width: 700px) {
+        .image-list-row {
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-list-item img.poster-image-caption {
+            max-width: 90vw;
+            max-height: 200px;
+        }
+        }
+
+		/* 追加：YouTube埋め込み動画のレスポンシブ対応 */
+        .responsive-video {
+        position: relative;
+        width: 100%;
+        max-width: 600px; /* 最大幅はお好みで調整 */
+        margin: 0 auto;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        }
+        .responsive-video iframe {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        }
+        @media (max-width: 700px) {
+        .responsive-video {
+            max-width: 98vw;
+            aspect-ratio: 9 / 16; /* スマホ縦長用 */
+        }
+        }
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography.html">プロフィール</a></li>
+						<li class="current-page"><a href="gallery.html">制作実績</a></li>
+						<li><a href="blog.html">ブログ</a></li>
+						<li><a href="contact.html">連絡先</a></li>
+					</ul>
+				</div>
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+                <li><a href="gallery.html">制作実績</a></li>
+			</ul>
+			<div class="page-title">小中学生向け電子工作の教材開発
+            </div>
+		</div>
+
+		<div class="content">
+				<h1 class="main-title">小中学生向け電子工作の教材開発</h1>
+			</div>
+			<div>
+				<section>
+					<h2>MCU付きハート型LED基盤の教材</h2>
+
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/TeachingMaterials01_06.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図1 ハート型LED制御基板</figcaption>
+
+
+						</div>	
+						
+
+					</div>
+                    <p class="p-w">　このレポートでは、小学生・中学生を対象とした、電子工作ならびに、ハードウェアプログラミングを学ぶことができる教材の開発を実験的に開発した内容をここにまとめる。
+                            大学近辺の小学生・中学生を対象とした情報技術を学べる体験教室の一環で、京都市伏見区醍醐支所からのプログラミングや電子工作を学べる教材の開発依頼があったことが開発のきっかけである。
+                            参加者1人辺りに1セットの教材を配布し、各自で電子工作とプログラミングを体験してもらう形式を想定している。また、一人当たりのセットの予算に制約があり、可能な限り低コストを目指す必要があった。
+                        </p>
+				</section>
+                
+                <section>
+					<h2>開発概要</h2>
+                        <p class="p-w">　この開発では、初級者向けの電子工作教材を作成することを目的としている。また、教育的効果の検討や費用的な制約を考慮した設計が必要である。
+                            そのため、難易度は簡単なもので、参加者がプログラミングした制御の動きを理解しやすい形でアウトプットする必要がある。さらに、コーディングツールではビジュアル型を採用し、直感的に操作できるようにする必要がある。
+                            このような観点から以下のような目標を設定した。
+                        </p>
+                        <ul>
+                            <li>目標1: プログラムのデバッグ動作がハードウェア上で明確に現れること</li>
+                            <li>目標2: ビジュアル型プログラミングツールを使用すること</li>
+                            <li>目標3: 電子部品は一つの基板に実装すること</li>
+                            <li>目標4: 低コストでの教材提供を実現すること</li>
+                        </ul>
+				</section>
+                <section>
+                    <h2>MCUの選定</h2>
+                    
+						<!-- <div class="profile-container">
+						  <ul class="image-list-row">
+							<li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_2.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図2 CADの図</figcaption>
+							  </div>
+							</li>
+							<li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_3.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図3 開発中の倒立振子の図</figcaption>
+							  </div>
+							</li>
+                            <li>
+							  <div class="image-list-item">
+								<img src="images/PID_Practice1_4.png" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>図4 開発中の倒立振子の図</figcaption>
+							  </div>
+							</li>
+						  </ul>
+						</div> -->
+                    <div class="profile-container">
+                        <div class="div-center">
+							<img src="images/TeachingMaterials01_02.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図2 CH552Tの実験</figcaption>
+						</div>	
+                    </div>            
+                    <p class="p-w">　MCUとしてCH552Tを採用した。
+                        CH552TはC言語でのプログラミングが可能であり、Arduino IDEにもボードライブラリを追加することで対応できる。また、1個あたり約100円という非常に安価な価格で入手できるため、低コストで教材を提供できる点も大きな利点である。 さらに、CH552Tは豊富なGPIOピンを備えており、多様なセンサやアクチュエータを接続できる。以上の点から、CH552Tは今回の教材開発に最適なMCUであると判断した。 なお、Arduino Micro互換機の使用も検討したが、そちらは別途シリアル変換のための回路が必要となる。一方、CH552Tにはシリアル変換機能が内蔵されているため、回路設計を簡素化できる点も選定理由の一つである。
+                    </p>
+
+                </section>
+                
+                
+
+                <section>
+                    <h2>基板の設計</h2>
+                    <p class="p-w">　基板上のすべての電子部品を実装するために、<a href="https://www.kicad.org/" target="_blank">Kicad</a>を用いて回路設計および基板設計を行い、<a href="https://www.pcbway.com/" target="_blank">PCBWay</a>を中心に周辺回路を配置し、各センサやアクチュエータとの接続を考慮したレイアウトを作成している。
+                        本設計では、10 個の発光ダイオードをハート型に配置し、小学生・中学生が視覚的に楽しめるよう工夫した。また、基板サイズを最小限に抑えることで、製造コストの削減にも配慮した。
+                        基板上に実装する発光ダイオード以外の電子部品には表面実装タイプを採用した。抵抗などの部品ははんだ付け点数が多く、体験教室の実施時間の制約や、小学生・中学生には作業難易度が高いことが懸念されるためである。
+                        表面実装化により、参加者が発光ダイオードの実装のみになり、時間内に体験できるようにした。
+                        なお、発光ダイオードの配置はハート型に限らず、星形や特定のロゴの輪郭を模したデザインにも変更可能である。子どもたちが好みに応じて模様を選べるため、体験意欲の向上も期待できる。
+
+                    </p>
+                    <div class="profile-container">
+                        <ul class="image-list-row">
+                        <li>
+                            <div class="image-list-item">
+                            <img src="images/TeachingMaterials01_03.png" alt="Masahiro Higuchi" class="poster-image-caption">
+                            <figcaption>図3 設計した基板 表面</figcaption>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image-list-item">
+                            <img src="images/TeachingMaterials01_04.png" alt="Masahiro Higuchi" class="poster-image-caption">
+                            <figcaption>図4 設計した基板 裏面</figcaption>
+                            </div>
+                        </li>
+                        </ul>
+                    </div>
+                    <p>PCBWay+で公開したプロジェクトは、<a href="https://www.pcbway.com/project/shareproject/Concept_for_an_Electronics_and_Programming_Starter_Kit_for_Children_a6048a80.html">こちら</a>から確認できます。</p>
+                </section>
+
+                <section>
+                    <h2>電子部品の試験実装</h2>
+                    <div class="profile-container">
+                        <div class="div-center">
+							<img src="images/TeachingMaterials01_07.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図5 部品を実装した基板</figcaption>
+						</div>	
+                    </div> 
+                    <p>本開発では、試験的な開発であることから、各部品の実装を個人設備で行なった。
+                        表面実装部分は、ステンシルを使用してはんだペーストを塗布し、小型なホットプレートでリフローを行なった。
+                        
+                    </p>
+                </section>
+
+                <section>
+                    <h2>開発環境</h2>
+                    <div class="profile-container">
+                        <div class="div-center">
+							<img src="images/TeachingMaterials01_05.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>図6 開発環境</figcaption>
+						</div>	
+                    </div> 
+                    <p>　小学生・中学生でもハードウェアプログラミング可能な環境を構築するには、ビジュアル型プログラミングを用いた開発は初期段階では有効であると考える。
+                        今回は、<a href="https://github.com/taweili/ardublock" target="_blank">ArduBlock</a>を用いて開発する想定で環境構築を行なって実験した。ArduBlockは、<a href="https://www.arduino.cc" target="_blank">Arduino IDE</a>上で動作するビジュアル型プログラミングツールであり、UI上で作成したブロック型推移図をArduino C++のコードに変換可能である。
+                        よって、今回の教材開発においても、ArduBlockを用いることで、小学生・中学生でも直感的にプログラミングを体験でき、C++言語に変換されることから、将来的にテキスト型プログラミングへの興味を持つきっかけになると期待する。
+                    </p>
+
+                    
+                </section>
+                
+				
+			</div>
+		</div>
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>
