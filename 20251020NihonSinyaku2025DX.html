@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第3回 日本新薬株式会社 Digital縁日で発表しました</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+  <link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li><a href="gallery.html">制作実績</a></li>
+          <li class="current-page"><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">第3回 日本新薬株式会社 Digital縁日で発表しました</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          <!-- <article class="content"> -->
+            <div class="entry-header">
+              <h2 class="entry-title">第3回 日本新薬株式会社 Digital縁日で発表しました</h2>
+              <ul class="entry-meta">
+                <li>2025.10.20</li>
+              </ul>
+              <div style="text-align: center;">
+                <img src="images/20251020_NihonSinyaku2025_1.JPG" alt="OpenBadge">
+                <figcaption>※京都橘大学 社会工学系事務グループより提供</figcaption>
+              </div>
+            </div>
+            <div class="profile-text">
+                <p>2025年10月10日(金)に日本新薬株式会社が主催する「第3回 Digital縁日」に展示・発表を行いました。このイベントは、DX推進や生成AI活用をテーマに、学生が研究・制作成果を展示・発表し、企業関係者と意見交換を行うイベントです。
+                  私は本イベントにおいて、『LSS(Location Signage System)』の展示と『ルービックキューブ solver machine』の検討に関して発表を行いました。展示・発表においては、私のブースにおいて多くの方々にお越しいただき、活発な意見交換を行うことができました。
+                このようなご機会をいただき、イベントの主催関係者の皆様には感謝申し上げます。</p>
+
+            </div>
+            <ul>
+              <li>
+                <p style="font-size: 20px;">京都橘大学による本イベントのレポート記事<br>
+                </p>
+                <a href="https://www.tachibana-u.ac.jp/news/2025/11/3-digital-in-13.html" target="_blank" rel="noopener noreferrer" style="font-size: 15px;">
+                  https://www.tachibana-u.ac.jp/news/2025/11/3-digital-in-13.html
+                </a>
+              </li>
+            </ul>
+
+            
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

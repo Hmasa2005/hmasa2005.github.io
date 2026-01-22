@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>.comドメインを取得しました</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/vue.min.js"></script>
+  <!-- 遅延読込 -->
+  <script src="js/lazysizes/lazysizes.min.js"></script>
+  <script src="js/lazysizes/ls.unveilhooks.min.js"></script>
+  <link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<body>
+<div id="container">
+  <div id="header">
+    <input type="checkbox" id="nav-menu-status" v-model="isChecked">
+    <div id="nav">
+      <div id="nav-header">
+        <div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+        <label id="nav-menu-toggle-button" for="nav-menu-status">
+			<img src="images/C.png" alt="Menu Icon" />
+		</label>
+        <a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+        <a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+      </div>
+      <div id="nav-content">
+        <ul class="header-menu-links">
+          <li><a href="biography.html">プロフィール</a></li>
+          <li><a href="gallery.html">制作実績</a></li>
+          <li class="current-page"><a href="blog.html">ブログ</a></li>
+          <li><a href="contact.html">連絡先</a></li>
+        </ul>
+      </div>
+    </div>
+    <label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+  </div>
+  <div id="main">
+    <div class="page-header">
+      <ul class="breadcrumb">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+      </ul>
+      <div class="page-title">hmasa2005.comドメインを取得</div>
+    </div>
+
+    <div class="content">
+      <div class="inner">
+        <div class="profile-concept-mean">
+          <!-- <article class="content"> -->
+            <div class="entry-header">
+              <h2 class="entry-title">hmasa2005.comドメインを取得</h2>
+              <ul class="entry-meta">
+                <li>2025.12.15</li>
+              </ul>
+              <!-- <div style="text-align: center;">
+                <img src="images/20251020_NihonSinyaku2025_1.JPG" alt="OpenBadge">
+                <figcaption>※京都橘大学 社会工学系事務グループより提供</figcaption>
+              </div> -->
+            </div>
+            <div class="profile-text">
+                <p>2025年12月よりhmasa2005.comドメインを取得しました。
+                  本サイトの運営においては、GitHub Pagesを利用しています。
+                  ドメイン管理サービスを利用して、hmasa2005.comドメインをGitHub Pagesに紐付けています。
+                なお、従来のhmasa2005.github.ioドメインも引き続き利用可能です。
+                </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="content footer">
+      <div class="copyright inner">
+        <ul>
+          <li>&copy; Masahiro Higuchi. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
