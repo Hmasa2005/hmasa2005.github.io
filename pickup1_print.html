@@ -291,15 +291,35 @@
 					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 				</div>
-				<div id="nav-content">
+				<!-- <div id="nav-content">
 					<ul class="header-menu-links">
 						<li><a href="biography-port.html">プロフィール</a></li>
 						<li><a href="gallery-port.html">制作実績</a></li>
+						<li><a href="blog-port.html">ブログ</a></li>
 						<li class="current-page"><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
 						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
 						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
 					</ul>
-				</div>
+				</div> -->
+				<div id="nav-content-bar"></div>
+
+				<script>
+					const CURRENT_MENU = "研究ポートフォリオ①";
+				</script>
+
+				<script>
+					fetch("info.html")
+					.then(res => res.text())
+					.then(html => {
+						document.getElementById("nav-content-bar").innerHTML = html;
+
+						document.querySelectorAll("#nav-content-bar a").forEach(link => {
+						if (link.textContent.trim() === CURRENT_MENU) {
+							link.parentElement.classList.add("current-page");
+						}
+						});
+					});
+				</script>				
 			</div>
 			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
 		</div>
@@ -412,6 +432,11 @@
 				<section>
 					<h2>その他の活動</h2>
 					<ul>
+						<li class="font-black">EXPO酒場山科店に展示した。<a href="https://www.tachibana-u.ac.jp/news/2025/10/expo.html">https://www.tachibana-u.ac.jp/news/2025/10/expo.html</a></li>
+						<li class="font-black">Maker Faire Tokyo 2025に出展した。<a href="https://makezine.jp/event/makers-mft2025/m0106/">https://makezine.jp/event/makers-mft2025/m0106/</a></li>
+						<li class="font-black">京都学びEXPO2025に出展した。<a href="https://www.kyoto-manabexpo.com/taikan.html">https://www.kyoto-manabexpo.com/taikan.html</a></li>
+						<li class="font-black">NHK大阪『ぐるっと関西おひるまえ』,「学校へどーも」』 2025年6月30日放送<a href="https://hmasa2005.com/202506_NHKOSAKA.html">https://hmasa2005.com/202506_NHKOSAKA.html</a></li>
+						<li class="font-black">富山県立大門高等学校 キャリア教育講演会(情報・理系)「高校生に伝えたいこと」<a href="https://www.tachibana-u.ac.jp/admission/faculty-contents/3回生の樋口雅裕さんが富山県立大門高等学校で生/">https://www.tachibana-u.ac.jp/admission/faculty-contents/3回生の樋口雅裕さんが富山県立大門高等学校で生/</a></li>
 						<li class="font-black">エフエム京都 α-STATION「UICK Radio」に出演し、自動演奏の音と光の演出が視覚・聴覚に与える感動について語った。<a href="https://radiko.jp/#!/ts/ALPHA-STATION/20250305150000">https://radiko.jp/#!/ts/ALPHA-STATION/20250305150000</a></li>
 						<li class="font-black">日本新薬（株）主催 Digital縁日に出展した。<a href="https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html">https://www.tachibana-u.ac.jp/faculty-cat/economics/economy/2024/10/digital9.html</a></li>
 						<li class="font-black">Maker Faire Tokyo 2024に出展した。<a href="https://makezine.jp/event/makers-mft2024/m0081/">https://makezine.jp/event/makers-mft2024/m0081/</a></li>

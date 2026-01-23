@@ -182,7 +182,7 @@
 					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 				</div>
-				<div id="nav-content">
+				<!-- <div id="nav-content">
 					<ul class="header-menu-links">
 						<li class="current-page"><a href="biography-port.html">プロフィール</a></li>
 						<li><a href="gallery-port.html">制作実績</a></li>
@@ -190,7 +190,27 @@
 						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
 						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
 					</ul>
-				</div>
+				</div> -->
+				<div id="nav-content-bar"></div>
+
+					<script>
+						const CURRENT_MENU = "プロフィール";
+					</script>
+
+					<script>
+						fetch("info.html")
+						.then(res => res.text())
+						.then(html => {
+							document.getElementById("nav-content-bar").innerHTML = html;
+
+							document.querySelectorAll("#nav-content-bar a").forEach(link => {
+							if (link.textContent.trim() === CURRENT_MENU) {
+								link.parentElement.classList.add("current-page");
+							}
+							});
+						});
+					</script>
+				</div>				
 			</div>
 			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
 		</div>

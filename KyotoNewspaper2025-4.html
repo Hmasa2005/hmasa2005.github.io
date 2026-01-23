@@ -25,13 +25,33 @@
 				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 			</div>
-			<div id="nav-content">
+			<!-- <div id="nav-content">
 				<ul class="header-menu-links">
 					<li><a href="biography.html">プロフィール</a></li>
 					<li><a href="gallery.html">制作実績</a></li>
 					<li class="current-page"><a href="blog.html">ブログ</a></li>
 					<li><a href="contact.html">連絡先</a></li>
 				</ul>
+			</div> -->
+			<div id="nav-content-bar"></div>
+
+				<script>
+					const CURRENT_MENU = "ブログ";
+				</script>
+
+				<script>
+					fetch("info.html")
+					.then(res => res.text())
+					.then(html => {
+						document.getElementById("nav-content-bar").innerHTML = html;
+
+						document.querySelectorAll("#nav-content-bar a").forEach(link => {
+						if (link.textContent.trim() === CURRENT_MENU) {
+							link.parentElement.classList.add("current-page");
+						}
+						});
+					});
+				</script>
 			</div>
 		</div>
 		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
@@ -67,7 +87,7 @@
 						<li>京都新聞社『「こんなの作って」友人の頼みに応えたらみんなに恩恵　京都・山科のバス運行状況を「見える化」』, 京都新聞, 2025年4月9日, 夕刊1面.<a href="https://www.kyoto-np.co.jp/articles/-/1456041">https://www.kyoto-np.co.jp/articles/-/1456041</a></li>
 						<li>新聞紙面原本※2次転載・利用禁止※<a href="https://www.tachibana-u.ac.jp/efd84f1324482d9cbbb3c626f5e5e9613da48760.pdf">https://www.tachibana-u.ac.jp/efd84f1324482d9cbbb3c626f5e5e9613da48760.pdf</a></li>
 						<li>京都橘大学　【情報工学科】3回生の樋口雅裕さんが京都新聞に掲載されました<a href="https://www.tachibana-u.ac.jp/admission/faculty-contents/%e3%80%90%e6%83%85%e5%a0%b1%e5%b7%a5%e5%ad%a6%e7%a7%91%e3%80%913%e5%9b%9e%e7%94%9f%e3%81%ae%e6%a8%8b%e5%8f%a3%e9%9b%85%e8%a3%95%e3%81%95%e3%82%93%e3%81%8c%e4%ba%ac%e9%83%bd%e6%96%b0%e8%81%9e%e3%81%ab/">https://www.tachibana-u.ac.jp/admission/faculty-contents/%e3%80%90%e6%83%85%e5%a0%b1%e5%b7%a5%e5%ad%a6%e7%a7%91%e3%80%913%e5%9b%9e%e7%94%9f%e3%81%ae%e6%a8%8b%e5%8f%a3%e9%9b%85%e8%a3%95%e3%81%95%e3%82%93%e3%81%8c%e4%ba%ac%e9%83%bd%e6%96%b0%e8%81%9e%e3%81%ab/</a></li>
-						<li>Location Signage System(LSS)運行情報表示板について<a href="https://hmasa2005.github.io/LSS.html">https://hmasa2005.github.io/LSS.html</a><br></li>
+						<li>Location Signage System(LSS)運行情報表示板について<a href="https://hmasa2005.github.io/pickup1_print.html">https://hmasa2005.github.io/pickup1_print.html</a><br></li>
 						
 					</ul>
                 </div>

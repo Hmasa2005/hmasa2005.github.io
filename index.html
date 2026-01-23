@@ -27,14 +27,33 @@
 				<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 				<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 			</div>
-			<div id="nav-content">
+			<!-- <div id="nav-content">
 				<ul class="header-menu-links">
-					<!-- メニュー一覧 -->
 					<li><a href="biography.html">プロフィール</a></li>
 					<li><a href="gallery.html">制作実績</a></li>
 					<li><a href="blog.html">ブログ</a></li>
 					<li><a href="contact.html">連絡先</a></li>
 				</ul>
+			</div> -->
+			<div id="nav-content-bar"></div>
+
+				<script>
+					const CURRENT_MENU = "ホーム";
+				</script>
+
+				<script>
+					fetch("info.html")
+					.then(res => res.text())
+					.then(html => {
+						document.getElementById("nav-content-bar").innerHTML = html;
+
+						document.querySelectorAll("#nav-content-bar a").forEach(link => {
+						if (link.textContent.trim() === CURRENT_MENU) {
+							link.parentElement.classList.add("current-page");
+						}
+						});
+					});
+				</script>
 			</div>
 		</div>
 		<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
@@ -106,7 +125,7 @@
 				</a>
 			</div>
 			<div class="column-item"><a href="gallery.html" class="tile-link"><div class="entry-header"><div class="entry-image-square"><div class="entry-image-square-bg" style="background-image: url(images/image5.jpg);"></div></div><h1 class="entry-title">制作実績</h1><ul class="entry-meta"><li>学外発表</li><li>ものづくりの成果物</li></ul></div><div class="entry-body"></div></a></div>
-			<div class="column-item"><a href="DaimonSeniorHighSchool_ Presentation copy.html" class="tile-link"><div class="entry-header"><div class="entry-image-square"><div class="entry-image-square-bg" style="background-image: url(images/20250725_DaimonSeniorHighSchool01.JPG);"></div></div><h1 class="entry-title">最新のブログ</h1><ul class="entry-meta"><li>2025.08.09</li></ul></div><div class="entry-body">富山県立大門高校で講演しました</div></a></div>
+			<div class="column-item"><a href="20260118_Daigo_elementary_Press202602.html" class="tile-link"><div class="entry-header"><div class="entry-image-square"><div class="entry-image-square-bg" style="background-image: url(images/20260118_Daigoevents_press1.png);"></div></div><h1 class="entry-title">最新のブログ</h1><ul class="entry-meta"><li>2026.01.18</li></ul></div><div class="entry-body">第1弾 子供たち対象の電子工作教室を開催します！</div></a></div>
 			<div class="column-item"><a href="https://www.tachibana-u.ac.jp/admission/touchtech/project04.html" class="tile-link"><div class="entry-header"><div class="entry-image-square"><div class="entry-image-square-bg" style="background-image: url(images/Touch-1.png);"></div></div><h1 class="entry-title">Touch Tech!</h1><ul class="entry-meta"><li>京都橘大学</li><li>外部サイト</li><li>Department of
 				Information and Computer Science in Kyoto Tachibana University</li></ul></div><div class="entry-body"></div></a></div>
 			<div class="column-item"><a href="https://www.tachibana-u.ac.jp/discovery/interview/4760" class="tile-link"><div class="entry-header"><div class="entry-image-square"><div class="entry-image-square-bg" style="background-image: url(images/tachibana_dis.jpg);"></div></div><h1 class="entry-title">TACHIBANA DISCOVERY</h1><ul class="entry-meta"><li>京都橘大学</li><li>外部サイト</li><li>Department of

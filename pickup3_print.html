@@ -288,15 +288,35 @@
 					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 				</div>
-				<div id="nav-content">
+				<!-- <div id="nav-content">
 					<ul class="header-menu-links">
 						<li><a href="biography-port.html">プロフィール</a></li>
 						<li><a href="gallery-port.html">制作実績</a></li>
+						<li><a href="blog-port.html">ブログ</a></li>
 						<li><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
 						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
 						<li class="current-page"><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
 					</ul>
-				</div>
+				</div> -->
+				<div id="nav-content-bar"></div>
+
+				<script>
+					const CURRENT_MENU = "研究ポートフォリオ③";
+				</script>
+
+				<script>
+					fetch("info.html")
+					.then(res => res.text())
+					.then(html => {
+						document.getElementById("nav-content-bar").innerHTML = html;
+
+						document.querySelectorAll("#nav-content-bar a").forEach(link => {
+						if (link.textContent.trim() === CURRENT_MENU) {
+							link.parentElement.classList.add("current-page");
+						}
+						});
+					});
+				</script>				
 			</div>
 			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
 		</div>
@@ -311,7 +331,7 @@
 
 		<div class="content">
 			<div  class="pickup-title">
-				<h1 class="main-title">L S S<br>Location Sinage System</h1>
+				<h1 class="main-title">L S S<br>Location Signage System</h1>
 			</div>
 			<div>
 				<section>
@@ -365,6 +385,7 @@
 				<section>
 					<h2>その他の活動</h2>
 					<ul>
+						<li class="font-black">第3回 日本新薬（株）主催 Digital縁日に出展した。<a href="https://hmasa2005.com/20251020NihonSinyaku2025DX.html">https://hmasa2005.com/20251020NihonSinyaku2025DX.html</a></li>
 						<li class="font-black">京都新聞社『「こんなの作って」友人の頼みに応えたらみんなに恩恵　京都・山科のバス運行状況を「見える化」』, 京都新聞, 2025年4月9日, 夕刊1面.で掲載された。<a href="https://hmasa2005.github.io/KyotoNewspaper2025-4.html">https://hmasa2005.github.io/KyotoNewspaper2025-4.html</a></li>
 						<li class="font-black">株式会社 union.a, ハンケイ500m Vol.84, TOWAの実力派 大学レポート, p.38-39.で掲載された。<a href="https://hankei500.com/back-number/">https://hankei500.com/back-number/</a></li>
 						<li class="font-black">オープンソースカンファレンス2025 Osakaに出展した。</li>

@@ -291,13 +291,33 @@
 					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
 					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
 				</div>
-				<div id="nav-content">
+				<!-- <div id="nav-content">
 					<ul class="header-menu-links">
 						<li><a href="biography.html">プロフィール</a></li>
 						<li class="current-page"><a href="gallery.html">制作実績</a></li>
 						<li><a href="blog.html">ブログ</a></li>
 						<li><a href="contact.html">連絡先</a></li>
 					</ul>
+				</div> -->
+				<div id="nav-content-bar"></div>
+
+					<script>
+						const CURRENT_MENU = "制作実績";
+					</script>
+
+					<script>
+						fetch("info.html")
+						.then(res => res.text())
+						.then(html => {
+							document.getElementById("nav-content-bar").innerHTML = html;
+
+							document.querySelectorAll("#nav-content-bar a").forEach(link => {
+							if (link.textContent.trim() === CURRENT_MENU) {
+								link.parentElement.classList.add("current-page");
+							}
+							});
+						});
+					</script>
 				</div>
 			</div>
 			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
@@ -352,7 +372,7 @@
 							<figcaption>PN532 NFC/RFIDモジュール</figcaption>
 						</div>	
 						<div class="div-center">
-							<img src="images/images:20250725_Student_CardReader_ESP32.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<img src="images/20250725_Student_CardReader_ESP32.png" alt="Masahiro Higuchi" class="poster-image-caption">
 							<figcaption>ESP32 Dev module</figcaption>
 						</div>	
 						
@@ -363,7 +383,7 @@
 							読み取りステータスを、FullColorLEDで表示したかったため、カードをかざす部分に穴を2つ開けた。
 						</p>
 						<div class="div-center">
-							<img src="images/20250725_Student_CardReader_3Dparts.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<img src="images/20250725_Student_CardReader_3DParts.png" alt="Masahiro Higuchi" class="poster-image-caption">
 							<figcaption>3Dプリンタで作成した外枠</figcaption>
 						</div>	
 						<div class="div-center">
@@ -434,5 +454,3 @@
 	<script src="js/script.js"></script>
 </body>
 </html>
-
-
