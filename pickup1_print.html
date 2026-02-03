@@ -276,6 +276,22 @@
     }
 
 
+	
+	.div-center {
+		width: 50%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.poster-image-caption {
+		width: 100%;
+		max-width: 500px;
+		height: auto;
+		aspect-ratio: 16/10;
+		object-fit: contain;
+		margin-bottom: 5px;
+	}
 </style>
 
 <body>
@@ -326,9 +342,9 @@
 	</div>
 	<div id="main">
 		<div class="page-header">
-			<!-- <ul class="breadcrumb">
+			<ul class="breadcrumb">
 				<li><a href="index.html">ホーム</a></li>
-			</ul> -->
+			</ul>
 			<div class="page-title">研究ポートフォリオ①</div>
 		</div>
 
@@ -365,21 +381,21 @@
 					</div>
 					
 
-					<p>　ハンドベルの駆動部分は、Arduinoを用いてリレーを制御し、ソレノイド（電磁アクチュエータ）を駆動することで、ハンドベルのクラッパーを打撃し音を鳴らす仕組みである。 
-						　ソレノイドを使用する理由は、電気信号によって瞬時に動作し、精密なタイミングでの打撃が可能であるためである。<br> 
-						　しかし、クラッパーは一度打撃を加えると、そのまま振動を続けるため、不要な共鳴が発生し、意図しない余韻や音の濁りが生じるという問題があった。
+					<p>ハンドベルの駆動部分は、Arduinoを用いてリレーを制御し、ソレノイド（電磁アクチュエータ）を駆動することで、ハンドベルのクラッパーを打撃し音を鳴らす仕組みである。 
+						ソレノイドを使用する理由は、電気信号によって瞬時に動作し、精密なタイミングでの打撃が可能であるためである。<br> 
+						しかし、クラッパーは一度打撃を加えると、そのまま振動を続けるため、不要な共鳴が発生し、意図しない余韻や音の濁りが生じるという問題があった。
 						また、次の打撃までにクラッパーの振動が収束しないと、連続した音の演奏に支障をきたす可能性があった。 
-						　そこで、ハンドベルの下部に小型ソレノイドを搭載し、クラッパーの振動を制御する仕組みを導入した。このソレノイドを適切なタイミングで作動させることで、不要な振動を速やかに抑え、音の強さを均一にし、音のムラを防ぐことを実現できた。
+						そこで、ハンドベルの下部に小型ソレノイドを搭載し、クラッパーの振動を制御する仕組みを導入した。このソレノイドを適切なタイミングで作動させることで、不要な振動を速やかに抑え、音の強さを均一にし、音のムラを防ぐことを実現できた。
 						これにより、連続した音や複雑な曲の演奏時でも正確なリズムを維持できるようになっている。</p>
 
 					<p class="bottom"><strong>2．自動演奏および光の演出における制御速度の制約</strong></p>
-					<p>　演出は、約500個のフルカラーLED（WS2812B）の制御と、ハンドベル演奏のためのソレノイド駆動を同時に行う。当初は、Arduino MEGA 2560 だけで LED とソレノイドの両方を制御し、演出を実現する計画だった。<br>
-						　しかし、Arduino MEGA 2560 の 16 MHz のクロック周波数では、LED のデータ送信とソレノイド駆動の処理をリアルタイムで両立させるのが困難だった。特に WS2812 の制御は、1 ビットあたり約 1.25 µs の正確なタイミングでデータを送信する必要があり、処理負荷が高いため、演奏の精度に影響を与えたと推測する。
+					<p>演出は、約500個のフルカラーLED（WS2812B）の制御と、ハンドベル演奏のためのソレノイド駆動を同時に行う。当初は、Arduino MEGA 2560 だけで LED とソレノイドの両方を制御し、演出を実現する計画だった。<br>
+						しかし、Arduino MEGA 2560 の 16 MHz のクロック周波数では、LED のデータ送信とソレノイド駆動の処理をリアルタイムで両立させるのが困難だった。特に WS2812 の制御は、1 ビットあたり約 1.25 µs の正確なタイミングでデータを送信する必要があり、処理負荷が高いため、演奏の精度に影響を与えたと推測する。
 						そこで、マイコンの役割を分担し、Arduino MEGA 2560 はソレノイドの制御を、ESP32 はフルカラー LED の制御を担当する構成に変更した。ESP32 は 240 MHz の高クロックで動作し、高速な LED 制御が可能なため、滑らかな光の演出を実現できる。
 						また、Arduino MEGA 2560 と ESP32 は UART によるシリアル通信を用いて接続し、鳴らす音の命令をリアルタイムで共有するように設計した。通信プロトコルには MIDI 形式を採用し、正確な演奏と光の同期を両立している。</p>
 					
 					<p class="bottom"><strong>3．安定したMIDI通信の実現に向けた検討</strong></p>
-					<p>　ハンドベル自動演奏装置では、MIDI 規格を用いて演奏データをリアルタイム送信し、Arduino MEGA 2560 が受信してソレノイドを駆動する。
+					<p>ハンドベル自動演奏装置では、MIDI 規格を用いて演奏データをリアルタイム送信し、Arduino MEGA 2560 が受信してソレノイドを駆動する。
 						MIDI 通信には ① MocoLUFA を用いた USB MIDI 方式 と ② USB 接続 MIDI インターフェースケーブルを用いる方式 の 2 つが検討された。
 						当初は MocoLUFA を採用したが、OS によって MIDI の送信速度やクロックにばらつきが発生する問題が確認された。
 						これは、USB 処理のタイミングや OS によるバッファ処理の違いによる影響と推測される。
@@ -389,7 +405,7 @@
 
 				<section id="about">
 					<h2>本装置を用いたヒューマンインタフェース分野の研究</h2>
-					<p>　開発したハンドベル自動演奏装置を用いて研究を行った。研究の結果を2024年9月の<strong>ヒューマンインタフェースシンポジウム2024の「デモ・対話発表」</strong>で発表した。その結果、優秀プレゼンテーション優秀賞を受賞した。</p>
+					<p>開発したハンドベル自動演奏装置を用いて研究を行った。研究の結果を2024年9月の<strong>ヒューマンインタフェースシンポジウム2024の「デモ・対話発表」</strong>で発表した。その結果、優秀プレゼンテーション優秀賞を受賞した。</p>
 					<div class="profile-container">
 						
 						<img src="images/HIS-handbell_pos.png" alt="Masahiro Higuchi" class="poster-image">
@@ -399,7 +415,7 @@
 					<h5 class="Classification">●実験概要</h5>
 					
 					<div class="profile-container">
-						<p class="p-w">　実験では、参加者に自動演奏と人間の演奏を聴取してもらい、その印象を評価するために「感情状態アンケート」「演奏の印象評価アンケート」「多面的感情状態アンケート」の3種類のアンケートを実施した。
+						<p class="p-w">実験では、参加者に自動演奏と人間の演奏を聴取してもらい、その印象を評価するために「感情状態アンケート」「演奏の印象評価アンケート」「多面的感情状態アンケート」の3種類のアンケートを実施した。
 							自動演奏はコンソールソフトウェアを用いてMIDI音源を再生し、人間の演奏には無線ピアノ鍵盤を開発して使用した。収集した評価結果をもとに、自動演奏と人間の演奏のどちらがより高い印象評価を得るのかを分析した。
 							さらに、無線ピアノ鍵盤を導入することで、ピアノを弾く感覚でハンドベルを演奏することが可能となった。この新たな演奏方式が今後のハンドベル演奏に応用可能かについても考察を行った。
 							</p>
@@ -421,7 +437,7 @@
 						</div>
 						
 					</div>
-					<p>　無線ピアノ鍵盤は、市販のおもちゃの鍵盤を改造して作成した。
+					<p>無線ピアノ鍵盤は、市販のおもちゃの鍵盤を改造して作成した。
 						おもちゃの鍵盤基板はマトリクススイッチ方式を採用した設計となっていたため、プログラムのデバッグおよび開発専用のマトリクススイッチ基板をKiCadで設計し、CNCミリングマシンを用いて基板パターンを加工して製作した。
 						プログラム開発後、おもちゃの鍵盤基板に改造を施し、鍵盤ボタンスイッチの入力がArduino UNOに接続できるように配線を行った。
 						また、ハンドベル自動演奏装置と無線で通信を行うため、Arduino UNOからUARTシリアル通信を使用してESP32へ鍵盤のノート番号を送信するシステムを構築した。
@@ -429,6 +445,93 @@
 					</p>
 					
 				</section>
+				<section>
+				<h2>本研究の現在</h2>
+
+				<h5 class="Classification">1. 演奏に音の強弱を付与する手法の検討</h5>
+				<p>
+					自動演奏において音の強弱を付与することで、より表現力豊かな演奏を実現することを目指している。
+					本研究では、アクチュエータであるソレノイドの駆動電圧および駆動時間を制御することで、
+					駆動速度や打撃力を変化させ、音の強弱を表現することを目的としている。
+					本装置の演奏にはMIDIデータを使用しており、演奏データには音の強弱を示す
+					「ベロシティ」と呼ばれる数値情報が含まれている。
+					再生時にこのベロシティ情報をハンドベル1音ごとの機構ユニットに反映させ、
+					数値に応じた音の強弱を再現する仕組みについて検討している。
+				</p>
+
+				<ul>
+					<li class="font-black"><strong>モータドライバICを用いた制御実験</strong></li>
+					<p>
+						ソレノイドの制御にはモータドライバICを用い、MCUからPWM信号を出力することで
+						駆動電圧を制御した。ソレノイドは、PWM信号のデューティ比および信号の出力時間に
+						応じて動作する。
+						音の強弱を表現するアルゴリズムとして、駆動回数に応じてPWM信号の出力を増加させる方法や、
+						通電時間の長さを調整する方法を試行した。
+						実験では、スマートフォンのデシベルメーターアプリを用いて音量を計測し、
+						各制御パラメータと音量との関係性を調査した。
+						その結果、PWM信号には一定のオフセット設定が必要であることが明らかとなった。
+						また、駆動時間についても、オフセット時間を超えた場合に初めて発音が確認された。
+						さらに、本手法による音量の変化幅は約20dB程度であり、
+						PWM信号による駆動力および駆動時間のみの制御では、
+						十分な強弱表現の実現が困難である可能性が示唆された。
+					</p>
+					<div class="profile-container">
+						<div class="div-center">
+							<img src="images/20250625_handbell_velocity1.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>モータドライバICを実装した自作基板</figcaption>
+						</div>
+						<div class="div-center">
+							<img src="images/20250625_handbell_velocity2_page-0001.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>デシベルメータの様子</figcaption>
+						</div>
+					</div>
+
+					<li class="font-black"><strong>ソレノイド駆動時間による打力制御の検討（※研究中）</strong></li>
+					<p>
+						ソレノイドの駆動時間を変化させることで、打撃力を制御する手法について検討している。
+						ソレノイドの駆動特性には個体差が存在し、またハンドベル上部のボタンを押し始めるまでに
+						必要な駆動時間は、ハンドベルの機構ユニットごとに異なる。
+						そのため、駆動時間のみで打撃力を制御した場合、
+						ソレノイドごとの駆動速度のばらつきが制御精度に影響を与えるという課題がある。
+						そこで、透過型フォトインタラプタを用いてソレノイドの動作を検出し、
+						センサーの反応タイミングに基づいて駆動時間を補正することで、
+						個体差を考慮した打撃力制御が可能か検討している。
+					</p>
+
+
+				</ul>
+				<h5 class="Classification">2. プロジェクションマッピングによる演奏の視覚的演出</h5>
+				<p>
+					プロジェクションマッピングを用いて、演奏に合わせた視覚的な演出を行う手法について検討している。
+					演奏中の音の強弱やリズムに応じて映像を変化させることで、より没入感のある体験を実現させることを目指している。
+					このために、MIDIデータをUnityコンテンツ上に入力し、映像生成に必要な情報を抽出するアルゴリズムの開発を進めている。
+					また、映像と音声の同期を取るためのタイミング調整や、演出アニメーションの制作を行っている。
+					<ul>
+						<li class="font-black"><strong>演奏とUnityによる花火演出</strong></li>
+						<p>
+							同期して演出されるUnityコンテンツは、伴野元信（2025年度 大学1年生）のプロジェクトメンバーが制作を担当した。
+							ハンドベルの演奏に合わせて花火が打ち上がる映像をUnityで制作し、プロジェクタでハンドベル自動演奏装置の正面に向けてUnityコンテンツを投影可能なシステムを構築した。
+							花火の打ち上がるタイミングは、特定の鍵を鳴らすMIDIのNotesを受信したときに、
+							ハンドベル自動演奏装置のハンドベルユニット付近に花火エフェクトを生成する仕組みである。
+							樋口雅裕（2025年度 大学3年生）は、MIDIデータをUnityに入力し、演奏情報をリアルタイムで取得する通信機構とプロジェクションマッピングの映像を
+							可能な限り鮮明にするために、ハンドベル自動演奏装置に暗幕を被せる骨組みを設計・製作した。
+
+						</p>
+						<div class="profile-container">
+							<div class="div-center">
+							<iframe class="poster-image-caption" width="100%" height="auto" style="aspect-ratio:16/10;" src="https://www.youtube.com/embed/AozlkpG2Z5Q?si=DuoK3qQWcGRRAI8L" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<figcaption>演奏と演出の同期実験</figcaption>
+							</div>
+							<div class="div-center">
+								<img src="images/20250825_handbell_Projection01.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+								<figcaption>花火の演出の様子</figcaption>
+							</div>
+						</div>
+					</div>
+					</ul>
+				</p>
+				</section>
+
 				<section>
 					<h2>その他の活動</h2>
 					<ul>
@@ -453,12 +556,12 @@
 					</ul>
 					<div class="profile-container">
 						<div class="div-center">
-							<img src="images/UICK2025-REC.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
-							<figcaption>α-STATION「UICK Radio」</figcaption>
+							<img src="images/20251001_EXPOsakaba01.png" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>EXPO酒場山科店</figcaption>
 						</div>
 						<div class="div-center">
-							<img src="images/MFT2024_1.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
-							<figcaption>Maker Faire Tokyo 2024での発表</figcaption>
+							<img src="images/20251004_MFT20251.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>Maker Faire Tokyo 2025</figcaption>
 						</div>
 						
 					</div>

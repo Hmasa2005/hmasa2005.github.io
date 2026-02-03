@@ -324,9 +324,9 @@
 	</div>
 	<div id="main">
 		<div class="page-header">
-			<!-- <ul class="breadcrumb">
+			<ul class="breadcrumb">
 				<li><a href="index.html">ホーム</a></li>
-			</ul> -->
+			</ul>
 			<div class="page-title">研究ポートフォリオ②</div>
 		</div>
 
@@ -348,7 +348,7 @@
 							<img src="images/Apcalender4.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
 							<figcaption>開発したカレンダーデバイス</figcaption>
 						</div>
-						<p class="p-w">　近年、ペーパーレス化が進む中で、多くの人がスマートフォンのカレンダーアプリを利用して日程を管理している。
+						<p class="p-w">近年、ペーパーレス化が進む中で、多くの人がスマートフォンのカレンダーアプリを利用して日程を管理している。
 							スマートフォンのカレンダーアプリは、デバイス間で予定を共有できるだけでなく、通知機能によってリマインドを受け取れるという利点がある。
 							一方で、紙のカレンダーは、設置場所を見れば直感的に予定を確認できるというメリットがある。しかし、両者を併用すると情報の同期が難しくなり、予定の食い違いが生じる可能性がある。
 
@@ -362,7 +362,7 @@
 					<p class="bottom"><strong></strong></p>
 					<div class="profile-container">
 						
-						<p class="p-w">　本装置で実装したE-INKは、白・黒・赤の3色での表示が可能であり、この特性を活かして視認性を向上させている。E-INKディスプレイに当月のカレンダーを表示し、現在の日付を赤色で強調する。
+						<p class="p-w">本装置で実装したE-INKは、白・黒・赤の3色での表示が可能であり、この特性を活かして視認性を向上させている。E-INKディスプレイに当月のカレンダーを表示し、現在の日付を赤色で強調する。
 							日付が変わると、自動的にE-INKの画面を書き換え、最新の日付を赤く塗り直す。また、月が変わると、カレンダーのレイアウトも当月の配置に更新される。
 							さらに、本装置はApple iCloudと連携し、カレンダーの予定をリアルタイムで反映する。
 							iCloud上のカレンダーに予定が追加・変更された場合、E-INKの画面も自動的に更新される。カレンダーの表示にはPythonのcalendarモジュールを用い、E-INK上で視認しやすいように予定ボックスを整理する。
@@ -378,7 +378,7 @@
 						<div class="div-center">
 							<img src="images/ApCalendar3.png" alt="Masahiro Higuchi" class="poster-image-caption">
 						</div>
-						<p class="p-w">　Pythonのcaldavモジュールを使用してiCloudからカレンダーの内容を取得するには、https://caldav.icloud.com/にApple IDとアプリ用パスワードで認証し、PROPFINDリクエストを送ってCalDAVのホームセットアップURLを取得する。
+						<p class="p-w">Pythonのcaldavモジュールを使用してiCloudからカレンダーの内容を取得するには、https://caldav.icloud.com/にApple IDとアプリ用パスワードで認証し、PROPFINDリクエストを送ってCalDAVのホームセットアップURLを取得する。
 							次に、このURLに対してPROPFINDを実行し、利用可能なカレンダーの一覧を取得する。
 							特定のカレンダーに対してREPORTリクエストを送ることで、指定した期間の予定をXML形式で取得できる。
 							取得したデータはiCalendarフォーマットで提供されるため、icalendarモジュールを用いて解析し、カレンダーの予定を整理・表示している。</p>
@@ -387,7 +387,7 @@
 
 					<h5 class="Classification">●使用方法</h5>
 							
-						<p>　初期設定として、iCloudに紐づけられたメールアドレスとアプリ用パスワードを準備する。
+						<p>初期設定として、iCloudに紐づけられたメールアドレスとアプリ用パスワードを準備する。
 							カレンダーデバイスが起動すると、PCからWEBUIにアクセスするため、ブラウザを使用してデバイスのIPアドレスを入力し、WEBサーバにアクセスする。
 							その際、用意したメールアドレスとアプリ用パスワードを入力する。
 							設定が適用されると、次回以降の起動時からは、指定したアカウント情報を基にカレンダーの情報が自動的に取得され、表示されるようになる。</p>

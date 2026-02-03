@@ -323,9 +323,9 @@
 	</div>
 	<div id="main">
 		<div class="page-header">
-			<!-- <ul class="breadcrumb">
+			<ul class="breadcrumb">
 				<li><a href="index.html">ホーム</a></li>
-			</ul> -->
+			</ul>
 			<div class="page-title">研究ポートフォリオ③</div>
 		</div>
 
@@ -346,7 +346,7 @@
 							<img src="images/LSS_main.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
 							<figcaption>掲示の様子</figcaption>
 						</div>
-						<p class="p-w">　京都橘大学から帰宅する際のバスダイヤは、交通機関の公式サイトや大学のWEBページで公開されている。
+						<p class="p-w">京都橘大学から帰宅する際のバスダイヤは、交通機関の公式サイトや大学のWEBページで公開されている。
 							しかし、授業期間と長期休暇期間でバスの運行本数が異なるため、利用者にとって分かりにくい場合がある。
 							また、マップや経路案内サイトでは、授業期間のみ運行しているバスが長期休暇期間中も運行しているかのように表示されることがあり、正確な運行情報を得られないという課題がある。
 							さらに、バスから乗り換える鉄道の運行に影響が出ていた場合、適切な料金で効率的に帰宅するルートを選ぶことが難しくなる。
@@ -358,7 +358,7 @@
 					</h5>
 					<div class="profile-container">
 						
-						<p class="p-w">　京阪バスのBusNaviから「ダイヤ情報」と「バス位置」の2種類のサイトのHTMLに対してリクエストを送信し、PythonのBeautifulSoupモジュールを使用して解析し、リアルタイムで情報を取得している。
+						<p class="p-w">京阪バスのBusNaviから「ダイヤ情報」と「バス位置」の2種類のサイトのHTMLに対してリクエストを送信し、PythonのBeautifulSoupモジュールを使用して解析し、リアルタイムで情報を取得している。
 							また、鉄道各社の運行情報は、Yahoo! 路線情報APIに対して、同様の手法を用いて特定の路線の運行状況を取得している。
 							なお、バスの情報収集においては、一般的な公共交通データフォーマットであるGTFS（General Transit Feed Specification）の利用も検討したが、京阪バスのGTFSデータはオープンソースとして公開されていないため、本システムではBusNaviの情報を直接解析する手法を採用した。
 							リクエストは7秒に一度行い、相手のサーバに負荷がかからないように配慮している。
@@ -375,7 +375,7 @@
 						<img src="images/LSS-WEB.png" alt="Masahiro Higuchi" class="poster-image2">
 						<figcaption>WEB形式の運行情報の提供</figcaption>
 						
-						<p>　学内のローカルネットワークでのみリアルタイムにバスのダイヤや運行情報を表示する機能を開発した。
+						<p>学内のローカルネットワークでのみリアルタイムにバスのダイヤや運行情報を表示する機能を開発した。
 							これにより、サイネージの表示と同じ情報をWEBサーバー上で公開し、学内のネットワークに接続している端末から、サイネージを直接確認しなくてもインターネット経由で最新の運行情報を取得できるようになっている。
 
 							実装にはPythonのFlaskモジュールを使用し、バスのダイヤ・運行情報を取得するライブラリから得られたデータを、作成したHTMLテンプレートに出力することで、学内ネットワーク内のWEBブラウザ上でリアルタイムに表示できるようにしている。</p>
@@ -391,13 +391,14 @@
 						<li class="font-black">オープンソースカンファレンス2025 Osakaに出展した。</li>
 					</ul>
 					<div class="profile-container">
+						
+						<div class="div-center">
+							<img src="images/20251020_NihonSinyaku2025_1.JPG" alt="Masahiro Higuchi" class="poster-image-caption">
+							<figcaption>日本新薬（株）主催Digital縁日</figcaption>
+						</div>
 						<div class="div-center">
 							<img src="images/OSCosaka2025main.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
 							<figcaption>オープンソースカンファレンス2025 Osaka</figcaption>
-						</div>
-						<div class="div-center">
-							<img src="images/LSS-Event.jpg" alt="Masahiro Higuchi" class="poster-image-caption">
-							<figcaption>京都橘大学 学園祭での掲示</figcaption>
 						</div>
 						
 					</div>

@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>研究ポートフォリオ④</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<script src="js/vue.min.js"></script>
+	<link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+</head>
+<style>
+    /* 全体をセンター配置 */
+    #main1 {
+        max-width: 5000px;
+        margin: 50px auto; /* 上下50pxの余白を追加して中央配置 */
+        padding: 20px;
+        text-align: center; /* テキストを中央揃え */
+		
+    }
+
+    /* セクションごとにボックスを追加 */
+    section {
+        background-color: rgb(255, 255, 255); /* 背景を白にして透明度を少し追加 */
+        padding: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		max-width: calc(100% - 100px); /* 横幅の最大値を調整（20px × 2 = 40px） */
+        margin: 20px auto; /* 上下の余白をつけて中央配置 */
+        border-radius: 10px; /* 角を丸める */
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* ふんわりした影をつける */
+        width: 100%; /* 横幅を90%に設定（可変） */
+        max-width: 1000px; /* 最大幅を制限 */
+    }
+
+    /* 見出しのデザイン */
+    h2 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    /* リストデザイン */
+    /* リストアイテムを左揃えにする */
+    p {
+        list-style-type: none; /* デフォルトのリストマーカーを消す */
+        padding-left: 0;
+        text-align: left; /* リストを左揃えにする */
+    }
+
+    p {
+        color: black;
+        margin: 5px 0; /* リストアイテム間の余白 */
+    }
+
+    /* 任意でリストのマーカーを使いたい場合 */
+    ul.custom-list {
+        list-style-position: inside; /* リストアイテムのマーカーをリスト内に表示 */
+    }
+
+    .name-japanese{
+        font-size: 45px;
+        line-height: 0.8;
+    }
+
+    .name-English{
+        font-size: 20px;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-direction: row; /* デフォルトで横並び */
+		margin-left: 20px;
+		margin-right: 20px;
+    }
+
+
+    /* 四角形のアイコン画像 */
+    .poster-image {
+        /* width: 860px; アイコンの幅 */
+        /* height: 1200px; アイコンの高さ */
+		width: 50%; /* アイコンの幅 */
+        height: 50%; /* アイコンの高さ */
+		margin-right: 10px;
+		margin-left: 10px;
+        object-fit: cover; /* 画像のアスペクト比を維持して切り抜き */
+		max-width: 800px; /* 最大幅を制限 */
+    }
+	.poster-image2 {
+		max-width: 100%;
+		max-height: 1100px;
+		margin-bottom: 20px;
+		align-items: center;
+        justify-content: center;
+		
+	}
+
+	.image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap; /* 画像が複数ある場合に折り返し可能 */
+	}
+
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を重ねる */
+        table-layout: auto; /* 列の幅を内容に合わせて自動調整 */
+        margin-top: 10px;
+    }
+
+    td {
+        color: #000;
+        padding: 2px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+    }
+
+    .date {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        font-weight: bold;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .kinds {
+        width: 80px; /* 日付の幅を固定 */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        text-align: center;
+        white-space: nowrap; /* 日付を改行させない */
+    }
+
+    .content1 {
+        padding: 7px 10px; /* 上下の余白をさらに減らす */
+        border: 1px solid #ccc; /* 枠線を追加 */
+        vertical-align: top; /* テキストを上寄せ */
+        line-height: 1.2; /* 行間を詰める */
+        text-align: left; /* 左寄せ */
+    }
+
+    .Classification {
+        text-align: left; /* 左寄せ */
+    }
+
+    .content2 {
+        text-align: left;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip); /* HTMLの data-tooltip 属性を読み取る */
+        position: absolute;
+        top: -30px; /* 📄の上側に表示 */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .Award {
+        color: #ff9100;
+    }
+
+	.pickup-title {
+		text-align: left;
+		margin-left: 25px;
+	}
+
+	.bottom{
+		margin-top: 20px;
+	}
+
+	.p-w {
+		width: 50%; /* テキスト部分の幅を設定 */
+		margin-right: 20px; /* 画像との間にスペース */
+		margin-left: 0px; /* 画像との間にスペース */
+		text-align: justify; /* テキストを左右に揃える */
+	}
+
+	.div-center {
+		width: 50%; /* 画像部分の幅を設定 */
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+
+	.poster-image-caption {
+		width: 100%; /* 画像を親要素の幅いっぱいに広げる */
+		height: auto; /* 高さは自動調整 */
+		object-fit: contain; /* アスペクト比を維持しつつ親要素に収める */
+	}
+
+	figcaption {
+		font-size: 14px;
+		color: #000000;
+		text-align: center; /* キャプションを中央揃え */
+		margin-top: 5px; /* 画像とキャプションの間にスペース */
+	}
+
+	.font-black {
+		color: #000;
+	}
+	.main-title {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.center {
+		align-items: center;
+	}
+	.atention-left {
+		text-align: right;
+	}
+
+	/* 画面幅が1050px以下の場合に対応 */
+	
+    @media (max-width: 1050px) {
+        .profile-container {
+            flex-direction: column;
+            align-items: center;
+        }
+		.profile-container-mobile {
+            flex-direction: flex;
+            align-items: center;
+        }
+
+        .profile-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .name-japanese {
+            font-size: 40px;
+        }
+
+        .name-English {
+            font-size: 18px;
+        }
+
+		.p-w {
+			width: 100%;
+			margin-right: 20px;
+			margin-left: 0px;
+			text-align: justify;
+		}
+
+		
+    }
+
+
+	
+	.div-center {
+		width: 50%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.poster-image-caption {
+		width: 100%;
+		max-width: 500px;
+		height: auto;
+		aspect-ratio: 16/10;
+		object-fit: contain;
+		margin-bottom: 5px;
+	}
+
+	.profile-container-mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.profile-container-mobile > div {
+  flex: 1 1 0;
+  max-width: 33%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.profile-container-mobile img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 1050px) {
+  .profile-container-mobile {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .profile-container-mobile > div {
+    max-width: 33%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile-container-mobile > div {
+    max-width: 33vw;
+    min-width: 0;
+    padding: 0;
+  }
+}
+</style>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<input type="checkbox" id="nav-menu-status" v-model="isChecked">
+			<div id="nav">
+				<div id="nav-header">
+					<div class="site-title"><a href="index.html" id="logo">Masahiro Higuchi</a></div>
+					<label id="nav-menu-toggle-button" for="nav-menu-status">
+						<img src="images/C.png" alt="Menu Icon">
+					</label>
+					<a href="#nav-menu-status" id="nav-menu-open" v-on:click.stop.prevent="toggleMenu()" ><span>メニューを開く</span></a>
+					<a href="#" id="nav-menu-close" v-on:click.stop.prevent="toggleMenu()"><span>メニューを閉じる</span></a>
+				</div>
+				<!-- <div id="nav-content">
+					<ul class="header-menu-links">
+						<li><a href="biography-port.html">プロフィール</a></li>
+						<li><a href="gallery-port.html">制作実績</a></li>
+						<li><a href="blog-port.html">ブログ</a></li>
+						<li class="current-page"><a href="pickup1_print.html">研究ポートフォリオ①</a></li>
+						<li><a href="pickup2_print.html">研究ポートフォリオ②</a></li>
+						<li><a href="pickup3_print.html">研究ポートフォリオ③</a></li>
+					</ul>
+				</div> -->
+				<div id="nav-content-bar"></div>
+
+				<script>
+					const CURRENT_MENU = "研究ポートフォリオ④";
+				</script>
+
+				<script>
+					fetch("info.html")
+					.then(res => res.text())
+					.then(html => {
+						document.getElementById("nav-content-bar").innerHTML = html;
+
+						document.querySelectorAll("#nav-content-bar a").forEach(link => {
+						if (link.textContent.trim() === CURRENT_MENU) {
+							link.parentElement.classList.add("current-page");
+						}
+						});
+					});
+				</script>				
+			</div>
+			<label id="menu-bg" for="nav-menu-status" id="menu-bg"></label>
+		</div>
+	</div>
+	<div id="main">
+		<div class="page-header">
+			<ul class="breadcrumb">
+				<li><a href="index.html">ホーム</a></li>
+			</ul>
+			<div class="page-title">研究ポートフォリオ④</div>
+		</div>
+
+		<div class="content">
+			<div  class="pickup-title">
+				<h1 class="main-title">Microsoft Teamsアプリを用いたバス案内アプリケーション</h1>
+			</div>
+			<div>
+				
+				
+				<section>
+
+					<h2>アプリケーションの開発概要</h2>
+
+					<div class="image-container"><img src="images/20260201_BusInfoTeams_main01.png" alt="Masahiro Higuchi" class="poster-image2"></div>
+					<p class="atention-left"><strong>※展示イベントのシステム説明ポスターより</strong></p>
+
+					<h5 class="Classification">●開発概要</h5>
+					<img src="images/20260201_BusInfoTeams_main02.png" alt="Masahiro Higuchi" class="poster-image2" style="width: 60%; display: block; margin: 0 auto; margin-bottom: 20px;">
+					<div class="profile-container">
+						
+						<p>
+							本アプリケーションは、京都橘大学の学生を含む関係者が通勤・通学に利用する公共交通機関である京阪バスの時刻表や運行状況を、簡単に確認できるようにすることを目的としている。
+							京都橘大学では、授業連絡や課題提出、各種連絡に Microsoft Teams を使用しており、学生・教員・事務局の関係者が日常的に利用している。
+							Teams には、組織内で利用可能なアプリケーションを公開する機能がある。本プロジェクトでは、この機能を活用してバス案内アプリケーションを開発し、京都橘大学の Teams アカウントを持つ関係者が、組織内アプリとして利用できる環境の構築を目指している。
+							
+							本取り組みは、学生自治会から大学に対して寄せられた「公共交通機関の利便性を向上させたい」という要望を背景としており、特に「どのバスに乗れば効率よく目的地へ移動できるのかを、素早く判断できる手段が欲しい」という課題の解決を目的として、学生自治会と連携しながら進めている。
+							
+							バスの時刻表および運行状況の情報は、自身が開発した
+							<a href="/pickup3_print.html" target="_blank" rel="noopener noreferrer">LSSプロジェクト</a>
+							の解析アルゴリズムを用いて、京阪バス株式会社が運営する「バスナビ」から自動的に収集する。
+							これらの情報を本アプリケーションを通じて提供することで、学生・大学関係者が手軽に最新のバス運行情報を取得できる環境を整えるとともに、
+							アプリケーション公開後には、通学時の移動判断や待ち時間の短縮といった観点から、
+							学生の通学に関する効率がどのように改善されるかを調査することも本プロジェクトの目的に含まれている。
+						</p>
+
+					</div>
+					<h5 class="Classification">●ToolKit</h5>
+
+					<img src="images/Microsoft 365 Agents Toolkit.png" alt="Masahiro Higuchi" class="poster-image2" style="width: 60%; display: block; margin: 0 auto; margin-bottom: 20px;">
+
+					<p>
+						本開発では、Microsoft 365 Agents Toolkit(旧Microsoft Teams Toolkit)を使用した。
+						Microsoft 365 Agents Toolkitは、Microsoft Teamsアプリケーションの開発を支援するためのツールキットであり、アプリケーションの作成、デバッグ、デプロイメントを容易にする機能が提供されている。
+						このツールキットを活用することで、開発者は効率的にアプリケーションを構築し、Microsoft Teams 環境に統合することが可能となる。
+						<br>詳細: <a href="https://learn.microsoft.com/ja-jp/microsoftteams/platform/toolkit/agents-toolkit-fundamentals" target="_blank" rel="noopener noreferrer">Microsoft 365 Agents Toolkit</a>
+					
+					</p>
+					
+				</section>
+
+				<section>
+					<h2>アプリケーションの主な機能</h2>
+					<p>
+						乗車バス停と行き先を指定すると、
+						その方向へ向かうバスの情報を一覧で確認できる。
+					</p>
+					<div class="profile-container-mobile">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_function1.jpeg" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">アプリケーション画面</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_function2.jpeg" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">乗車バス停の選択</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_function3.jpeg" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">行先の選択</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_function4.jpeg" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">バス詳細情報</figcaption>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>本システムの構成</h2>
+					<p>
+						本システムは、以下に示す4つの主要なコンポーネントによって構成されている。
+						バックエンドサーバーには、
+						<a href="/pickup3_print.html" target="_blank" rel="noopener noreferrer">LSSプロジェクト</a>
+						のシステムの一部を応用し、本システム向けに拡張・再構成したものを使用している。
+						システムの開発言語には Python を採用している。
+						
+						フロントエンドのアプリケーションは、リバースプロキシによって公開された DNS 名を通じて
+						Web サーバーへ接続し、バス情報を取得する仕組みとなっている。
+						
+						LSS プロジェクトでは、解析プログラムがスタンドアロンで京阪バスから直接情報を取得する構成であった。
+						しかし、本システムでは京阪バス側サーバーへの負荷を考慮し、
+						解析プログラムを単一のプロセスとして動作させ、その解析結果を一度データベースに保存した上で、
+						複数のクライアントへ配信する構成へと変更している。
+					</p>
+
+					<ul>
+						<li style="color: #000;"><strong>バス情報収集</strong></li>
+						<p>
+							バスの時刻表および運行状況の情報を定期的に取得し、2つの情報を1つの便の情報としてまとめた後、
+							データベースへ保存する役割を担う。
+						</p>
+
+						<li style="color: #000;"><strong>DB(データベース)</strong></li>
+						<p>
+							収集したバス情報を一時的に保管し、要求に応じて各種プログラムへデータを提供する役割を担う。
+						</p>
+
+						<li style="color: #000;"><strong>Webサーバー</strong></li>
+						<p>
+							データベースに保存されたバス情報を取得し、アプリケーションの要求に応じて
+							Teamsアプリケーションへ配信する役割を担う。
+						</p>
+						<li style="color: #000;"><strong>DNS・リバースプロキシ・WAF</strong></li>
+						<p>
+							外部のクラウド型ネットワークサービスを利用し、
+							グローバルDNSの管理、リバースプロキシによるトラフィック制御、
+							およびWAF機能による不正アクセス対策を行っている。
+						</p>
+
+					</ul>
+					<img src="images/20260201_BusInfoTeams_config_diagram.png" alt="Masahiro Higuchi" class="poster-image2" style="width: 80%; display: block; margin: 0 auto; margin-bottom: 20px;">
+					<figcaption style="color: #000; font-size: 15px;">本システムの構成図</figcaption>
+
+				</section>
+				
+				
+
+				<section id="about">
+					<h2>利用方法</h2>
+					<h5 class="Classification">・アプリケーションのインストール方法</h5>
+					<p>バス案内アプリケーションのインストール方法は以下の通りである。
+						<br><strong>※なお、本アプリケーションは京都橘大学組織内アプリケーションとして公開しているため、
+							st.tachibana-u.ac.jp、tachibana-u.ac.jpに所属するMicrosoft Teams アカウントを持つユーザのみがインストール可能である。</strong>
+					</p>
+					<h5 class="Classification">1.	PC版</h5>
+					<div class="profile-container">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC01.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順1, Teams画面より「アプリ」をクリック</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC02.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順2, 「組織向けに開発」より「バス案内」をクリック</figcaption>
+						</div>
+					</div>
+
+					<div class="profile-container">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC03.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順3, 「追加」をクリック</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC04.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順4, 「開く」をクリック</figcaption>
+						</div>
+					</div>
+
+					<div class="profile-container">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC05.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順5, 上記の画像のような操作を行う</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainPC06.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">完了　※開く時はツールバーより「バス案内」を選択</figcaption>
+						</div>
+					</div>
+
+					<h5 class="Classification">2.	モバイル版</h5>
+					
+					<div class="profile-container-mobile">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile01.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順1, Teamsアプリを開き「その他」をタップ</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile02.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順2, 「Add app」をタップ</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile03.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順3, <strong>PC版手順2と同様</strong>に「バス案内」アプリを検索して追加</figcaption>
+						</div>
+					</div>
+
+					<div class="profile-container-mobile">
+						<div style=" margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile03-2.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順4, 「並べ替え」をタップ</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile04.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">手順5, バス案内を上位に移動する</figcaption>
+						</div>
+						<div style="margin: 5px;">
+							<img src="images/20260201_BusInfoTeams_installexplainMobile05.png" alt="Masahiro Higuchi" class="poster-image" style="width: 100%;">
+							<figcaption style="color: #000; font-size: 15px;">移動後にナビゲーションバーにバス案内が追加されていれば完了 </figcaption>
+						</div>
+					</div>
+
+
+					<h5 class="Classification">●トラブルシューティング(Q&A)</h5>
+					<ul>
+						<li style="color: #000;"><strong>モバイル版で、ナビゲーションバーにバス案内を追加できない</strong></li>
+						<p>→ナビゲーションバーには、６つまでのアプリしか表示できないため、ナビゲーションバーのアプリを整理する必要があります。</p>
+						<li style="color: #000;"><strong>アプリのアイコンが正しく表示されない。バスアイコンにならない。</strong></li>
+						<p>→モバイル版Teamsアプリでよく見られる現象です。これは、Teamsアプリのキャッシュが原因である可能性があります。アプリのキャッシュをクリアするか、しばらく様子を見てください。本来の機能には何ら支障はありません。</p>
+						<li style="color: #000;"><strong>バス案内アプリが表示されない。</strong></li>
+						<p>→アプリの動作が遅い場合、バックグラウンドで動作している他のアプリやプロセスが影響している可能性があります。不要なアプリを終了するか、Teamsアプリ・デバイスを再起動してみてください。</p>
+						<li style="color: #000;"><strong>モバイル版Teamsでバス案内アプリをインストールしたいのに、Add appから見つけられない。</strong></li>
+						<p>→PC版Teamsですでにインストール済みであれば、モバイル版にも反映されてインストールされている可能性があります。モバイル版Teamsアプリ右下の「その他」をタップして、バス案内アプリが存在するか確認してください。<br>
+						→初めてモバイル版Teamsアプリでバス案内アプリをインストールする場合、その他>Add app>「あなたの組織で人気」の項目に表示される可能性があります。</p>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>苦労話(学内デプロイは学生の範疇では完結しない)</h2>
+					<p>
+						本システムの学内デプロイにあたっては、情報システム課との事前確認および調整が必要であった。
+						組織の Microsoft Teams アカウントでは、Teams Developer Portal を通じて、
+						開発したアプリケーションのデプロイを組織管理者に申請することが可能である。
+						しかし、当学の情報システム課においては、学生が開発したアプリケーションを
+						学内向けにデプロイした前例がなく、加えてセキュリティポリシーの観点からも
+						慎重な対応が求められた。
+						
+						そのため、デプロイ申請後に情報システム課との協議の場が設けられ、
+						システム全体の構成、データの取り扱い、ならびにセキュリティ対策について
+						詳細な説明を行った。
+						その後、指摘された点に基づいてシステムの改善を行い、
+						複数回の協議を経て、最終的に学内デプロイを完了することができた。
+						
+						本経験を通じて、学内システムのデプロイには技術的な実装力だけでなく、
+						組織のポリシーを理解した上での説明能力や、
+						関係者との継続的なコミュニケーションが重要であることを学んだ。
+					</p>
+
+				</section>
+			</div>
+		</div>
+	</div>
+	<div class="content footer">
+		<div class="copyright inner">
+		  <ul>
+			<li>&copy; Masahiro Higuchi. All rights reserved.</li>
+		  </ul>
+		</div>
+	</div>
+
+
+	<script src="js/script.js"></script>
+</body>
+</html>
