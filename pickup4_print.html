@@ -413,9 +413,9 @@
 						
 						<p>
 							本アプリケーションは、京都橘大学の学生を含む関係者が通勤・通学に利用する公共交通機関である京阪バスの時刻表や運行状況を、簡単に確認できるようにすることを目的としている。
-							京都橘大学では、授業連絡や課題提出、各種連絡に Microsoft Teams を使用しており、学生・教員・事務局の関係者が日常的に利用している。
-							Teams には、組織内で利用可能なアプリケーションを公開する機能がある。本プロジェクトでは、この機能を活用してバス案内アプリケーションを開発し、京都橘大学の Teams アカウントを持つ関係者が、組織内アプリとして利用できる環境の構築を目指している。
-							
+							京都橘大学では、授業連絡や課題提出、各種連絡にMicrosoft Teamsを使用しており、学生・教員・事務局の関係者が日常的に利用している。
+							Teamsには、組織内で利用可能なアプリケーションを公開する機能がある。本プロジェクトでは、この機能を活用してバス案内アプリケーションを開発し、京都橘大学のTeamsアカウントを持つ関係者が、組織内アプリとして利用できる環境の構築を目指している。
+
 							本取り組みは、学生自治会から大学に対して寄せられた「公共交通機関の利便性を向上させたい」という要望を背景としており、特に「どのバスに乗れば効率よく目的地へ移動できるのかを、素早く判断できる手段が欲しい」という課題の解決を目的として、学生自治会と連携しながら進めている。
 							
 							バスの時刻表および運行状況の情報は、自身が開発した
@@ -432,12 +432,21 @@
 					<img src="images/Microsoft 365 Agents Toolkit.png" alt="Masahiro Higuchi" class="poster-image2" style="width: 60%; display: block; margin: 0 auto; margin-bottom: 20px;">
 
 					<p>
-						本開発では、Microsoft 365 Agents Toolkit(旧Microsoft Teams Toolkit)を使用した。
-						Microsoft 365 Agents Toolkitは、Microsoft Teamsアプリケーションの開発を支援するためのツールキットであり、アプリケーションの作成、デバッグ、デプロイメントを容易にする機能が提供されている。
-						このツールキットを活用することで、開発者は効率的にアプリケーションを構築し、Microsoft Teams 環境に統合することが可能となる。
-						<br>詳細: <a href="https://learn.microsoft.com/ja-jp/microsoftteams/platform/toolkit/agents-toolkit-fundamentals" target="_blank" rel="noopener noreferrer">Microsoft 365 Agents Toolkit</a>
-					
+						本開発では、Microsoft 365 Agents Toolkit（旧 Microsoft Teams Toolkit）を使用した。
+						Microsoft 365 Agents Toolkitは、Microsoft 365環境上で動作するエージェントおよび
+						アプリケーションの開発を支援するツールキットであり、
+						その機能の一つとしてMicrosoft Teams向けアプリケーションの作成、デバッグ、テスト、
+						デプロイを行うための機能が含まれている。
+						本ツールキットを活用することで、Microsoft 365と連携したアプリケーションを
+						効率的に構築・管理することが可能となる。
+						<br>
+						詳細：
+						<a href="https://learn.microsoft.com/ja-jp/microsoftteams/platform/toolkit/agents-toolkit-fundamentals"
+						target="_blank" rel="noopener noreferrer">
+							Microsoft 365 Agents Toolkit
+						</a>
 					</p>
+
 					
 				</section>
 
@@ -474,12 +483,12 @@
 						バックエンドサーバーには、
 						<a href="/pickup3_print.html" target="_blank" rel="noopener noreferrer">LSSプロジェクト</a>
 						のシステムの一部を応用し、本システム向けに拡張・再構成したものを使用している。
-						システムの開発言語には Python を採用している。
+						システムの開発言語にはPythonを採用している。
 						
-						フロントエンドのアプリケーションは、リバースプロキシによって公開された DNS 名を通じて
-						Web サーバーへ接続し、バス情報を取得する仕組みとなっている。
+						フロントエンドのアプリケーションは、リバースプロキシによって公開されたDNS名を通じて
+						Webサーバーへ接続し、バス情報を取得する仕組みとなっている。
 						
-						LSS プロジェクトでは、解析プログラムがスタンドアロンで京阪バスから直接情報を取得する構成であった。
+						LSSプロジェクトでは、解析プログラムがスタンドアロンで京阪バスから直接情報を取得する構成であった。
 						しかし、本システムでは京阪バス側サーバーへの負荷を考慮し、
 						解析プログラムを単一のプロセスとして動作させ、その解析結果を一度データベースに保存した上で、
 						複数のクライアントへ配信する構成へと変更している。
@@ -522,7 +531,7 @@
 					<h5 class="Classification">・アプリケーションのインストール方法</h5>
 					<p>バス案内アプリケーションのインストール方法は以下の通りである。
 						<br><strong>※なお、本アプリケーションは京都橘大学組織内アプリケーションとして公開しているため、
-							st.tachibana-u.ac.jp、tachibana-u.ac.jpに所属するMicrosoft Teams アカウントを持つユーザのみがインストール可能である。</strong>
+							st.tachibana-u.ac.jp、tachibana-u.ac.jpに所属するMicrosoft Teamsアカウントを持つユーザのみがインストール可能である。</strong>
 					</p>
 					<h5 class="Classification">1.	PC版</h5>
 					<div class="profile-container">
@@ -609,7 +618,7 @@
 					<h2>苦労話(学内デプロイは学生の範疇では完結しない)</h2>
 					<p>
 						本システムの学内デプロイにあたっては、情報システム課との事前確認および調整が必要であった。
-						組織の Microsoft Teams アカウントでは、Teams Developer Portal を通じて、
+						組織のMicrosoft Teamsアカウントでは、Teams Developer Portal を通じて、
 						開発したアプリケーションのデプロイを組織管理者に申請することが可能である。
 						しかし、当学の情報システム課においては、学生が開発したアプリケーションを
 						学内向けにデプロイした前例がなく、加えてセキュリティポリシーの観点からも
@@ -626,6 +635,15 @@
 						関係者との継続的なコミュニケーションが重要であることを学んだ。
 					</p>
 
+				</section>
+				<section>
+					<h2>今後の目標</h2>
+					<ul>
+						<li>鉄道の遅延情報を表示、またはTeamsに通知可能な機能の実装</li>
+						<li>鉄道とバスのの乗り換えを案内できる機能の実装</li>
+						<li>アプリケーションの多言語対応(留学生に対する配慮)</li>
+						<li>ユーザーからのフィードバックをもとにした機能改善</li>
+					</ul>
 				</section>
 			</div>
 		</div>
