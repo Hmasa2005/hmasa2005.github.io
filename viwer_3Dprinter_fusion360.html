@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Presentation「3Dプリンタ活用講座 Fusion360」</title>
+    <link rel="icon" href="favicons/favicon.ico" id="favicon">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .intro-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #555, #222);
+            z-index: 20;
+            text-align: center;
+            flex-direction: column;
+            color: #fff;
+            animation: fadeOut 1.6s ease-in-out forwards;
+            animation-delay: 1.6s;
+        }
+
+        .intro-screen div {
+            margin: 5px 0;
+        }
+
+        .intro-screen div:first-child {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .intro-screen div:nth-child(2) {
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        .intro-screen div:last-child {
+            font-size: 1rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .viewer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* slide animation images */
+        .slide-img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            will-change: transform, opacity;
+            z-index: 10;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .nav-button.left {
+            left: 20px;
+        }
+
+        .nav-button.right {
+            right: 20px;
+        }
+
+        .home-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .fullscreen-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 7px 14px;
+            font-size: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .course-name {
+            position: absolute;
+            bottom: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .name-display {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+        /* TOC modal styles */
+        .toc-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 60;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 260ms ease;
+        }
+        .toc-modal {
+            background: #fff;
+            color: #111;
+            width: 90%;
+            max-width: 420px;
+            max-height: 80%;
+            overflow: auto;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            transform: translateY(-8px) scale(0.98);
+            opacity: 0;
+            transition: transform 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
+        }
+        .toc-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .toc-overlay.open .toc-modal {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        /* unobtrusive TOC toggle button */
+        .toc-button {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: background 180ms ease, transform 140ms ease;
+            z-index: 70;
+        }
+        .toc-button:hover { background: rgba(255,255,255,0.14); transform: translateY(-1px); }
+        .toc-modal h3 { margin: 0 0 8px 0; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-item { padding: 8px 10px; border-bottom: 1px solid #eee; cursor: pointer; }
+        .toc-item:hover { background: #f0f0f0; }
+        .toc-close { display:block; text-align:right; margin-bottom:8px; cursor:pointer; color:#333 }
+    </style>
+</head>
+<body>
+    <div class="intro-screen" id="introScreen">
+        <div>Animation Presentation V3.4</div>
+        <div>3Dプリンタ活用講座 Fusion360</div>
+        <div>Made By Masahiro Higuchi</div>
+    </div>
+    <div class="viewer" id="viewer">
+        <button class="nav-button left" onclick="prevImage()">&lt;</button>
+        <img id="gifDisplay" src="3Dprinter_fusion_gif/1.gif" alt="Lecture Slide">
+        <button class="nav-button right" onclick="nextImage()">&gt;</button>
+        <div class="course-name">3Dプリンタ活用講座 Fusion360</div>
+        <div class="name-display">Masahiro Higuchi</div>
+        <button id="tocButton" class="toc-button" aria-label="目次">目次</button>
+        <a href="#" class="home-button" onclick="goHome()">ホームに戻る</a>
+        <button class="fullscreen-button" onclick="toggleFullscreen()">全画面</button>
+        
+    </div>
+
+    <!-- TOC modal -->
+    <div id="tocOverlay" class="toc-overlay" aria-hidden="true">
+        <div class="toc-modal" role="dialog" aria-modal="true" aria-labelledby="tocTitle">
+            <div class="toc-close" id="tocClose" role="button" aria-label="閉じる" tabindex="0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </div>
+            <h3 id="tocTitle">資料目次</h3>
+            <ul id="tocList" class="toc-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 1;
+        const basePath = '3Dprinter_fusion_gif';
+        let gifDisplay = document.getElementById("gifDisplay");
+
+        // 現在の画像を更新
+        function updateImage() {
+            gifDisplay.src = `${basePath}/${currentIndex}.gif`;
+        }
+
+        // 次の画像へ移動
+        function nextImage() {
+            const tempIndex = currentIndex + 1;
+            checkImageExists(tempIndex, exists => {
+                if (exists) {
+                    currentIndex = tempIndex;
+                    updateImage();
+                } else {
+                    alert('次の画像が見つかりません！');
+                }
+            });
+        }
+
+        // 前の画像へ移動
+        function prevImage() {
+            const tempIndex = currentIndex - 1;
+            if (tempIndex > 0) {
+                checkImageExists(tempIndex, exists => {
+                    if (exists) {
+                        currentIndex = tempIndex;
+                        updateImage();
+                    } else {
+                        alert('前の画像が見つかりません！');
+                    }
+                });
+            } else {
+                alert('これ以上戻れません！');
+            }
+        }
+
+        // ファイルの存在を確認
+        function checkImageExists(index, callback) {
+            const img = new Image();
+            img.src = `${basePath}/${index}.gif`;
+            img.onload = () => callback(true);
+            img.onerror = () => callback(false);
+        }
+
+        // 全画面表示のトグル
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // ホームに戻る
+        function goHome() {
+            window.location.href = 'https://hmasa2005.github.io/';
+        }
+
+        // キーボードで画像の移動
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                nextImage();
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                prevImage();
+            }
+        });
+
+        // マウスホイールで画像の移動（ただし目次オーバーレイ表示中は無効）
+        document.addEventListener('wheel', function(event) {
+            const tocOverlayEl = document.getElementById('tocOverlay');
+            if (tocOverlayEl && tocOverlayEl.classList.contains('open')) {
+                // 目次をスクロールしているときはスライド移動しない
+                return;
+            }
+            if (event.deltaY > 0) {
+                nextImage(); // 下方向（スクロールダウン）で次の画像に進む
+            } else {
+                prevImage(); // 上方向（スクロールアップ）で前の画像に戻る
+            }
+        });
+        
+        // --- end of existing controls ---
+    </script>
+
+    <script>
+        // TOC + animated jump implementation
+        const nameDisplay = document.querySelector('.name-display');
+        const tocOverlay = document.getElementById('tocOverlay');
+        const tocList = document.getElementById('tocList');
+        const tocClose = document.getElementById('tocClose');
+        let isAnimating = false;
+
+        // JSONファイルパス（ページ定義）
+        const pagesJsonPath = '3Dprinter_fusion_gif/pages/pages.json';
+
+        // トグルで目次表示（クラスで開閉してアニメーション）
+        function toggleTOC() {
+            if (tocOverlay.classList.contains('open')) {
+                closeTOC();
+            } else {
+                openTOC();
+            }
+        }
+
+        function openTOC() {
+            loadTOC();
+            tocOverlay.classList.add('open');
+            tocOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeTOC() {
+            tocOverlay.classList.remove('open');
+            tocOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        tocOverlay.addEventListener('click', (e) => {
+            if (e.target === tocOverlay) closeTOC();
+        });
+        tocClose.addEventListener('click', closeTOC);
+        // replace name click with a small unobtrusive button
+        const tocButton = document.getElementById('tocButton');
+        tocButton.addEventListener('click', toggleTOC);
+
+        // 目次を読み込み、リストを作成
+        function loadTOC() {
+            // prevent reloading unnecessarily
+            if (tocList.children.length > 0) return;
+            fetch(pagesJsonPath)
+                .then(resp => {
+                    if (!resp.ok) throw new Error('JSON読み込み失敗');
+                    return resp.json();
+                })
+                .then(pages => {
+                    pages.forEach(p => {
+                        const li = document.createElement('li');
+                        li.className = 'toc-item';
+                        li.textContent = `${p.index}. ${p.title}`;
+                        li.dataset.index = p.index;
+                        li.addEventListener('click', () => {
+                            closeTOC();
+                            goToIndexAnimated(Number(p.index));
+                        });
+                        tocList.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    console.error('TOC load error', err);
+                    const li = document.createElement('li');
+                    li.className = 'toc-item';
+                    li.textContent = '目次を読み込めませんでした。';
+                    tocList.appendChild(li);
+                });
+        }
+
+        // 指定ページまでアニメーションで移動
+        async function goToIndexAnimated(targetIndex) {
+            if (isAnimating) return;
+            if (targetIndex === currentIndex) return;
+            isAnimating = true;
+
+            const step = targetIndex > currentIndex ? 1 : -1;
+            const total = Math.abs(targetIndex - currentIndex);
+            const minDur = 5; // fastest per-frame ms (was 60)
+            const maxDur = 150; // slowest per-frame ms (was 420)
+
+            let stepsDone = 0;
+            while (currentIndex !== targetIndex) {
+                const next = currentIndex + step;
+                // ensure image exists
+                const exists = await new Promise(resolve => checkImageExists(next, resolve));
+                if (!exists) break;
+
+                stepsDone++;
+                const progress = stepsDone / total; // 0..1
+                // ease: start fast, slow toward the end (quadratic)
+                const duration = Math.round(minDur + (maxDur - minDur) * Math.pow(progress, 2));
+
+                await animateStep(next, step, duration);
+                currentIndex = next;
+            }
+
+            isAnimating = false;
+        }
+
+        // animate a single step to nextIndex with horizontal slide
+        function animateStep(nextIndex, direction, duration) {
+            return new Promise((resolve) => {
+                const currentImg = gifDisplay;
+                const nextImg = document.createElement('img');
+                nextImg.className = 'slide-img';
+                nextImg.alt = 'Lecture Slide';
+                nextImg.src = `${basePath}/${nextIndex}.gif`;
+                // prepare positions: entering from right (direction=1) or left (-1)
+                const enterX = direction === 1 ? 100 : -100;
+                const exitX = -enterX;
+
+                // initial styles
+                nextImg.style.transform = `translate(-50%,-50%) translateX(${enterX}%)`;
+                nextImg.style.opacity = '1';
+                nextImg.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
+                if (currentImg) {
+                    currentImg.classList.add('slide-img');
+                    currentImg.style.transform = `translate(-50%,-50%) translateX(0%)`;
+                    currentImg.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
+                }
+
+                // insert next image
+                const viewerEl = document.getElementById('viewer');
+                viewerEl.appendChild(nextImg);
+
+                // ensure image loaded then animate
+                nextImg.onload = () => {
+                    // allow layout
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            // move next to center and current out
+                            nextImg.style.transform = 'translate(-50%,-50%) translateX(0%)';
+                            if (currentImg) currentImg.style.transform = `translate(-50%,-50%) translateX(${exitX}%)`;
+                        });
+                    });
+
+                    // cleanup after transition
+                    setTimeout(() => {
+                        // remove old image
+                        if (currentImg && currentImg.parentNode === viewerEl) {
+                            viewerEl.removeChild(currentImg);
+                        }
+                        // ensure new image has id and reference
+                        nextImg.id = 'gifDisplay';
+                        gifDisplay = document.getElementById('gifDisplay');
+                        resolve();
+                    }, duration + 10);
+                };
+
+                // fallback if image fails to load quickly
+                nextImg.onerror = () => {
+                    // remove next image and resolve
+                    if (nextImg.parentNode === viewerEl) viewerEl.removeChild(nextImg);
+                    resolve();
+                };
+            });
+        }
+    </script>
+</body>
+</html>

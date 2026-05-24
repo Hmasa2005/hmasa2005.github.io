@@ -1,0 +1,61 @@
+[
+  { "index": 1, "title": "表紙" },
+  { "index": 2, "title": "目次" },
+  { "index": 3, "title": "オリエンテーション" },
+  { "index": 4, "title": "０１　自己紹介" },
+
+  { "index": 6, "title": "０２　3Dプリンタとは？" },
+  { "index": 9, "title": "０３　何ができるのか？" },
+  { "index": 11, "title": "出力の流れ・演習" },
+
+  { "index": 12, "title": "講座で制作するもの" },
+  { "index": 13, "title": "データ形式とその流れ" },
+
+  { "index": 15, "title": "０４　3DCAD/スライサーの操作" },
+  { "index": 16, "title": "3DCADとは？" },
+  { "index": 17, "title": "3DCADの重要なこと" },
+
+  { "index": 18, "title": "新規プロジェクト作成" },
+
+  { "index": 20, "title": "操作　画面の立体移動" },
+  { "index": 21, "title": "操作　画面の平面移動" },
+  { "index": 22, "title": "操作　画面の拡大" },
+
+  { "index": 23, "title": "スケッチ" },
+
+  { "index": 25, "title": "文字入れ" },
+
+  { "index": 28, "title": "押し出し" },
+  { "index": 29, "title": "穴あけ" },
+
+  { "index": 32, "title": "図形の角を丸くする" },
+
+  { "index": 34, "title": "操作　3Dデータ(STL)の出力" },
+
+  { "index": 35, "title": "スライサーとは？" },
+
+  { "index": 36, "title": "Gcodeファイル保存場所" },
+  { "index": 37, "title": "ELEGOO Curaの起動" },
+
+  { "index": 38, "title": "ELEGOO Cura STL読み込み" },
+
+  { "index": 39, "title": "ELEGOO Cura Gcode出力" },
+  { "index": 40, "title": "出力が難しいパターン" },
+
+  { "index": 41, "title": "０５　3Dプリンタの準備と操作" },
+
+  { "index": 45, "title": "予熱" },
+  { "index": 46, "title": "フィラメントの準備" },
+  { "index": 47, "title": "Gcodeの送信（ネットワーク）" },
+
+  { "index": 50, "title": "出力完了" },
+
+  { "index": 51, "title": "０６　キーホルダー制作" },
+  { "index": 52, "title": "作成するキーホルダー" },
+
+  { "index": 53, "title": "テンプレをCADにインポート" },
+
+  { "index": 59, "title": "作成するキーホルダーの例" },
+
+  { "index": 61, "title": "終わりに" }
+]
