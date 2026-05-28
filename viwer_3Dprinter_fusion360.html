@@ -32,8 +32,11 @@
             text-align: center;
             flex-direction: column;
             color: #fff;
-            animation: fadeOut 1.6s ease-in-out forwards;
-            animation-delay: 1.6s;
+            opacity: 1;
+        }
+
+        .intro-screen.fade-out {
+            animation: fadeOut 1.2s ease-in-out forwards;
         }
 
         .intro-screen div {
@@ -388,6 +391,7 @@
     <script>
         // TOC + animated jump implementation
         const nameDisplay = document.querySelector('.name-display');
+        const introScreen = document.getElementById('introScreen');
         const tocOverlay = document.getElementById('tocOverlay');
         const tocList = document.getElementById('tocList');
         const tocClose = document.getElementById('tocClose');
@@ -395,6 +399,41 @@
 
         // JSONファイルパス（ページ定義）
         const pagesJsonPath = '3Dprinter_fusion_gif/pages/pages.json';
+
+        function preloadImage(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({ src, ok: true });
+                img.onerror = () => resolve({ src, ok: false });
+                img.src = src;
+            });
+        }
+
+        async function preloadAllGifs() {
+            try {
+                const resp = await fetch(pagesJsonPath);
+                if (!resp.ok) throw new Error('JSON読み込み失敗');
+                const pages = await resp.json();
+                const tasks = pages.map((page) => preloadImage(`${basePath}/${page.index}.gif`));
+                const results = await Promise.all(tasks);
+                const failed = results.filter((item) => !item.ok).length;
+                if (failed > 0) {
+                    console.warn(`GIF preload completed with ${failed} failures`);
+                }
+            } catch (err) {
+                console.error('GIF preload error', err);
+            }
+        }
+
+        const preloadPromise = preloadAllGifs();
+
+        function finishIntroWhenReady() {
+            if (!introScreen) return;
+            introScreen.classList.add('fade-out');
+            setTimeout(() => {
+                introScreen.style.visibility = 'hidden';
+            }, 1300);
+        }
 
         // トグルで目次表示（クラスで開閉してアニメーション）
         function toggleTOC() {
@@ -538,6 +577,12 @@
                         });
                     });
 
+
+                // preload all gifs while intro screen is visible, then fade it out
+                window.addEventListener('load', async () => {
+                    await preloadPromise;
+                    finishIntroWhenReady();
+                });
                     // cleanup after transition
                     setTimeout(() => {
                         // remove old image
