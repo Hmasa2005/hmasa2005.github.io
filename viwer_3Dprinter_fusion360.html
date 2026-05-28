@@ -356,9 +356,35 @@
         const basePath = '3Dprinter_fusion_gif';
         let gifDisplay = document.getElementById("gifDisplay");
 
+        // Cookie helpers: save and load last viewed page
+        function setViewedPageCookie(idx) {
+            try {
+                // 1 year
+                const maxAge = 60 * 60 * 24 * 365;
+                document.cookie = `viewedPage=${idx};path=/;max-age=${maxAge}`;
+            } catch (e) { console.warn('Failed to set cookie', e); }
+        }
+        function getViewedPageCookie() {
+            try {
+                const m = document.cookie.match(new RegExp('(?:^|; )' + 'viewedPage' + '=(\\d+)'));
+                return m ? parseInt(m[1], 10) : null;
+            } catch (e) { return null; }
+        }
+
+        // restore saved page (if any)
+        (function restoreSavedPage() {
+            const saved = getViewedPageCookie();
+            if (saved && Number.isInteger(saved) && saved > 0) {
+                currentIndex = saved;
+                console.log('Restored viewedPage from cookie:', currentIndex);
+            }
+        })();
+
         // 現在の画像を更新
         function updateImage() {
             gifDisplay.src = `${basePath}/${currentIndex}.gif`;
+            // persist viewed page
+            try { setViewedPageCookie(currentIndex); } catch (e) { /* ignore */ }
         }
 
         // 次の画像へ移動
@@ -680,6 +706,8 @@
                 currentIndex = next;
             }
 
+            // persist final position
+            try { setViewedPageCookie(currentIndex); } catch (e) {}
             isAnimating = false;
         }
 
