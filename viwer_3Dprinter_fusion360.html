@@ -249,7 +249,7 @@
             font-size: 1.2rem;
             color: #fff;
             font-weight: bold;
-            width: 100%;
+            width: 50%;
             cursor: pointer;
             z-index: 90;
         }
@@ -502,11 +502,6 @@
                                 preloadInnerText.style.color = val >= 50 ? '#000' : '#fff';
                             }
                             if (onComplete) setTimeout(onComplete, 430);
-                            // if reached full, schedule showing the viewer after 2s
-                            if (val === 100 && typeof scheduleFinishAfterDelay === 'function') {
-                                console.log('animatePreloadTo reached 100%, scheduling delayed finish');
-                                        scheduleFinishAfterDelay(1000);
-                            }
                         }
 
                         const tasks = pages.map((page) =>
@@ -518,53 +513,19 @@
                                 return res;
                             })
                         );
-                // Wait for all tasks, but with a timeout fallback so intro won't hang
-                const allPromise = Promise.all(tasks);
-                const timeoutMs = 10000; // 10s
-                const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve('__timeout__'), timeoutMs));
-                const results = await Promise.race([allPromise, timeoutPromise]);
-                let finalResults = [];
-                let timedOut = false;
-                if (results === '__timeout__') {
-                    timedOut = true;
-                    console.warn('GIF preload timed out after', timeoutMs, 'ms');
-                    // we still await the allPromise in background but proceed
-                    allPromise.then(r => console.info('GIF preload later finished', r.length)).catch(()=>{});
+                // Wait for all tasks to complete (no timeout: wait until fully loaded)
+                const results = await Promise.all(tasks);
+                const finalResults = results;
+                const failed = finalResults.filter((item) => !item.ok).length;
+                if (failed > 0) console.warn(`GIF preload completed with ${failed} failures`);
+                if (typeof animatePreloadTo === 'function') {
+                    animatePreloadTo(100, () => { if (preloadText) preloadText.textContent = '読み込み完了'; });
                 } else {
-                    finalResults = results;
-                }
-                if (!timedOut) {
-                    const failed = finalResults.filter((item) => !item.ok).length;
-                    if (failed > 0) console.warn(`GIF preload completed with ${failed} failures`);
-                    if (typeof animatePreloadTo === 'function') {
-                        animatePreloadTo(100, () => { if (preloadText) preloadText.textContent = '読み込み完了'; });
-                    } else {
-                        if (preloadFill) preloadFill.style.width = '100%';
-                        if (preloadText) preloadText.textContent = '読み込み完了';
-                        if (typeof preloadInnerText !== 'undefined' && preloadInnerText) {
-                            preloadInnerText.textContent = '100%';
-                            preloadInnerText.style.color = '#000';
-                        }
-                    }
-                    // ensure delayed finish is scheduled even in fallback
-                    if (typeof scheduleFinishAfterDelay === 'function') {
-                        console.log('Scheduling delayed finish after preload complete (fallback)');
-                        scheduleFinishAfterDelay(2000);
-                    }
-                } else {
-                    if (typeof animatePreloadTo === 'function') {
-                        animatePreloadTo(100, () => { if (preloadText) preloadText.textContent = '読み込みタイムアウト'; });
-                    } else {
-                        if (preloadFill) preloadFill.style.width = '100%';
-                        if (preloadText) preloadText.textContent = '読み込みタイムアウト';
-                        if (typeof preloadInnerText !== 'undefined' && preloadInnerText) {
-                            preloadInnerText.textContent = '100%';
-                            preloadInnerText.style.color = '#000';
-                        }
-                    }
-                    if (typeof scheduleFinishAfterDelay === 'function') {
-                        console.log('Scheduling delayed finish after preload timeout (fallback)');
-                        scheduleFinishAfterDelay(2000);
+                    if (preloadFill) preloadFill.style.width = '100%';
+                    if (preloadText) preloadText.textContent = '読み込み完了';
+                    if (typeof preloadInnerText !== 'undefined' && preloadInnerText) {
+                        preloadInnerText.textContent = '100%';
+                        preloadInnerText.style.color = '#000';
                     }
                 }
             } catch (err) {
@@ -782,47 +743,15 @@
             });
         }
 
-        // preload all gifs while intro screen is visible, then show viewer after delay
-        window.addEventListener('load', async () => {
-            // wait for preloadPromise but ensure we never hang longer than 12s total
-            const maxTotal = 12000;
-            const maxPromise = new Promise((resolve) => setTimeout(resolve, maxTotal));
-            await Promise.race([preloadPromise, maxPromise]);
-            scheduleFinishAfterDelay(2000);
-        });
-
-        // skip button (immediately finish and cancel pending scheduled finish)
-        let introFinishTimeoutId = null;
-        function scheduleFinishAfterDelay(ms = 2000) {
-            if (introFinishTimeoutId) return;
-            console.log('Scheduling finish intro in', ms, 'ms');
-            introFinishTimeoutId = setTimeout(() => {
-                introFinishTimeoutId = null;
-                console.log('Delayed finish triggered');
-                finishIntroWhenReady();
-            }, ms);
-        }
-        function cancelScheduledFinish() {
-            if (introFinishTimeoutId) {
-                clearTimeout(introFinishTimeoutId);
-                introFinishTimeoutId = null;
-                console.log('Cancelled scheduled finish');
-            }
-        }
-        // skip button removed; no event listener needed
-        // safety: ensure intro finishes after 13s even if other logic fails
-        setTimeout(() => {
-            if (introScreen && introScreen.style.display !== 'none') {
-                console.warn('Forcing intro finish after safety timeout');
-                finishIntroWhenReady();
-            }
-        }, 13000);
-
-        // If preload finishes before window load, schedule finish after 2s delay
+        // When all preload finishes, show the viewer (no timeouts)
         preloadPromise.then(() => {
-            console.log('preloadPromise resolved; scheduling delayed finish');
-            scheduleFinishAfterDelay(2000);
-        }).catch(()=>{});
+            console.log('preloadPromise resolved; showing viewer now');
+            finishIntroWhenReady();
+        }).catch((err)=>{
+            console.error('preloadPromise failed', err);
+            // if preload fails, still attempt to show viewer so user isn't blocked
+            finishIntroWhenReady();
+        });
     </script>
 </body>
 </html>
