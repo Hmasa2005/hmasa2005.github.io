@@ -38,6 +38,53 @@
         .intro-screen.fade-out {
             animation: fadeOut 1.2s ease-in-out forwards;
         }
+        /* preload progress inside intro */
+        .preload-wrap { margin-top: 18px; width: 60%; max-width: 480px; }
+        .preload-bar { position: relative; width: 100%; height: 10px; background: rgba(255,255,255,0.12); border-radius: 8px; overflow: hidden; }
+        .preload-fill {
+            position: absolute;
+            left: 0;
+            top: -5px;
+            bottom: -5px;
+            height: auto;
+            width: 0%;
+            background: #2563eb; /* deeper blue fill */
+            transition: width 420ms cubic-bezier(.2,.8,.2,1), opacity 180ms linear;
+            will-change: width, opacity;
+            border-radius: 8px;
+            z-index: 1; /* ensure fill renders above the bar background */
+            pointer-events: none;
+        }
+        .preload-fill::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                rgba(255,255,255,0.34) 0px,
+                rgba(255,255,255,0.34) 8px,
+                rgba(255,255,255,0.08) 8px,
+                rgba(255,255,255,0.08) 16px
+            );
+            animation: progressStripeMove 900ms linear infinite;
+            pointer-events: none;
+        }
+        @keyframes progressStripeMove {
+            from { background-position: 0 0; }
+            to { background-position: 24px 0; }
+        }
+
+        .preload-inner-text {
+            position: absolute;
+            left: 50%; top: 50%; transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            pointer-events: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
+        .preload-text { margin-top: 8px; font-size: 0.95rem; opacity: 0.95; text-align: center; }
 
         .intro-screen div {
             margin: 5px 0;
@@ -71,12 +118,10 @@
             width: 100%;
             height: 100%;
             background-color: #2a2a2a;
-            display: flex;
+            display: none; /* shown after preload/intro */
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-            animation-delay: 1s;
+            opacity: 1;
         }
 
         @keyframes fadeIn {
@@ -272,13 +317,21 @@
         <div>Animate Presenter V3.4</div>
         <div>3Dプリンタ活用講座 Fusion360</div>
         <div>Made By Masahiro Higuchi</div>
+        <div class="preload-wrap" id="preloadWrap" aria-hidden="false">
+            <div class="preload-bar" aria-hidden="true">
+                <div id="preloadFill" class="preload-fill"></div>
+                <div id="preloadInnerText" class="preload-inner-text">0%</div>
+            </div>
+            <div id="preloadText" class="preload-text">読み込み中 0%</div>
+        </div>
+        <!-- skip button removed per user request -->
     </div>
     <div class="viewer" id="viewer">
         <button class="nav-button left" onclick="prevImage()">&lt;</button>
         <img id="gifDisplay" src="3Dprinter_fusion_gif/1.gif" alt="Lecture Slide">
         <button class="nav-button right" onclick="nextImage()">&gt;</button>
-        <div class="course-name">3Dプリンタ活用講座 Fusion360</div>
-        <div class="name-display">Masahiro Higuchi</div>
+        <!-- <div class="course-name">3Dプリンタ活用講座 Fusion360</div> -->
+        <div class="name-display">3Dプリンタ活用講座 Fusion360</div>
         <button id="tocButton" class="toc-button" aria-label="目次">目次</button>
         <a href="#" class="home-button" onclick="goHome()">ホームに戻る</a>
         <button class="fullscreen-button" onclick="toggleFullscreen()">全画面</button>
@@ -414,25 +467,154 @@
                 const resp = await fetch(pagesJsonPath);
                 if (!resp.ok) throw new Error('JSON読み込み失敗');
                 const pages = await resp.json();
-                const tasks = pages.map((page) => preloadImage(`${basePath}/${page.index}.gif`));
-                const results = await Promise.all(tasks);
-                const failed = results.filter((item) => !item.ok).length;
-                if (failed > 0) {
-                    console.warn(`GIF preload completed with ${failed} failures`);
+                        const total = pages.length;
+                        let completed = 0;
+                        const preloadFill = document.getElementById('preloadFill') || document.querySelector('.preload-fill');
+                        const preloadText = document.getElementById('preloadText');
+                        const preloadInnerText = document.getElementById('preloadInnerText');
+                        console.log('preloadAllGifs: loaded pages', total);
+                        // ensure initial visual state
+                        try {
+                            if (preloadFill) { preloadFill.style.width = '0%'; preloadFill.style.opacity = '1'; }
+                            if (preloadText) preloadText.textContent = '読み込み中 0%';
+                            if (preloadInnerText) preloadInnerText.textContent = '0%';
+                        } catch (e) { console.warn('preload init failed', e); }
+
+                        // progress state (CSS transition handles smooth visual animation)
+                        let _preloadCurrent = 0;
+                        function animatePreloadTo(targetPct, onComplete) {
+                            console.log('animatePreloadTo called', targetPct);
+                            if (!preloadFill || !preloadText) {
+                                if (onComplete) onComplete();
+                                return;
+                            }
+                            const val = Math.max(0, Math.min(100, Math.round(targetPct)));
+                            _preloadCurrent = val;
+                            try {
+                                preloadFill.style.display = 'block';
+                                preloadFill.style.opacity = '1';
+                                preloadFill.style.width = val + '%';
+                            } catch (e) { /* ignore */ }
+                            // update both texts
+                            preloadText.textContent = `読み込み中 ${val}%`;
+                            if (preloadInnerText) {
+                                preloadInnerText.textContent = val + '%';
+                                preloadInnerText.style.color = val >= 50 ? '#000' : '#fff';
+                            }
+                            if (onComplete) setTimeout(onComplete, 430);
+                            // if reached full, schedule showing the viewer after 2s
+                            if (val === 100 && typeof scheduleFinishAfterDelay === 'function') {
+                                console.log('animatePreloadTo reached 100%, scheduling delayed finish');
+                                        scheduleFinishAfterDelay(1000);
+                            }
+                        }
+
+                        const tasks = pages.map((page) =>
+                            preloadImage(`${basePath}/${page.index}.gif`).then((res) => {
+                                completed++;
+                                const pct = Math.round((completed / total) * 100);
+                                console.log('preload progress', completed, '/', total, pct + '%');
+                                animatePreloadTo(pct);
+                                return res;
+                            })
+                        );
+                // Wait for all tasks, but with a timeout fallback so intro won't hang
+                const allPromise = Promise.all(tasks);
+                const timeoutMs = 10000; // 10s
+                const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve('__timeout__'), timeoutMs));
+                const results = await Promise.race([allPromise, timeoutPromise]);
+                let finalResults = [];
+                let timedOut = false;
+                if (results === '__timeout__') {
+                    timedOut = true;
+                    console.warn('GIF preload timed out after', timeoutMs, 'ms');
+                    // we still await the allPromise in background but proceed
+                    allPromise.then(r => console.info('GIF preload later finished', r.length)).catch(()=>{});
+                } else {
+                    finalResults = results;
+                }
+                if (!timedOut) {
+                    const failed = finalResults.filter((item) => !item.ok).length;
+                    if (failed > 0) console.warn(`GIF preload completed with ${failed} failures`);
+                    if (typeof animatePreloadTo === 'function') {
+                        animatePreloadTo(100, () => { if (preloadText) preloadText.textContent = '読み込み完了'; });
+                    } else {
+                        if (preloadFill) preloadFill.style.width = '100%';
+                        if (preloadText) preloadText.textContent = '読み込み完了';
+                        if (typeof preloadInnerText !== 'undefined' && preloadInnerText) {
+                            preloadInnerText.textContent = '100%';
+                            preloadInnerText.style.color = '#000';
+                        }
+                    }
+                    // ensure delayed finish is scheduled even in fallback
+                    if (typeof scheduleFinishAfterDelay === 'function') {
+                        console.log('Scheduling delayed finish after preload complete (fallback)');
+                        scheduleFinishAfterDelay(2000);
+                    }
+                } else {
+                    if (typeof animatePreloadTo === 'function') {
+                        animatePreloadTo(100, () => { if (preloadText) preloadText.textContent = '読み込みタイムアウト'; });
+                    } else {
+                        if (preloadFill) preloadFill.style.width = '100%';
+                        if (preloadText) preloadText.textContent = '読み込みタイムアウト';
+                        if (typeof preloadInnerText !== 'undefined' && preloadInnerText) {
+                            preloadInnerText.textContent = '100%';
+                            preloadInnerText.style.color = '#000';
+                        }
+                    }
+                    if (typeof scheduleFinishAfterDelay === 'function') {
+                        console.log('Scheduling delayed finish after preload timeout (fallback)');
+                        scheduleFinishAfterDelay(2000);
+                    }
                 }
             } catch (err) {
                 console.error('GIF preload error', err);
+                const preloadText = document.getElementById('preloadText');
+                if (preloadText) preloadText.textContent = '読み込みエラー';
             }
         }
 
         const preloadPromise = preloadAllGifs();
 
         function finishIntroWhenReady() {
+            console.log('finishIntroWhenReady called');
             if (!introScreen) return;
             introScreen.classList.add('fade-out');
+            // ensure viewer is visible and properly configured
+            const viewerEl = document.getElementById('viewer');
+            if (viewerEl) {
+                console.log('Showing viewer element');
+                viewerEl.style.display = 'flex';
+                viewerEl.style.opacity = '1';
+                viewerEl.style.visibility = 'visible';
+                viewerEl.style.zIndex = '5';
+            } else {
+                console.warn('viewer element not found');
+            }
+
+            // ensure we have a gifDisplay element and it has a valid src
+            let gd = document.getElementById('gifDisplay');
+            if (!gd) {
+                console.warn('gifDisplay element missing, creating fallback img');
+                gd = document.createElement('img');
+                gd.id = 'gifDisplay';
+                gd.alt = 'Lecture Slide';
+                if (viewerEl) viewerEl.appendChild(gd);
+            }
+            // force set to currentIndex image
+            try {
+                updateImage();
+            } catch (e) {
+                console.error('updateImage failed', e);
+                if (gd) gd.src = `${basePath}/1.gif`;
+            }
+
+            // after animation, remove intro from layout
             setTimeout(() => {
+                introScreen.style.display = 'none';
                 introScreen.style.visibility = 'hidden';
-            }, 1300);
+                console.log('intro removed, viewer should be visible now');
+            }, 800);
         }
 
         // トグルで目次表示（クラスで開閉してアニメーション）
@@ -578,11 +760,6 @@
                     });
 
 
-                // preload all gifs while intro screen is visible, then fade it out
-                window.addEventListener('load', async () => {
-                    await preloadPromise;
-                    finishIntroWhenReady();
-                });
                     // cleanup after transition
                     setTimeout(() => {
                         // remove old image
@@ -604,6 +781,48 @@
                 };
             });
         }
+
+        // preload all gifs while intro screen is visible, then show viewer after delay
+        window.addEventListener('load', async () => {
+            // wait for preloadPromise but ensure we never hang longer than 12s total
+            const maxTotal = 12000;
+            const maxPromise = new Promise((resolve) => setTimeout(resolve, maxTotal));
+            await Promise.race([preloadPromise, maxPromise]);
+            scheduleFinishAfterDelay(2000);
+        });
+
+        // skip button (immediately finish and cancel pending scheduled finish)
+        let introFinishTimeoutId = null;
+        function scheduleFinishAfterDelay(ms = 2000) {
+            if (introFinishTimeoutId) return;
+            console.log('Scheduling finish intro in', ms, 'ms');
+            introFinishTimeoutId = setTimeout(() => {
+                introFinishTimeoutId = null;
+                console.log('Delayed finish triggered');
+                finishIntroWhenReady();
+            }, ms);
+        }
+        function cancelScheduledFinish() {
+            if (introFinishTimeoutId) {
+                clearTimeout(introFinishTimeoutId);
+                introFinishTimeoutId = null;
+                console.log('Cancelled scheduled finish');
+            }
+        }
+        // skip button removed; no event listener needed
+        // safety: ensure intro finishes after 13s even if other logic fails
+        setTimeout(() => {
+            if (introScreen && introScreen.style.display !== 'none') {
+                console.warn('Forcing intro finish after safety timeout');
+                finishIntroWhenReady();
+            }
+        }, 13000);
+
+        // If preload finishes before window load, schedule finish after 2s delay
+        preloadPromise.then(() => {
+            console.log('preloadPromise resolved; scheduling delayed finish');
+            scheduleFinishAfterDelay(2000);
+        }).catch(()=>{});
     </script>
 </body>
 </html>
